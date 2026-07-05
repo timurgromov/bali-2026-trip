@@ -1,0 +1,561 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6f3;
+  --panel: #ffffff;
+  --text: #17211b;
+  --muted: #5c6b60;
+  --line: #d9dfd8;
+  --soft: #eef3ee;
+  --base: #166534;
+  --day: #1d4ed8;
+  --airport: #4b5563;
+  --ferry: #7c3aed;
+  --optional: #a16207;
+  --route: #0f766e;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.hero {
+  padding: 22px clamp(18px, 4vw, 56px) 52px;
+  background:
+    linear-gradient(120deg, rgba(22, 101, 52, 0.13), rgba(29, 78, 216, 0.08)),
+    #fbfcfb;
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto 58px;
+}
+
+.topbar div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.brand,
+.topbar a {
+  text-decoration: none;
+}
+
+.brand {
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.topbar div a {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: 28px;
+  align-items: end;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero-copy {
+  max-width: 760px;
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--route);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(46px, 8vw, 84px);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+p {
+  line-height: 1.58;
+}
+
+.lead {
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.35;
+}
+
+.trip-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.trip-facts div,
+.base-card,
+.day-card,
+.transfer-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 12px 34px rgba(23, 33, 27, 0.06);
+}
+
+.trip-facts div {
+  padding: 16px;
+}
+
+.trip-facts span,
+.card-topline small,
+.day-base,
+.note,
+dt {
+  color: var(--muted);
+}
+
+.trip-facts strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 22px;
+}
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 58px clamp(18px, 4vw, 56px);
+  min-width: 0;
+}
+
+.intro,
+.safety {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.section-head {
+  max-width: 840px;
+  margin-bottom: 28px;
+}
+
+.map-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 58px clamp(18px, 4vw, 56px);
+  min-width: 0;
+}
+
+.map-copy {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1fr);
+  gap: 22px;
+  margin-bottom: 22px;
+  align-items: end;
+}
+
+.map-copy p:last-of-type {
+  margin-bottom: 0;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  grid-column: 1 / -1;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  border-radius: 999px;
+  background: var(--day);
+}
+
+.airport,
+.number-marker.airport,
+.point-num.airport {
+  background: var(--airport);
+}
+
+.base,
+.number-marker.base,
+.point-num.base {
+  background: var(--base);
+}
+
+.day,
+.number-marker.day,
+.point-num.day {
+  background: var(--day);
+}
+
+.ferry,
+.number-marker.ferry,
+.point-num.ferry {
+  background: var(--ferry);
+}
+
+.optional,
+.number-marker.optional,
+.point-num.optional {
+  background: var(--optional);
+}
+
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 16px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.route-map {
+  min-height: 660px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #dbe7dd;
+}
+
+.route-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 660px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.route-point {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.route-point:hover,
+.route-point:focus-visible {
+  border-color: #8eb79d;
+  outline: none;
+  background: #f8fbf8;
+}
+
+.route-point strong,
+.route-point small {
+  display: block;
+}
+
+.route-point strong {
+  font-size: 14px;
+  line-height: 1.28;
+}
+
+.route-point small {
+  margin-top: 4px;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.number-marker,
+.point-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.number-marker {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.38);
+  font-size: 14px;
+}
+
+.point-num {
+  width: 34px;
+  height: 34px;
+  font-size: 13px;
+}
+
+.leaflet-popup-content {
+  margin: 14px 16px;
+  min-width: 230px;
+}
+
+.map-popup h3 {
+  margin-bottom: 7px;
+  font-size: 16px;
+}
+
+.map-popup p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.map-popup .popup-meta {
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+.base-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.base-card {
+  padding: 20px;
+}
+
+.card-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.card-topline span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--base);
+  color: #fff;
+  font-weight: 900;
+}
+
+.role {
+  color: var(--route);
+  font-weight: 800;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.chips span {
+  padding: 7px 9px;
+  border-radius: 8px;
+  background: var(--soft);
+  color: #334238;
+  font-size: 13px;
+}
+
+.timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.day-card {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 18px;
+  padding: 18px;
+}
+
+.date-box {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: 86px;
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.date-box strong,
+.date-box span {
+  display: block;
+}
+
+.date-box strong {
+  font-size: 18px;
+}
+
+.date-box span {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.day-base {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.note {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.transfer-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.transfer-card {
+  padding: 18px;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+
+dt {
+  font-size: 12px;
+}
+
+dd {
+  margin: 4px 0 0;
+  font-weight: 800;
+}
+
+code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #e8eee8;
+}
+
+@media (max-width: 920px) {
+  .hero-grid,
+  .intro,
+  .safety,
+  .map-copy,
+  .map-layout,
+  .base-grid,
+  .transfer-list {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 36px;
+  }
+
+  .route-map {
+    min-height: 520px;
+  }
+
+  .route-list {
+    max-height: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-bottom: 38px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .trip-facts,
+  dl {
+    grid-template-columns: 1fr;
+  }
+
+  .day-card {
+    grid-template-columns: 1fr;
+  }
+
+  .date-box {
+    min-height: auto;
+    justify-items: start;
+    padding: 12px;
+  }
+}

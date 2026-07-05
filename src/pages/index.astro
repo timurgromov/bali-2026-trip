@@ -1,0 +1,164 @@
+---
+import RouteMap from "../components/RouteMap.astro";
+import trip from "../data/trip.json";
+import "../styles/global.css";
+
+const baseUrl = import.meta.env.BASE_URL;
+const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Семейный маршрут поездки на Бали 2026: карта, базы, дни и переезды." />
+    <title>{trip.title} - маршрут</title>
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Основная навигация">
+        <a href={baseUrl} class="brand">Bali 2026</a>
+        <div>
+          <a href="#map">Карта</a>
+          <a href="#bases">Базы</a>
+          <a href="#days">Дни</a>
+          <a href="#transfers">Переезды</a>
+        </div>
+      </nav>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Семейная поездка</p>
+          <h1>{trip.title}</h1>
+          <p class="lead">{trip.subtitle}</p>
+          <p>{trip.summary.coreIdea}</p>
+        </div>
+        <aside class="trip-facts" aria-label="Краткая сводка">
+          <div>
+            <span>Свадьба</span>
+            <strong>{trip.summary.weddingDate}</strong>
+          </div>
+          <div>
+            <span>Бали</span>
+            <strong>{totalNights} ночей</strong>
+          </div>
+          <div>
+            <span>Базы</span>
+            <strong>{trip.bases.length} районов</strong>
+          </div>
+          <div>
+            <span>Карта</span>
+            <strong>{trip.map.points.length} точек</strong>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section class="section intro">
+        <div>
+          <p class="eyebrow">Главная логика</p>
+          <h2>Живём базами, а не ездим через весь остров каждый день</h2>
+        </div>
+        <p>
+          Маршрут собран вокруг районов проживания: рядом смотрим локальные места, а между базами делаем ограниченное число крупных переездов.
+          Свадебный блок в Umalas остаётся фиксированным якорем.
+        </p>
+      </section>
+
+      <div id="map">
+        <RouteMap />
+      </div>
+
+      <section id="bases" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Базы проживания</p>
+          <h2>Пять районов, вокруг которых строится поездка</h2>
+        </div>
+        <div class="base-grid">
+          {trip.bases.map((base) => (
+            <article class="base-card">
+              <div class="card-topline">
+                <span>{String(base.order).padStart(2, "0")}</span>
+                <small>{base.dates} · {base.nights} ночи</small>
+              </div>
+              <h3>{base.name}</h3>
+              <p class="role">{base.role}</p>
+              <p>{base.why}</p>
+              <div class="chips">
+                {base.nearby.map((item) => <span>{item}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="days" class="section">
+        <div class="section-head">
+          <p class="eyebrow">План по дням</p>
+          <h2>Скелет маршрута от вылета до возвращения</h2>
+        </div>
+        <div class="timeline">
+          {trip.days.map((day) => (
+            <article class="day-card">
+              <div class="date-box">
+                <strong>{day.date}</strong>
+                <span>{day.weekday}</span>
+              </div>
+              <div>
+                <p class="day-base">{day.base}</p>
+                <h3>{day.title}</h3>
+                <p>{day.plan}</p>
+                <p class="note">{day.notes}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="transfers" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Логистика</p>
+          <h2>Главные переезды и окна выезда</h2>
+        </div>
+        <div class="transfer-list">
+          {trip.transfers.map((transfer) => (
+            <article class="transfer-card">
+              <h3>{transfer.from} -> {transfer.to}</h3>
+              <dl>
+                <div>
+                  <dt>Расстояние</dt>
+                  <dd>{transfer.distance}</dd>
+                </div>
+                <div>
+                  <dt>Время</dt>
+                  <dd>{transfer.time}</dd>
+                </div>
+                <div>
+                  <dt>Транспорт</dt>
+                  <dd>{transfer.transport}</dd>
+                </div>
+                <div>
+                  <dt>Когда ехать</dt>
+                  <dd>{transfer.window}</dd>
+                </div>
+              </dl>
+              <p>{transfer.note}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="section safety">
+        <div>
+          <p class="eyebrow">Правило проекта</p>
+          <h2>Текст и карта завязаны на один источник</h2>
+        </div>
+        <p>
+          Все публичные блоки сайта строятся из <code>src/data/trip.json</code>. Если меняется порядок баз, точка карты,
+          день или переезд, обновляется этот файл, а сайт пересобирается. Приватные данные в публичный repo не добавляются.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

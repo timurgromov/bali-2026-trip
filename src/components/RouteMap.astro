@@ -1,0 +1,165 @@
+---
+import trip from "../data/trip.json";
+import "leaflet/dist/leaflet.css";
+
+const mapPayload = JSON.stringify({
+  points: trip.map.points,
+  routes: trip.map.routes,
+  typeLabels: trip.map.typeLabels
+});
+---
+
+<section class="map-shell" aria-labelledby="map-title">
+  <div class="map-copy">
+    <p class="eyebrow">Карта маршрута</p>
+    <h2 id="map-title">20 точек с понятным порядком</h2>
+    <p>
+      Цифры показывают порядок маршрута. Сплошная линия - основные базы, пунктир - островной день и optional-направления.
+    </p>
+    <div class="legend" aria-label="Легенда карты">
+      <span><i class="dot airport"></i>Аэропорт</span>
+      <span><i class="dot base"></i>База</span>
+      <span><i class="dot day"></i>Выезд</span>
+      <span><i class="dot ferry"></i>Паром</span>
+      <span><i class="dot optional"></i>Optional</span>
+    </div>
+  </div>
+  <div class="map-layout">
+    <div id="route-map" class="route-map" aria-label="Интерактивная карта Бали"></div>
+    <nav id="route-list" class="route-list" aria-label="Точки маршрута"></nav>
+  </div>
+  <script id="route-map-data" type="application/json" set:html={mapPayload} is:inline></script>
+</section>
+
+<script>
+  import L from "leaflet";
+
+  type RoutePoint = {
+    order: number;
+    title: string;
+    type: "airport" | "base" | "day" | "ferry" | "optional";
+    role: string;
+    lat: number;
+    lng: number;
+    description: string;
+  };
+
+  type MapPayload = {
+    points: RoutePoint[];
+    routes: {
+      main: number[];
+      island: number[];
+      optional: number[][];
+    };
+    typeLabels: Record<RoutePoint["type"], string>;
+  };
+
+  const payloadEl = document.getElementById("route-map-data");
+  const mapEl = document.getElementById("route-map");
+  const listEl = document.getElementById("route-list");
+
+  if (payloadEl && mapEl && listEl) {
+    const data = JSON.parse(payloadEl.textContent || "{}") as MapPayload;
+    const pointsByOrder = new Map(data.points.map((point) => [point.order, point]));
+
+    const map = L.map(mapEl, {
+      zoomControl: true,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    const markers = new Map<number, L.Marker>();
+    const bounds = L.latLngBounds(data.points.map((point) => [point.lat, point.lng]));
+
+    function iconFor(point: RoutePoint) {
+      return L.divIcon({
+        className: "",
+        html: `<span class="number-marker ${point.type}">${point.order}</span>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17],
+        popupAnchor: [0, -18]
+      });
+    }
+
+    function popupFor(point: RoutePoint) {
+      const label = data.typeLabels[point.type];
+      return `
+        <article class="map-popup">
+          <h3>${String(point.order).padStart(2, "0")}. ${point.title}</h3>
+          <p class="popup-meta">${label} · ${point.role}</p>
+          <p>${point.description}</p>
+        </article>
+      `;
+    }
+
+    data.points.forEach((point) => {
+      const marker = L.marker([point.lat, point.lng], {
+        icon: iconFor(point),
+        title: `${String(point.order).padStart(2, "0")}. ${point.title}`
+      }).addTo(map);
+      marker.bindPopup(popupFor(point));
+      markers.set(point.order, marker);
+    });
+
+    function routeLine(orders: number[]) {
+      return orders
+        .map((order) => pointsByOrder.get(order))
+        .filter((point): point is RoutePoint => Boolean(point))
+        .map((point) => [point.lat, point.lng] as [number, number]);
+    }
+
+    L.polyline(routeLine(data.routes.main), {
+      color: "#0f766e",
+      weight: 4,
+      opacity: 0.86
+    }).addTo(map);
+
+    L.polyline(routeLine(data.routes.island), {
+      color: "#7c3aed",
+      weight: 3,
+      opacity: 0.78,
+      dashArray: "8 8"
+    }).addTo(map);
+
+    data.routes.optional.forEach((route) => {
+      L.polyline(routeLine(route), {
+        color: "#a16207",
+        weight: 2,
+        opacity: 0.68,
+        dashArray: "4 8"
+      }).addTo(map);
+    });
+
+    function fitRouteBounds() {
+      map.invalidateSize();
+      map.fitBounds(bounds.pad(0.16));
+    }
+
+    fitRouteBounds();
+    window.addEventListener("load", () => window.setTimeout(fitRouteBounds, 250));
+    window.addEventListener("resize", () => window.setTimeout(fitRouteBounds, 120));
+
+    data.points.forEach((point) => {
+      const button = document.createElement("button");
+      button.className = "route-point";
+      button.type = "button";
+      button.innerHTML = `
+        <span class="point-num ${point.type}">${point.order}</span>
+        <span>
+          <strong>${String(point.order).padStart(2, "0")}. ${point.title}</strong>
+          <small>${data.typeLabels[point.type]} · ${point.role}</small>
+        </span>
+      `;
+      button.addEventListener("click", () => {
+        const marker = markers.get(point.order);
+        map.setView([point.lat, point.lng], Math.max(map.getZoom(), 12), { animate: true });
+        marker?.openPopup();
+      });
+      listEl.appendChild(button);
+    });
+  }
+</script>
