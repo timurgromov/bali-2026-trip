@@ -15,6 +15,7 @@ const mapPayload = JSON.stringify({
     <h2 id="map-title">20 точек с понятным порядком</h2>
     <p>
       Цифры показывают порядок маршрута. Сплошная линия - основные базы, пунктир - островной день и optional-направления.
+      В карточках справа у каждой точки указано, к какой дате или блоку поездки она относится.
     </p>
     <div class="legend" aria-label="Легенда карты">
       <span><i class="dot airport"></i>Аэропорт</span>
@@ -38,6 +39,7 @@ const mapPayload = JSON.stringify({
     order: number;
     title: string;
     type: "airport" | "base" | "day" | "ferry" | "optional";
+    dateLabel: string;
     role: string;
     lat: number;
     lng: number;
@@ -90,6 +92,7 @@ const mapPayload = JSON.stringify({
       return `
         <article class="map-popup">
           <h3>${String(point.order).padStart(2, "0")}. ${point.title}</h3>
+          <p class="popup-date">${point.dateLabel}</p>
           <p class="popup-meta">${label} · ${point.role}</p>
           <p>${point.description}</p>
         </article>
@@ -151,6 +154,7 @@ const mapPayload = JSON.stringify({
         <span class="point-num ${point.type}">${point.order}</span>
         <span>
           <strong>${String(point.order).padStart(2, "0")}. ${point.title}</strong>
+          <small class="route-date">${point.dateLabel}</small>
           <small>${data.typeLabels[point.type]} · ${point.role}</small>
         </span>
       `;

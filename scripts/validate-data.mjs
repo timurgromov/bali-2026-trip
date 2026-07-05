@@ -38,8 +38,8 @@ for (let order = 1; order <= 20; order += 1) {
 }
 
 for (const point of points) {
-  if (!point.title || !point.description || !point.lat || !point.lng) {
-    throw new Error(`Point ${point.order} is missing title, description, lat, or lng`);
+  if (!point.title || !point.description || !point.dateLabel || !point.lat || !point.lng) {
+    throw new Error(`Point ${point.order} is missing title, dateLabel, description, lat, or lng`);
   }
 }
 
