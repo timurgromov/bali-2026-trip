@@ -5,7 +5,8 @@ import "leaflet/dist/leaflet.css";
 const mapPayload = JSON.stringify({
   points: trip.map.points,
   routes: trip.map.routes,
-  typeLabels: trip.map.typeLabels
+  typeLabels: trip.map.typeLabels,
+  routeLabels: trip.map.routeLabels
 });
 ---
 
@@ -25,9 +26,41 @@ const mapPayload = JSON.stringify({
       <span><i class="dot optional"></i>Optional</span>
     </div>
   </div>
+  <div class="route-explainer" aria-label="Что означают линии на карте">
+    <article>
+      <span class="line-sample main"></span>
+      <strong>{trip.map.routeLabels.main}</strong>
+      <p>Только крупные переезды между районами, где живём.</p>
+    </article>
+    <article>
+      <span class="line-sample island"></span>
+      <strong>{trip.map.routeLabels.island}</strong>
+      <p>Отдельный день Sanur -> порт -> Nusa Lembongan / Ceningan -> обратно.</p>
+    </article>
+    <article>
+      <span class="line-sample optional"></span>
+      <strong>{trip.map.routeLabels.optional}</strong>
+      <p>Запасные или условные направления, которые не являются обязательным скелетом маршрута.</p>
+    </article>
+    <article>
+      <span class="point-sample day"></span>
+      <strong>Синие точки без линий</strong>
+      <p>Локальные места внутри базы: их смотрим из ближайшего района, но не соединяем все линии на карте.</p>
+    </article>
+  </div>
   <div class="map-layout">
     <div id="route-map" class="route-map" aria-label="Интерактивная карта Бали"></div>
-    <nav id="route-list" class="route-list" aria-label="Точки маршрута"></nav>
+    <aside class="route-panel" aria-label="Точки маршрута">
+      <div class="map-filters" aria-label="Фильтр точек карты">
+        <button type="button" class="active" data-filter="all">Все</button>
+        <button type="button" data-filter="base">Базы</button>
+        <button type="button" data-filter="day">Выезды</button>
+        <button type="button" data-filter="island">Острова</button>
+        <button type="button" data-filter="optional">Optional</button>
+      </div>
+      <nav id="route-list" class="route-list" aria-label="Точки маршрута"></nav>
+      <p id="route-empty" class="route-empty" hidden>Для этого фильтра нет точек.</p>
+    </aside>
   </div>
   <script id="route-map-data" type="application/json" set:html={mapPayload} is:inline></script>
 </section>
@@ -54,15 +87,25 @@ const mapPayload = JSON.stringify({
       optional: number[][];
     };
     typeLabels: Record<RoutePoint["type"], string>;
+    routeLabels: {
+      main: string;
+      island: string;
+      optional: string;
+    };
   };
 
   const payloadEl = document.getElementById("route-map-data");
   const mapEl = document.getElementById("route-map");
   const listEl = document.getElementById("route-list");
+  const emptyEl = document.getElementById("route-empty");
+  const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(".map-filters button"));
 
-  if (payloadEl && mapEl && listEl) {
+  if (payloadEl && mapEl && listEl && emptyEl) {
+    const routeListEl = listEl;
+    const routeEmptyEl = emptyEl;
     const data = JSON.parse(payloadEl.textContent || "{}") as MapPayload;
     const pointsByOrder = new Map(data.points.map((point) => [point.order, point]));
+    const islandOrders = new Set(data.routes.island);
 
     const map = L.map(mapEl, {
       zoomControl: true,
@@ -108,6 +151,22 @@ const mapPayload = JSON.stringify({
       markers.set(point.order, marker);
     });
 
+    function shouldShowPoint(point: RoutePoint, filter: string) {
+      if (filter === "all") {
+        return true;
+      }
+
+      if (filter === "base") {
+        return point.type === "base" || point.type === "airport";
+      }
+
+      if (filter === "island") {
+        return islandOrders.has(point.order) || point.title.includes("Nusa Penida");
+      }
+
+      return point.type === filter;
+    }
+
     function routeLine(orders: number[]) {
       return orders
         .map((order) => pointsByOrder.get(order))
@@ -146,9 +205,9 @@ const mapPayload = JSON.stringify({
     window.addEventListener("load", () => window.setTimeout(fitRouteBounds, 250));
     window.addEventListener("resize", () => window.setTimeout(fitRouteBounds, 120));
 
-    data.points.forEach((point) => {
+    function createPointButton(point: RoutePoint) {
       const button = document.createElement("button");
-      button.className = "route-point";
+      button.className = `route-point ${point.type === "base" || point.type === "airport" ? "is-anchor" : ""}`;
       button.type = "button";
       button.innerHTML = `
         <span class="point-num ${point.type}">${point.order}</span>
@@ -163,7 +222,28 @@ const mapPayload = JSON.stringify({
         map.setView([point.lat, point.lng], Math.max(map.getZoom(), 12), { animate: true });
         marker?.openPopup();
       });
-      listEl.appendChild(button);
+      return button;
+    }
+
+    function renderPointList(filter = "all") {
+      routeListEl.innerHTML = "";
+      const visiblePoints = data.points.filter((point) => shouldShowPoint(point, filter));
+
+      visiblePoints.forEach((point) => {
+        routeListEl.appendChild(createPointButton(point));
+      });
+
+      routeEmptyEl.hidden = visiblePoints.length > 0;
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        renderPointList(button.dataset.filter || "all");
+      });
     });
+
+    renderPointList();
   }
 </script>

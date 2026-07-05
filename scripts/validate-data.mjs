@@ -22,6 +22,11 @@ if (hits.length > 0) {
 const points = data.map.points;
 const orders = points.map((point) => point.order);
 const uniqueOrders = new Set(orders);
+const routeLabels = data.map.routeLabels;
+
+if (!routeLabels?.main || !routeLabels?.island || !routeLabels?.optional) {
+  throw new Error("Map routeLabels must explain main, island, and optional lines");
+}
 
 if (points.length !== 20) {
   throw new Error(`Expected 20 map points, got ${points.length}`);

@@ -334,6 +334,11 @@
       "ferry": "Паром",
       "optional": "Optional"
     },
+    "routeLabels": {
+      "main": "Переезды между базами проживания",
+      "island": "Островной день",
+      "optional": "Optional / fallback"
+    },
     "points": [
       {
         "order": 1,
