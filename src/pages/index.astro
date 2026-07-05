@@ -10,6 +10,44 @@ const placesByBase = trip.bases.map((base) => ({
   places: trip.places.filter((place) => place.base === base.name)
 }));
 const dayDetailsByDate = new Map(trip.dayDetails.map((detail) => [detail.date, detail]));
+type Place = (typeof trip.places)[number];
+type Day = (typeof trip.days)[number];
+type DayDetail = (typeof trip.dayDetails)[number];
+const placeAliases: Record<string, string[]> = {
+  "Batu Bolong / Echo Beach": ["Batu Bolong", "Echo Beach"],
+  "Seminyak / Petitenget": ["Seminyak", "Petitenget"],
+  "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
+  "Mount Batur / Kintamani": ["Mount Batur", "Batur", "Kintamani", "вулкан"],
+  "Uluwatu Temple + Kecak": ["Uluwatu Temple", "Kecak", "храм Uluwatu", "Kecak dance"],
+  "Nusa Lembongan / Ceningan": ["Nusa Lembongan", "Lembongan", "Ceningan"],
+  "Snorkeling - снорклинг": ["snorkeling", "снорклинг"],
+  "Sanur Beach Promenade": ["Sanur Beach", "promenade"],
+  "Nusa Dua / Geger Beach": ["Nusa Dua", "Geger Beach"]
+};
+const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
+const includesTerm = (text: string, term: string) => {
+  const normalizedTerm = normalize(term);
+  return normalizedTerm.length > 2 && normalize(text).includes(normalizedTerm);
+};
+const getPlaceTerms = (place: Place) => [
+  place.name,
+  ...(placeAliases[place.name] ?? []),
+  ...place.name.split(/\s*(?:\/|\+)\s*/u)
+];
+const getDayPlaces = (day: Day, details?: DayDetail) => {
+  const detailText = details
+    ? [
+        ...details.timing,
+        details.focus,
+        details.fallback,
+        details.foodRest,
+        ...details.warnings
+      ].join(" ")
+    : "";
+  const dayText = [day.title, day.plan, day.notes, detailText].join(" ");
+
+  return trip.places.filter((place) => getPlaceTerms(place).some((term) => includesTerm(dayText, term)));
+};
 const navItems = [
   ["overview", "Обзор"],
   ["map", "Карта"],
@@ -156,6 +194,7 @@ const navItems = [
         <div class="timeline">
           {trip.days.map((day) => {
             const details = dayDetailsByDate.get(day.date);
+            const dayPlaces = getDayPlaces(day, details);
             return (
               <article class="day-card">
                 <div class="date-box">
@@ -167,6 +206,23 @@ const navItems = [
                   <h3>{day.title}</h3>
                   <p>{day.plan}</p>
                   <p class="note">{day.notes}</p>
+                  {dayPlaces.length > 0 && (
+                    <div class="day-places" aria-label="Места этого дня">
+                      <h4>Места дня</h4>
+                      <div class="day-place-grid">
+                        {dayPlaces.map((place) => (
+                          <article class="day-place">
+                            <div>
+                              <strong>{place.name}</strong>
+                              <small>{place.duration}</small>
+                            </div>
+                            <p>{place.description}</p>
+                            <p class="note">{place.familyNote}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {details && (
                     <details class="day-details">
                       <summary>Показать детали дня</summary>
