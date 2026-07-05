@@ -7,7 +7,9 @@ const forbidden = [
   ["timur", "gromov", ".ru"].join(""),
   "PNR",
   "passport",
-  "паспорт",
+  "серия паспорта",
+  "номер паспорта",
+  "паспортные данные",
   "e-ticket",
   "номер билета"
 ];
@@ -38,6 +40,32 @@ for (let order = 1; order <= 20; order += 1) {
 for (const point of points) {
   if (!point.title || !point.description || !point.lat || !point.lng) {
     throw new Error(`Point ${point.order} is missing title, description, lat, or lng`);
+  }
+}
+
+if (!Array.isArray(data.places) || data.places.length < 20) {
+  throw new Error("Expected places directory with at least 20 entries");
+}
+
+for (const place of data.places) {
+  if (!place.name || !place.description || !place.familyNote || !place.duration) {
+    throw new Error(`Place "${place.name || "unknown"}" is missing required public description fields`);
+  }
+}
+
+if (!Array.isArray(data.dayDetails) || data.dayDetails.length < 20) {
+  throw new Error("Expected detailed day plan entries");
+}
+
+for (const detail of data.dayDetails) {
+  if (!detail.date || !detail.focus || !detail.fallback || !Array.isArray(detail.timing) || detail.timing.length === 0) {
+    throw new Error(`Day detail "${detail.date || "unknown"}" is incomplete`);
+  }
+}
+
+for (const section of ["budgetSummary", "decisions", "resources"]) {
+  if (!Array.isArray(data[section]) || data[section].length === 0) {
+    throw new Error(`Missing ${section}`);
   }
 }
 

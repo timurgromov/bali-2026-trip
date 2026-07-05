@@ -5,6 +5,22 @@ import "../styles/global.css";
 
 const baseUrl = import.meta.env.BASE_URL;
 const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
+const placesByBase = trip.bases.map((base) => ({
+  base,
+  places: trip.places.filter((place) => place.base === base.name)
+}));
+const dayDetailsByDate = new Map(trip.dayDetails.map((detail) => [detail.date, detail]));
+const navItems = [
+  ["overview", "Обзор"],
+  ["map", "Карта"],
+  ["flights", "Перелёты"],
+  ["bases", "Базы"],
+  ["days", "Дни"],
+  ["places", "Места"],
+  ["transfers", "Логистика"],
+  ["budget", "Финансы"],
+  ["decisions", "Решения"]
+];
 ---
 
 <!doctype html>
@@ -54,8 +70,12 @@ const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
       </div>
     </header>
 
+    <nav class="section-tabs" aria-label="Разделы маршрута">
+      {navItems.map(([href, label]) => <a href={`#${href}`}>{label}</a>)}
+    </nav>
+
     <main>
-      <section class="section intro">
+      <section id="overview" class="section intro">
         <div>
           <p class="eyebrow">Главная логика</p>
           <h2>Живём базами, а не ездим через весь остров каждый день</h2>
@@ -69,6 +89,38 @@ const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
       <div id="map">
         <RouteMap />
       </div>
+
+      <section id="flights" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Перелёты</p>
+          <h2>Ключевые времена дороги</h2>
+          <p>В публичной версии нет номеров бронирований, билетов и документов. Здесь только расписание и практические буферы.</p>
+        </div>
+        <div class="flight-grid">
+          {trip.flights.map((flight) => (
+            <article class="flight-card">
+              <div class="card-topline">
+                <span>✈</span>
+                <small>{flight.date}</small>
+              </div>
+              <h3>{flight.direction}</h3>
+              <p class="role">{flight.airline}</p>
+              <div class="segments">
+                {flight.segments.map((segment) => (
+                  <div class="segment">
+                    <strong>{segment.from} -> {segment.to}</strong>
+                    <span>{segment.departure} -> {segment.arrival}</span>
+                    <small>{segment.note}</small>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="notice">
+          <strong>Выезд из дома:</strong> на рейс 18 Oct 22:20 из SVO C текущий ориентир - выехать из Солнцево около 17:00 и быть в аэропорту к 18:45-19:00.
+        </div>
+      </section>
 
       <section id="bases" class="section">
         <div class="section-head">
@@ -86,7 +138,10 @@ const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
               <p class="role">{base.role}</p>
               <p>{base.why}</p>
               <div class="chips">
-                {base.nearby.map((item) => <span>{item}</span>)}
+                {base.nearby.map((item) => {
+                  const place = trip.places.find((entry) => entry.name === item || item.includes(entry.name) || entry.name.includes(item));
+                  return <span title={place?.description}>{item}</span>;
+                })}
               </div>
             </article>
           ))}
@@ -99,19 +154,89 @@ const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
           <h2>Скелет маршрута от вылета до возвращения</h2>
         </div>
         <div class="timeline">
-          {trip.days.map((day) => (
-            <article class="day-card">
-              <div class="date-box">
-                <strong>{day.date}</strong>
-                <span>{day.weekday}</span>
+          {trip.days.map((day) => {
+            const details = dayDetailsByDate.get(day.date);
+            return (
+              <article class="day-card">
+                <div class="date-box">
+                  <strong>{day.date}</strong>
+                  <span>{day.weekday}</span>
+                </div>
+                <div>
+                  <p class="day-base">{day.base}</p>
+                  <h3>{day.title}</h3>
+                  <p>{day.plan}</p>
+                  <p class="note">{day.notes}</p>
+                  {details && (
+                    <details class="day-details">
+                      <summary>Показать детали дня</summary>
+                      <div class="detail-grid">
+                        <section>
+                          <h4>Тайминг</h4>
+                          <ul>
+                            {details.timing.map((item) => <li>{item}</li>)}
+                          </ul>
+                        </section>
+                        <section>
+                          <h4>Смысл дня</h4>
+                          <p>{details.focus}</p>
+                        </section>
+                        <section>
+                          <h4>Fallback</h4>
+                          <p>{details.fallback}</p>
+                        </section>
+                        <section>
+                          <h4>Еда / отдых</h4>
+                          <p>{details.foodRest}</p>
+                        </section>
+                        <section>
+                          <h4>Важно</h4>
+                          <ul>
+                            {details.warnings.map((item) => <li>{item}</li>)}
+                          </ul>
+                        </section>
+                      </div>
+                    </details>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section id="places" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Справочник мест</p>
+          <h2>Что означают все названия в маршруте</h2>
+          <p>Здесь каждая точка расшифрована простым языком: что это, зачем туда ехать, сколько занимает и что важно для семьи.</p>
+        </div>
+        <div class="places-groups">
+          {placesByBase.map(({ base, places }) => (
+            <section class="place-group">
+              <div class="place-group-head">
+                <span>{String(base.order).padStart(2, "0")}</span>
+                <div>
+                  <h3>{base.name}</h3>
+                  <p>{base.role}</p>
+                </div>
               </div>
-              <div>
-                <p class="day-base">{day.base}</p>
-                <h3>{day.title}</h3>
-                <p>{day.plan}</p>
-                <p class="note">{day.notes}</p>
+              <div class="place-list">
+                {places.map((place) => (
+                  <article class="place-card">
+                    <div class="place-title">
+                      <h4>{place.name}</h4>
+                      <small>{place.duration}</small>
+                    </div>
+                    <div class="badges">
+                      {place.badges.map((badge) => <span class={`badge ${badge.replaceAll(" ", "-")}`}>{badge}</span>)}
+                    </div>
+                    <p>{place.description}</p>
+                    <p class="note">{place.familyNote}</p>
+                  </article>
+                ))}
               </div>
-            </article>
+            </section>
           ))}
         </div>
       </section>
@@ -146,6 +271,54 @@ const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
               <p>{transfer.note}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="budget" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Финансы</p>
+          <h2>Пока лёгкий бюджетный контур</h2>
+          <p>Excel в эту итерацию не импортируем. Здесь только категории, чтобы не потерять будущую структуру бюджета.</p>
+        </div>
+        <div class="budget-grid">
+          {trip.budgetSummary.map((item) => (
+            <article class="budget-card">
+              <div class="card-topline">
+                <span>₽</span>
+                <small>{item.status}</small>
+              </div>
+              <h3>{item.category}</h3>
+              <p>{item.note}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="decisions" class="section">
+        <div class="section-head">
+          <p class="eyebrow">Решения и TBD</p>
+          <h2>Что уже зафиксировано и что ещё надо решить</h2>
+        </div>
+        <div class="decision-grid">
+          {trip.decisions.map((decision) => (
+            <article class={`decision-card ${decision.status}`}>
+              <span>{decision.status === "done" ? "решено" : "TBD"}</span>
+              <h3>{decision.title}</h3>
+              <p>{decision.details}</p>
+            </article>
+          ))}
+        </div>
+        <div class="resources">
+          <h3>Ресурсы</h3>
+          <div class="resource-list">
+            {trip.resources.map((resource) => (
+              <article>
+                <strong>{resource.title}</strong>
+                <span>{resource.type} · {resource.status}</span>
+                {resource.url ? <a href={resource.url}>{resource.url}</a> : <em>Ссылка будет добавлена позже</em>}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
