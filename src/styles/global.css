@@ -515,6 +515,13 @@ dt {
   font-size: 14px;
 }
 
+.number-marker.optional,
+.point-num.optional {
+  width: 40px;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
 .point-num {
   width: 34px;
   height: 34px;

@@ -16,7 +16,8 @@ const mapPayload = JSON.stringify({
     <p class="eyebrow">Карта маршрута</p>
     <h2 id="map-title">{pointCount} точек с понятным порядком</h2>
     <p>
-      Цифры показывают порядок маршрута. Сплошная линия - основные базы, пунктир - островной день и optional-направления.
+      Цифры показывают порядок основного маршрута и островного сценария. Метка ALT - запасные альтернативы, а не следующий шаг маршрута.
+      Сплошная линия - основные базы, пунктир - островной день и optional-направления.
       В карточках справа у каждой точки указано, к какой дате или блоку поездки она относится.
     </p>
     <div class="legend" aria-label="Легенда карты">
@@ -41,7 +42,7 @@ const mapPayload = JSON.stringify({
     <article>
       <span class="line-sample optional"></span>
       <strong>{trip.map.routeLabels.optional}</strong>
-      <p>Запасные или условные направления, которые не являются обязательным скелетом маршрута.</p>
+      <p>Запасные направления с меткой ALT. Они не идут подряд после островного дня и не являются обязательным скелетом маршрута.</p>
     </article>
     <article>
       <span class="point-sample day"></span>
@@ -121,12 +122,20 @@ const mapPayload = JSON.stringify({
     const markers = new Map<number, L.Marker>();
     const bounds = L.latLngBounds(data.points.map((point) => [point.lat, point.lng]));
 
+    function labelFor(point: RoutePoint) {
+      return point.type === "optional" ? "ALT" : String(point.order);
+    }
+
+    function titlePrefixFor(point: RoutePoint) {
+      return point.type === "optional" ? "ALT" : String(point.order).padStart(2, "0");
+    }
+
     function iconFor(point: RoutePoint) {
       return L.divIcon({
         className: "",
-        html: `<span class="number-marker ${point.type}">${point.order}</span>`,
-        iconSize: [34, 34],
-        iconAnchor: [17, 17],
+        html: `<span class="number-marker ${point.type}">${labelFor(point)}</span>`,
+        iconSize: point.type === "optional" ? [40, 34] : [34, 34],
+        iconAnchor: point.type === "optional" ? [20, 17] : [17, 17],
         popupAnchor: [0, -18]
       });
     }
@@ -135,7 +144,7 @@ const mapPayload = JSON.stringify({
       const label = data.typeLabels[point.type];
       return `
         <article class="map-popup">
-          <h3>${String(point.order).padStart(2, "0")}. ${point.title}</h3>
+          <h3>${titlePrefixFor(point)}. ${point.title}</h3>
           <p class="popup-date">${point.dateLabel}</p>
           <p class="popup-meta">${label} · ${point.role}</p>
           <p>${point.description}</p>
@@ -146,7 +155,7 @@ const mapPayload = JSON.stringify({
     data.points.forEach((point) => {
       const marker = L.marker([point.lat, point.lng], {
         icon: iconFor(point),
-        title: `${String(point.order).padStart(2, "0")}. ${point.title}`
+        title: `${titlePrefixFor(point)}. ${point.title}`
       }).addTo(map);
       marker.bindPopup(popupFor(point));
       markers.set(point.order, marker);
@@ -211,9 +220,9 @@ const mapPayload = JSON.stringify({
       button.className = `route-point ${point.type === "base" || point.type === "airport" ? "is-anchor" : ""}`;
       button.type = "button";
       button.innerHTML = `
-        <span class="point-num ${point.type}">${point.order}</span>
+        <span class="point-num ${point.type}">${labelFor(point)}</span>
         <span>
-          <strong>${String(point.order).padStart(2, "0")}. ${point.title}</strong>
+          <strong>${titlePrefixFor(point)}. ${point.title}</strong>
           <small class="route-date">${point.dateLabel}</small>
           <small>${data.typeLabels[point.type]} · ${point.role}</small>
         </span>
