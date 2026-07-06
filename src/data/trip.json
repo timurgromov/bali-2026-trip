@@ -7,7 +7,7 @@
     "weddingDate": "30 октября 2026",
     "weddingArea": "Umalas - район рядом с Canggu/Berawa, семейный свадебный якорь",
     "nightsInBali": 19,
-    "coreIdea": "Не жить всё время в одном месте, а пройти 5 баз: западный кластер, Ubud, свадебный Umalas, Uluwatu/Bukit и Sanur."
+    "coreIdea": "Не жить всё время в одном месте, а пройти 4 смысловые зоны с 5 блоками жилья: старт Canggu/Berawa/Umalas, Ubud, свадебный Umalas, Uluwatu/Bukit и финальный возврат в Canggu/Berawa/Umalas."
   },
   "flights": [
     {
@@ -61,7 +61,14 @@
       "name": "Canggu / Berawa / Umalas",
       "role": "Мягкий старт, западное побережье, рядом семейная география",
       "why": "После позднего прилёта не едем далеко. Это удобный район для адаптации, кафе, пляжей, закатов и связи с Umalas.",
-      "nearby": ["Berawa Beach", "Batu Bolong / Echo Beach", "Pererenan", "Seminyak / Petitenget", "Tanah Lot", "Waterbom Bali"]
+      "nearby": [
+        "Berawa Beach",
+        "Batu Bolong / Echo Beach",
+        "Pererenan",
+        "Seminyak / Petitenget",
+        "Tanah Lot",
+        "Waterbom Bali"
+      ]
     },
     {
       "order": 2,
@@ -69,8 +76,16 @@
       "nights": 5,
       "name": "Ubud",
       "role": "Центральный Бали: природа, культура, рисовые террасы, вулкан",
-      "why": "Из Ubud логично смотреть центральные достопримечательности без ежедневных дальних поездок из Canggu.",
-      "nearby": ["Monkey Forest", "Campuhan Ridge Walk", "Tegallalang", "Tirta Empul", "Gunung Kawi / Goa Gajah", "Tegenungan Waterfall", "Mount Batur / Kintamani"]
+      "why": "Из Ubud логично смотреть центральные достопримечательности без ежедневных дальних поездок из Canggu. Конкретный водопад не фиксируем: старый туристический водопад убран по локальному фидбеку сестры.",
+      "nearby": [
+        "Monkey Forest",
+        "Campuhan Ridge Walk",
+        "Tegallalang",
+        "Tirta Empul",
+        "Gunung Kawi / Goa Gajah",
+        "Водопад TBD - локальный вариант",
+        "Mount Batur / Kintamani"
+      ]
     },
     {
       "order": 3,
@@ -79,7 +94,12 @@
       "name": "Umalas / Berawa / Canggu",
       "role": "Свадебный блок",
       "why": "30 октября свадьба. 30 октября - 1 ноября фиксированы 2 ночи в Umalas, примерно 3 минуты от дома сестры. Лучше иметь буфер рядом до свадьбы.",
-      "nearby": ["Umalas", "Berawa / Canggu", "Seminyak / Petitenget", "Tanah Lot fallback"]
+      "nearby": [
+        "Umalas",
+        "Berawa / Canggu",
+        "Seminyak / Petitenget",
+        "Tanah Lot fallback"
+      ]
     },
     {
       "order": 4,
@@ -88,23 +108,44 @@
       "name": "Uluwatu / Bukit",
       "role": "Скалы, южные пляжи, храм Uluwatu, Kecak",
       "why": "Юг Бали сильно отличается от Canggu и Ubud. Отдельная база убирает тяжелые поездки туда-обратно.",
-      "nearby": ["Melasti Beach", "Padang Padang", "Bingin", "Balangan", "Uluwatu Temple", "Kecak dance", "Jimbaran seafood", "GWK"]
+      "nearby": [
+        "Melasti Beach",
+        "Padang Padang",
+        "Bingin",
+        "Balangan",
+        "Uluwatu Temple",
+        "Kecak dance",
+        "Jimbaran seafood",
+        "GWK"
+      ]
     },
     {
       "order": 5,
       "dates": "4-7 Nov",
       "nights": 3,
-      "name": "Sanur",
-      "role": "Спокойный финал, лодки на острова, удобный аэропорт",
-      "why": "Sanur мягче для финала, удобен для Nusa Lembongan и логичен перед ночным вылетом из DPS.",
-      "nearby": ["Sanur Beach Promenade", "Sanur Port", "Nusa Lembongan / Ceningan", "Keramas Beach", "Nusa Dua / Geger Beach"]
+      "name": "Canggu / Berawa / Umalas (финал)",
+      "role": "Финальный возврат к семейной географии перед вылетом",
+      "why": "Финал возвращаем ближе к сестре и знакомой зоне, а Sanur оставляем не базой, а логистической точкой для optional-выезда на острова.",
+      "nearby": [
+        "Berawa Beach",
+        "Batu Bolong / Echo Beach",
+        "Pererenan",
+        "Seminyak / Petitenget",
+        "Sanur Port",
+        "Nusa Lembongan / Ceningan",
+        "Keramas Beach",
+        "Nusa Dua / Geger Beach"
+      ]
     }
   ],
   "places": [
     {
       "base": "Canggu / Berawa / Umalas",
       "name": "Berawa Beach",
-      "badges": ["optional", "child-friendly"],
+      "badges": [
+        "optional",
+        "child-friendly"
+      ],
       "duration": "1-2 часа",
       "description": "Пляж рядом с Umalas и Canggu: подойдёт для первой прогулки, заката и кафе без дальнего переезда.",
       "familyNote": "Купание зависит от волн; с ребёнком лучше воспринимать как прогулку и закат, а не как спокойное море."
@@ -112,7 +153,9 @@
     {
       "base": "Canggu / Berawa / Umalas",
       "name": "Batu Bolong / Echo Beach",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "2-3 часа",
       "description": "Пляжно-кафешная зона Canggu с серфовой атмосферой, закатами и большим выбором еды.",
       "familyNote": "Много людей и байков; лучше ехать ближе к вечеру и не планировать купание как главный смысл."
@@ -120,7 +163,9 @@
     {
       "base": "Canggu / Berawa / Umalas",
       "name": "Pererenan",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "2-3 часа",
       "description": "Более спокойный соседний район к северо-западу от Canggu: кафе, прогулка, закат, меньше ощущения суеты.",
       "familyNote": "Хорош как мягкая альтернатива Canggu, если не хочется толпы."
@@ -128,7 +173,9 @@
     {
       "base": "Canggu / Berawa / Umalas",
       "name": "Seminyak / Petitenget",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "вечер",
       "description": "Более цивильный ресторанно-магазинный район южнее Canggu: ужин, магазины, beach clubs и прогулка.",
       "familyNote": "Ехать лучше до вечернего трафика; не ставить в день свадьбы или тяжёлого переезда."
@@ -136,7 +183,9 @@
     {
       "base": "Canggu / Berawa / Umalas",
       "name": "Tanah Lot",
-      "badges": ["must"],
+      "badges": [
+        "must"
+      ],
       "duration": "2-3 часа с дорогой в одну сторону по ситуации",
       "description": "Храм на скале у океана, классический закатный выезд с западного побережья Бали.",
       "familyNote": "Красиво, но туристично; выезжать заранее, потому что на закат дороги могут стоять."
@@ -144,7 +193,10 @@
     {
       "base": "Canggu / Berawa / Umalas",
       "name": "Waterbom Bali",
-      "badges": ["fallback", "child-friendly"],
+      "badges": [
+        "fallback",
+        "child-friendly"
+      ],
       "duration": "полдня или день",
       "description": "Большой аквапарк в районе Kuta. Нормальный fallback, если хочется понятного детского развлечения вместо храмов и пляжей.",
       "familyNote": "Нужно отдельно проверить билеты, часы работы и логистику ближе к датам."
@@ -152,7 +204,10 @@
     {
       "base": "Ubud",
       "name": "Monkey Forest",
-      "badges": ["must", "child-friendly"],
+      "badges": [
+        "must",
+        "child-friendly"
+      ],
       "duration": "1-2 часа",
       "description": "Лес-парк с обезьянами в центре Ubud. Это не зоопарк, а прогулочная зона с храмами и свободно гуляющими обезьянами.",
       "familyNote": "Не держать еду, очки, бутылки и мелкие вещи открыто; ребёнку заранее объяснить правила."
@@ -160,7 +215,10 @@
     {
       "base": "Ubud",
       "name": "Campuhan Ridge Walk",
-      "badges": ["optional", "child-friendly"],
+      "badges": [
+        "optional",
+        "child-friendly"
+      ],
       "duration": "1-1.5 часа",
       "description": "Лёгкая зелёная прогулка по гребню рядом с центром Ubud: виды, воздух, без тяжёлой экскурсии.",
       "familyNote": "Лучше утром или ближе к закату; в жару может быть неприятно."
@@ -168,7 +226,9 @@
     {
       "base": "Ubud",
       "name": "Tegallalang Rice Terraces",
-      "badges": ["must"],
+      "badges": [
+        "must"
+      ],
       "duration": "1.5-2 часа",
       "description": "Знаменитые рисовые террасы к северу от Ubud: главный визуальный образ центрального Бали.",
       "familyNote": "Лучше ехать рано утром; дорожки могут быть скользкими и ступенчатыми."
@@ -176,7 +236,9 @@
     {
       "base": "Ubud",
       "name": "Tirta Empul",
-      "badges": ["must"],
+      "badges": [
+        "must"
+      ],
       "duration": "1-1.5 часа",
       "description": "Балийский храм с источниками и ритуальным омовением. Хорошо ложится в один день с Tegallalang.",
       "familyNote": "Нужна уважительная одежда; участие в омовении необязательно."
@@ -184,7 +246,9 @@
     {
       "base": "Ubud",
       "name": "Gunung Kawi",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "1-1.5 часа",
       "description": "Древний храмовый комплекс в долине с высеченными в скале святынями. Культурная остановка рядом с Tirta Empul.",
       "familyNote": "Есть ступени; с ребёнком оценивать по жаре и энергии."
@@ -192,23 +256,31 @@
     {
       "base": "Ubud",
       "name": "Goa Gajah",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "45-75 минут",
       "description": "Небольшой древний храмовый комплекс, известный как Elephant Cave. Удобен как короткая культурная остановка.",
       "familyNote": "Лучше как add-on, а не отдельный главный день."
     },
     {
       "base": "Ubud",
-      "name": "Tegenungan Waterfall",
-      "badges": ["fallback", "child-friendly"],
-      "duration": "1.5-2 часа",
-      "description": "Популярный и сравнительно доступный водопад недалеко от Ubud. Подходит для лёгкого природного дня.",
-      "familyNote": "В жару и после дождя может быть скользко; не строить день только вокруг купания."
+      "name": "Водопад TBD - локальный вариант",
+      "badges": [
+        "optional",
+        "fallback"
+      ],
+      "duration": "полдня, если найдём хороший вариант",
+      "description": "Не фиксируем старый туристический водопад. Водопад оставляем как TBD: выбрать по локальной рекомендации сестры или по карте ближе к поездке.",
+      "familyNote": "Не ехать ради галочки. Если нет сильного локального варианта с нормальной дорогой и безопасным доступом для ребёнка, лучше оставить день на отдых."
     },
     {
       "base": "Ubud",
       "name": "Mount Batur / Kintamani",
-      "badges": ["must", "hard optional"],
+      "badges": [
+        "must",
+        "hard optional"
+      ],
       "duration": "полдня, если sunrise jeep",
       "description": "Вулканический район с видом на Mount Batur и озеро. Для этой поездки логичнее jeep tour на рассвете, а не пеший подъём.",
       "familyNote": "Ребёнка по умолчанию не брать; нужно подтвердить, кто остаётся с ним, и проверить цену тура."
@@ -216,7 +288,10 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "Melasti Beach",
-      "badges": ["must", "child-friendly"],
+      "badges": [
+        "must",
+        "child-friendly"
+      ],
       "duration": "2-4 часа",
       "description": "Красивый южный пляж с подъездом между скалами. Один из самых удобных пляжей Bukit для семьи.",
       "familyNote": "Проверять волны и солнце; лучше утро или ближе к вечеру."
@@ -224,7 +299,9 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "Padang Padang",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "1-2 часа",
       "description": "Небольшой известный пляж в районе Uluwatu, красивый, но может быть тесным и туристичным.",
       "familyNote": "Есть спуск; с ребёнком выбирать по состоянию и толпе."
@@ -232,7 +309,9 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "Bingin",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "1-2 часа",
       "description": "Атмосферный пляж под скалами с серфовой сценой и видами.",
       "familyNote": "Спуск и подъём могут быть тяжёлыми; не лучший вариант с уставшим ребёнком."
@@ -240,7 +319,9 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "Balangan",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "1-2 часа",
       "description": "Пляж и видовая точка на юге Бали, хорошо подходит для закатного вида.",
       "familyNote": "Хорош как видовая остановка, не обязательно как длинный пляжный день."
@@ -248,7 +329,9 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "Uluwatu Temple + Kecak",
-      "badges": ["must"],
+      "badges": [
+        "must"
+      ],
       "duration": "2.5-4 часа",
       "description": "Храм на скале над океаном и вечернее представление Kecak: хор, ритм, огонь и закатная атмосфера.",
       "familyNote": "Билеты и время шоу проверить заранее; на территории храма аккуратно с вещами."
@@ -256,7 +339,10 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "Jimbaran seafood",
-      "badges": ["optional", "child-friendly"],
+      "badges": [
+        "optional",
+        "child-friendly"
+      ],
       "duration": "вечер",
       "description": "Ужин с рыбой и морепродуктами на песке в бухте Jimbaran. Хороший спокойный вечер после пляжного дня.",
       "familyNote": "Выбирать место по свежим отзывам и бюджету, не бронировать вслепую заранее."
@@ -264,66 +350,87 @@
     {
       "base": "Uluwatu / Bukit",
       "name": "GWK Cultural Park",
-      "badges": ["fallback", "child-friendly"],
+      "badges": [
+        "fallback",
+        "child-friendly"
+      ],
       "duration": "2-3 часа",
       "description": "Культурный парк Garuda Wisnu Kencana с большой статуей, площадками и шоу. Нормальный fallback, если пляжная погода плохая.",
       "familyNote": "Нужно проверить часы, билеты и насколько это интересно ребёнку."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Sanur Beach Promenade",
-      "badges": ["must", "child-friendly"],
+      "badges": [
+        "optional",
+        "child-friendly"
+      ],
       "duration": "1-3 часа",
-      "description": "Длинная спокойная набережная Sanur: завтраки, прогулки, велосипеды, рассветная сторона острова.",
-      "familyNote": "Хороший финальный ритм без тяжелой логистики."
+      "description": "Спокойная набережная Sanur рядом с портовой логистикой: можно использовать как короткий stop вокруг лодки, но не как финальную базу.",
+      "familyNote": "Хороша как лёгкая прогулка, если всё равно едем к Sanur Port; отдельно ради неё финальную базу не строим."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Nusa Lembongan / Ceningan",
-      "badges": ["must", "child-friendly"],
+      "badges": [
+        "optional",
+        "child-friendly"
+      ],
       "duration": "целый день",
-      "description": "Островной день на лодке из Sanur: пляжи, бирюзовая вода, кафе, снорклинг - плавание с маской у рифов, и маленький соседний остров Ceningan.",
-      "familyNote": "Нужно проверить speedboat, погоду, волны и формат перемещения по острову."
+      "description": "Островной день через Sanur Port: пляжи, бирюзовая вода, кафе, снорклинг - плавание с маской у рифов, и маленький соседний остров Ceningan.",
+      "familyNote": "Теперь это optional из финальной базы Canggu/Umalas. Нужны ранний выезд, проверка волн и понимание, что день будет логистически плотным."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Yellow Bridge",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "10-20 минут",
       "description": "Жёлтый мост между Nusa Lembongan и Nusa Ceningan. Это не отдельная достопримечательность на полдня, а короткая узнаваемая точка по дороге.",
       "familyNote": "Смотреть только если логично по островному маршруту."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Devil's Tear",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "30-45 минут",
       "description": "Скалистая точка на Nusa Lembongan, где волны разбиваются о берег и дают мощные брызги.",
       "familyNote": "Не подходить близко к краю; с ребёнком держать дистанцию."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Snorkeling - снорклинг",
-      "badges": ["optional", "child-friendly"],
+      "badges": [
+        "optional",
+        "child-friendly"
+      ],
       "duration": "1-2 часа",
       "description": "Плавание с маской у островов. Может стать главным смыслом островного дня, если море спокойное.",
       "familyNote": "Нужны жилеты, спокойная вода и проверенный оператор; если ребёнку некомфортно, заменить пляжем и кафе."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Keramas Beach",
-      "badges": ["optional"],
+      "badges": [
+        "optional"
+      ],
       "duration": "45-90 минут",
-      "description": "Пляж с чёрным вулканическим песком. Логично встроить как остановку по дороге в Sanur.",
-      "familyNote": "Не делать отдельной базой; это короткая визуальная остановка."
+      "description": "Пляж с чёрным вулканическим песком. Оставляем как optional-выезд, а не как остановку с чемоданами по дороге в Sanur.",
+      "familyNote": "Не делать отдельной базой; ехать только если реально хочется увидеть чёрный песок и день не перегружен."
     },
     {
-      "base": "Sanur",
+      "base": "Canggu / Berawa / Umalas (финал)",
       "name": "Nusa Dua / Geger Beach",
-      "badges": ["fallback", "child-friendly"],
+      "badges": [
+        "fallback",
+        "child-friendly"
+      ],
       "duration": "полдня",
-      "description": "Более курортный спокойный пляжный вариант на финал, если островной день отменяется или хочется простого моря.",
-      "familyNote": "Хорош как безопасный запасной сценарий вместо дальних поездок."
+      "description": "Более курортный спокойный пляжный вариант на финал, если хочется простого моря вместо островного дня или дальних выездов.",
+      "familyNote": "Хорош как безопасный запасной сценарий, но не обязательная точка маршрута."
     }
   ],
   "map": {
@@ -342,20 +449,20 @@
     "points": [
       {
         "order": 1,
-        "title": "DPS Airport - прилёт/вылет",
+        "title": "DPS Airport - аэропорт Бали / Denpasar / Ngurah Rai",
         "type": "airport",
         "dateLabel": "19 Oct поздний прилёт / 7 Nov ночной вылет",
-        "role": "19 Oct arrival / 7 Nov departure",
+        "role": "arrival / departure",
         "lat": -8.7467,
         "lng": 115.1672,
-        "description": "Аэропорт Denpasar / Ngurah Rai. Точка позднего прилёта 19 октября и ночного обратного вылета 7 ноября."
+        "description": "Главный аэропорт Бали: в билетах обычно DPS / Denpasar Bali, на картах часто Ngurah Rai International Airport."
       },
       {
         "order": 2,
         "title": "Canggu / Berawa / Umalas - первая база",
         "type": "base",
         "dateLabel": "19-23 Oct · база 1 · 4 ночи",
-        "role": "19-23 Oct",
+        "role": "мягкий старт",
         "lat": -8.6617,
         "lng": 115.1616,
         "description": "Западный кластер рядом с сестрой: кафе, пляжи, закаты и мягкая адаптация после перелёта."
@@ -375,10 +482,10 @@
         "title": "Ubud - центральная база",
         "type": "base",
         "dateLabel": "23-28 Oct · база 2 · 5 ночей",
-        "role": "23-28 Oct",
+        "role": "центр острова",
         "lat": -8.5069,
         "lng": 115.2625,
-        "description": "Центр острова: рисовые террасы, храмы, водопады, джунгли и вулканический блок."
+        "description": "Центр острова: рисовые террасы, храмы, вулканический блок и TBD-водопад только по хорошей локальной рекомендации."
       },
       {
         "order": 5,
@@ -422,36 +529,26 @@
       },
       {
         "order": 9,
-        "title": "Tegenungan Waterfall - водопад",
-        "type": "day",
-        "dateLabel": "27 Oct · лёгкий день / fallback из Ubud",
-        "role": "waterfall / fallback",
-        "lat": -8.5755,
-        "lng": 115.2892,
-        "description": "Доступный водопад недалеко от Убуда. Хорош как лёгкий природный день или fallback вместо дальних храмов."
-      },
-      {
-        "order": 10,
         "title": "Umalas - свадебный блок",
         "type": "base",
         "dateLabel": "28 Oct-1 Nov · база 3 · свадьба 30 Oct",
-        "role": "28 Oct-1 Nov, fixed 30 Oct-1 Nov",
+        "role": "wedding block",
         "lat": -8.665,
         "lng": 115.1628,
         "description": "Ключевой семейный район рядом с домом сестры. 30 октября свадьба, 30 октября - 1 ноября уже фиксированы 2 ночи."
       },
       {
-        "order": 11,
+        "order": 10,
         "title": "Uluwatu / Bukit - южная база",
         "type": "base",
         "dateLabel": "1-4 Nov · база 4 · 3 ночи",
-        "role": "1-4 Nov",
+        "role": "south coast",
         "lat": -8.8291,
         "lng": 115.0849,
         "description": "Южные скалы, видовые пляжи, закаты и храм Uluwatu. Отдельная база, чтобы не ездить туда-сюда из Umalas."
       },
       {
-        "order": 12,
+        "order": 11,
         "title": "Melasti Beach - семейный пляж",
         "type": "day",
         "dateLabel": "1-2 Nov · южный пляж из Uluwatu/Bukit",
@@ -461,7 +558,7 @@
         "description": "Красивый южный пляж с удобным подъездом между скалами. Один из лучших семейных пляжных вариантов на Bukit."
       },
       {
-        "order": 13,
+        "order": 12,
         "title": "Uluwatu Temple - храм + Kecak",
         "type": "day",
         "dateLabel": "3 Nov · вечер из Uluwatu/Bukit",
@@ -471,7 +568,7 @@
         "description": "Храм на высокой скале над океаном. Вечером можно смотреть Kecak dance - представление с хором и огнём."
       },
       {
-        "order": 14,
+        "order": 13,
         "title": "Jimbaran seafood - ужин на песке",
         "type": "day",
         "dateLabel": "1-3 Nov · optional ужин после юга",
@@ -481,47 +578,47 @@
         "description": "Пляжная бухта с ужином из рыбы и морепродуктов на песке. Хороший вечерний сценарий после юга."
       },
       {
-        "order": 15,
+        "order": 14,
         "title": "Keramas Beach - чёрный песок",
-        "type": "day",
-        "dateLabel": "4 Nov · остановка по дороге Uluwatu -> Sanur",
-        "role": "black sand stop",
+        "type": "optional",
+        "dateLabel": "5-6 Nov · optional выезд из финальной базы",
+        "role": "black sand option",
         "lat": -8.6042,
         "lng": 115.3364,
-        "description": "Пляж с чёрным вулканическим песком. Лучше встроить как остановку по дороге к Sanur или коротким выездом из Sanur."
+        "description": "Пляж с чёрным вулканическим песком. Оставляем как optional-выезд, не как обязательный переезд с чемоданами."
+      },
+      {
+        "order": 15,
+        "title": "Canggu / Berawa / Umalas - финальная база",
+        "type": "base",
+        "dateLabel": "4-7 Nov · база 5 · 3 ночи",
+        "role": "final family base",
+        "lat": -8.6617,
+        "lng": 115.1616,
+        "description": "Финальный возврат в знакомую семейную географию рядом с сестрой перед ночным вылетом из DPS."
       },
       {
         "order": 16,
-        "title": "Sanur - финальная база",
-        "type": "base",
-        "dateLabel": "4-7 Nov · база 5 · 3 ночи",
-        "role": "4-7 Nov",
-        "lat": -8.6933,
-        "lng": 115.2631,
-        "description": "Спокойная финальная база: набережная, рассветы, лодки на острова и удобный выезд в аэропорт."
+        "title": "Sanur Port - порт на острова",
+        "type": "ferry",
+        "dateLabel": "5 Nov · optional ранний выезд из финальной базы",
+        "role": "island logistics only",
+        "lat": -8.6742,
+        "lng": 115.263,
+        "description": "Порт отправления лодок на Nusa Lembongan / Ceningan. Sanur теперь не база, а логистическая точка для островного дня."
       },
       {
         "order": 17,
-        "title": "Sanur Port - порт на острова",
-        "type": "ferry",
-        "dateLabel": "5 Nov · утренний speedboat на острова",
-        "role": "island day start",
-        "lat": -8.6742,
-        "lng": 115.263,
-        "description": "Порт отправления лодок на Nusa Lembongan / Ceningan и Nusa Penida. Нужен запас на посадку."
+        "title": "Nusa Lembongan / Ceningan - островной день",
+        "type": "day",
+        "dateLabel": "5 Nov · optional day trip через Sanur Port",
+        "role": "optional island day",
+        "lat": -8.6786,
+        "lng": 115.4556,
+        "description": "Островной day trip: вода, пляжи, кафе, снорклинг - плавание с маской у рифов. Оставлен как optional, потому что требует раннего выезда из финальной базы."
       },
       {
         "order": 18,
-        "title": "Nusa Lembongan / Ceningan - островной день",
-        "type": "day",
-        "dateLabel": "5 Nov · day trip из Sanur",
-        "role": "default island day",
-        "lat": -8.6786,
-        "lng": 115.4556,
-        "description": "Основной островной day trip: вода, пляжи, кафе, снорклинг - плавание с маской у рифов, и возвращение в Sanur вечером. Мягче, чем Nusa Penida."
-      },
-      {
-        "order": 19,
         "title": "Nusa Dua / Geger Beach - optional пляж",
         "type": "optional",
         "dateLabel": "6 Nov · fallback финального пляжного дня",
@@ -531,7 +628,7 @@
         "description": "Спокойный resort-пляжный вариант на финал, если не хочется островов или дальних перемещений."
       },
       {
-        "order": 20,
+        "order": 19,
         "title": "Nusa Penida - hard optional",
         "type": "optional",
         "dateLabel": "5 Nov · hard optional вместо Lembongan",
@@ -542,9 +639,36 @@
       }
     ],
     "routes": {
-      "main": [1, 2, 4, 10, 11, 16, 1],
-      "island": [16, 17, 18, 17, 16],
-      "optional": [[11, 15, 16], [16, 19], [17, 20]]
+      "main": [
+        1,
+        2,
+        4,
+        9,
+        10,
+        15,
+        1
+      ],
+      "island": [
+        15,
+        16,
+        17,
+        16,
+        15
+      ],
+      "optional": [
+        [
+          15,
+          14
+        ],
+        [
+          15,
+          18
+        ],
+        [
+          16,
+          19
+        ]
+      ]
     }
   },
   "days": [
@@ -624,9 +748,9 @@
       "date": "27 Oct",
       "weekday": "Tue",
       "base": "Ubud",
-      "title": "Лёгкий день",
-      "plan": "Tegenungan Waterfall или Bali Zoo/Bird Park, затем бассейн, отдых, массаж.",
-      "notes": "День восстановления перед свадебным блоком."
+      "title": "Лёгкий день / водопад TBD",
+      "plan": "Без старого туристического водопада. День восстановления: бассейн, массаж, Bali Zoo/Bird Park или Водопад TBD - локальный вариант только по рекомендации сестры/карте.",
+      "notes": "Не ехать на водопад ради галочки; если нет сильного локального варианта, оставить отдых."
     },
     {
       "date": "28 Oct",
@@ -687,34 +811,34 @@
     {
       "date": "4 Nov",
       "weekday": "Wed",
-      "base": "Sanur",
-      "title": "Переезд в Sanur через Keramas",
-      "plan": "Переезд в Sanur, по дороге optional stop на Keramas Beach с чёрным вулканическим песком, вечером promenade.",
-      "notes": "Keramas можно перенести, если переезд затянется."
+      "base": "Canggu / Berawa / Umalas (финал)",
+      "title": "Возвращение в финальную семейную базу",
+      "plan": "Checkout, переезд из Uluwatu/Bukit обратно в Canggu/Berawa/Umalas, заселение и спокойный вечер рядом с семьёй.",
+      "notes": "Sanur больше не финальная база; он остаётся только логистикой для островного optional-day."
     },
     {
       "date": "5 Nov",
       "weekday": "Thu",
-      "base": "Sanur",
-      "title": "Nusa Lembongan / Ceningan",
-      "plan": "Утренний speedboat из Sanur, островной день: пляжи, кафе, снорклинг - плавание с маской, Yellow Bridge - короткий жёлтый мост между Lembongan и Ceningan, вечером обратно.",
-      "notes": "Nusa Penida оставляем hard optional, не основной семейный вариант."
+      "base": "Canggu / Berawa / Umalas (финал)",
+      "title": "Nusa Lembongan optional через Sanur Port",
+      "plan": "Если решим делать островной день: ранний выезд в Sanur Port, speedboat на Nusa Lembongan / Ceningan, пляжи/кафе/снорклинг, вечером обратно в финальную базу.",
+      "notes": "Это optional: день логистически плотный из-за дороги до Sanur Port. Можно заменить на спокойный день рядом."
     },
     {
       "date": "6 Nov",
       "weekday": "Fri",
-      "base": "Sanur",
-      "title": "Спокойный финал",
-      "plan": "Sanur Beach Promenade, завтрак/кафе, пляж или Nusa Dua/Geger Beach, сборы.",
-      "notes": "Не ставить длинную дорогу."
+      "base": "Canggu / Berawa / Umalas (финал)",
+      "title": "Финальный свободный день",
+      "plan": "Семья, кафе, пляж, сборы. Optional: Keramas Beach с чёрным песком или Nusa Dua/Geger Beach, если реально хочется отдельного выезда.",
+      "notes": "Главная задача - не перегрузить последний полный день и подготовиться к ночному вылету."
     },
     {
       "date": "7 Nov",
       "weekday": "Sat",
-      "base": "Sanur / вылет",
+      "base": "Canggu / Berawa / Umalas (финал) / вылет",
       "title": "Финальный день и DPS",
-      "plan": "Checkout, багаж, лёгкий день, ужин, выезд в DPS около 19:45-20:00, рейс 23:10.",
-      "notes": "Оставить практичный аэропортовый буфер."
+      "plan": "Лёгкий день в финальной базе, багаж, ужин, выезд в DPS с большим буфером на трафик, рейс 23:10.",
+      "notes": "Ориентир выезда уточнить ближе к дате; закладывать трафик Canggu/Umalas."
     },
     {
       "date": "8 Nov",
@@ -730,7 +854,7 @@
       "from": "DPS Airport",
       "to": "Canggu / Berawa / Umalas",
       "distance": "15-20 km",
-      "time": "45-75 min",
+      "time": "45-90 min",
       "transport": "airport pickup / private car",
       "window": "late evening on arrival",
       "note": "19 Oct arrival 22:05; airport exit still takes time."
@@ -751,7 +875,7 @@
       "time": "1 h 30 min - 2 h 30 min",
       "transport": "private driver / taxi",
       "window": "09:30-11:00",
-      "note": "Do not combine with heavy sightseeing."
+      "note": "Do not combine with heavy sightseeing before wedding block."
     },
     {
       "from": "Umalas / Berawa / Canggu",
@@ -764,200 +888,334 @@
     },
     {
       "from": "Uluwatu / Bukit",
-      "to": "Sanur via Keramas Beach",
-      "distance": "50-60 km total",
-      "time": "2 h 15 min - 3 h 30 min total",
+      "to": "Canggu / Berawa / Umalas (финал)",
+      "distance": "30-40 km",
+      "time": "1 h 30 min - 2 h 30 min",
       "transport": "private driver / taxi",
-      "window": "09:00-10:00",
-      "note": "Best as one-stop transfer day."
+      "window": "09:30-11:00",
+      "note": "Return to family geography; do not add a heavy sightseeing stop with luggage."
     },
     {
-      "from": "Sanur",
-      "to": "Nusa Lembongan / Ceningan",
-      "distance": "speedboat",
-      "time": "30-45 min boat + 30-45 min pre-boarding buffer",
-      "transport": "speedboat",
-      "window": "first morning boat",
-      "note": "Default island day; softer than Penida."
+      "from": "Canggu / Berawa / Umalas (финал)",
+      "to": "Sanur Port / Nusa Lembongan optional",
+      "distance": "car + speedboat",
+      "time": "60-90 min car + 30-45 min boat + boarding buffer",
+      "transport": "private driver + speedboat",
+      "window": "early morning only",
+      "note": "Optional island day; Sanur is logistics, not lodging base."
     },
     {
-      "from": "Sanur",
+      "from": "Canggu / Berawa / Umalas (финал)",
       "to": "DPS Airport",
       "distance": "15-20 km",
-      "time": "35-60 min",
+      "time": "45-90 min",
       "transport": "taxi / private car",
-      "window": "19:45-20:00",
-      "note": "For 23:10 flight."
+      "window": "large evening buffer",
+      "note": "For 23:10 flight; Canggu/Umalas traffic can be unpredictable."
     }
   ],
   "dayDetails": [
     {
       "date": "18 Oct",
-      "timing": ["16:30 - финальная проверка документов и багажа", "17:00 - ориентир выезда из Солнцево на такси", "18:45-19:00 - цель быть в SVO Terminal C"],
+      "timing": [
+        "16:30 - финальная проверка документов и багажа",
+        "17:00 - ориентир выезда из Солнцево на такси",
+        "18:45-19:00 - цель быть в SVO Terminal C"
+      ],
       "focus": "Спокойно начать поездку и не рисковать регистрацией.",
       "fallback": "Rail/Aeroexpress проверить ближе к дате, если хочется уйти от дорожного трафика.",
       "foodRest": "Еда/лаунж после сдачи багажа, без спешки.",
-      "warnings": ["Не хранить публично номера билетов и документы.", "Расписание транспорта перепроверить ближе к октябрю 2026."]
+      "warnings": [
+        "Не хранить публично номера билетов и документы.",
+        "Расписание транспорта перепроверить ближе к октябрю 2026."
+      ]
     },
     {
       "date": "19 Oct",
-      "timing": ["11:00 - прилёт в Chengdu", "15:30 - вылет на Бали", "22:05 - прилёт DPS", "поздний вечер - pickup и сон"],
+      "timing": [
+        "11:00 - прилёт в Chengdu",
+        "15:30 - вылет на Бали",
+        "22:05 - прилёт DPS",
+        "поздний вечер - pickup и сон"
+      ],
       "focus": "Добраться до первой базы без попытки начать экскурсионную программу ночью.",
       "fallback": "Если задержка рейса, первая ночь должна оставаться максимально простой.",
       "foodRest": "Перекус в Chengdu и вода; на Бали сразу отдых.",
-      "warnings": ["На прилёте заложить время на паспортный контроль, багаж и дорогу."]
+      "warnings": [
+        "На прилёте заложить время на паспортный контроль, багаж и дорогу."
+      ]
     },
     {
       "date": "20 Oct",
-      "timing": ["утро - поздний подъём", "день - бассейн/кафе", "вечер - Berawa или Umalas"],
+      "timing": [
+        "утро - поздний подъём",
+        "день - бассейн/кафе",
+        "вечер - Berawa или Umalas"
+      ],
       "focus": "Адаптация после дороги и мягкий вход в Бали.",
       "fallback": "Если все бодрые, добавить короткий sunset у Berawa Beach.",
       "foodRest": "Нормальный завтрак и ранний ужин рядом с жильём.",
-      "warnings": ["Не ставить Tanah Lot или дальние поездки в первый день."]
+      "warnings": [
+        "Не ставить Tanah Lot или дальние поездки в первый день."
+      ]
     },
     {
       "date": "21 Oct",
-      "timing": ["утро - свободно", "день - Canggu / Pererenan", "вечер - пляжный закат"],
+      "timing": [
+        "утро - свободно",
+        "день - Canggu / Pererenan",
+        "вечер - пляжный закат"
+      ],
       "focus": "Понять атмосферу западного побережья: кафе, пляжи, серфовая зона, закат.",
       "fallback": "Если Canggu перегружен, уйти в более спокойный Pererenan.",
       "foodRest": "Обед/ужин в кафе по месту, без брони.",
-      "warnings": ["Много трафика и байков; перемещения держать короткими."]
+      "warnings": [
+        "Много трафика и байков; перемещения держать короткими."
+      ]
     },
     {
       "date": "22 Oct",
-      "timing": ["утро - отдых", "день - лёгкая программа", "за 1.5-2 часа до заката - выезд в Tanah Lot"],
+      "timing": [
+        "утро - отдых",
+        "день - лёгкая программа",
+        "за 1.5-2 часа до заката - выезд в Tanah Lot"
+      ],
       "focus": "Закрыть Tanah Lot как сильный западный sunset-сценарий.",
       "fallback": "Waterbom Bali для ребёнка или Seminyak/Petitenget для ужина и магазинов.",
       "foodRest": "Перед выездом перекусить, чтобы не искать еду в туристической толпе.",
-      "warnings": ["Не пытаться совместить Tanah Lot, Waterbom и Seminyak в один день."]
+      "warnings": [
+        "Не пытаться совместить Tanah Lot, Waterbom и Seminyak в один день."
+      ]
     },
     {
       "date": "23 Oct",
-      "timing": ["09:30-10:30 - выезд после завтрака", "день - дорога и заселение", "вечер - Ubud Center"],
+      "timing": [
+        "09:30-10:30 - выезд после завтрака",
+        "день - дорога и заселение",
+        "вечер - Ubud Center"
+      ],
       "focus": "Переехать в центральную базу и не перегрузить день.",
       "fallback": "Если заселение позднее, оставить вещи и поесть рядом.",
       "foodRest": "Ранний ужин в Ubud, без ночной программы.",
-      "warnings": ["Не добавлять в этот день водопад или дальний храм."]
+      "warnings": [
+        "Не добавлять в этот день водопад или дальний храм."
+      ]
     },
     {
       "date": "24 Oct",
-      "timing": ["утро - Monkey Forest", "день - центр Ubud", "вечер - Campuhan Ridge Walk или кафе"],
+      "timing": [
+        "утро - Monkey Forest",
+        "день - центр Ubud",
+        "вечер - Campuhan Ridge Walk или кафе"
+      ],
       "focus": "Локальный день в Ubud без машины на весь день.",
       "fallback": "Если Monkey Forest не заходит ребёнку, сократить и заменить кафе/бассейном.",
       "foodRest": "Держать день вокруг центра, чтобы легко вернуться в жильё.",
-      "warnings": ["В Monkey Forest не показывать еду и мелкие предметы."]
+      "warnings": [
+        "В Monkey Forest не показывать еду и мелкие предметы."
+      ]
     },
     {
       "date": "25 Oct",
-      "timing": ["07:30-08:30 - выезд", "утро - Tegallalang", "день - Tirta Empul + Gunung Kawi или Goa Gajah", "вечер - отдых"],
+      "timing": [
+        "07:30-08:30 - выезд",
+        "утро - Tegallalang",
+        "день - Tirta Empul + Gunung Kawi или Goa Gajah",
+        "вечер - отдых"
+      ],
       "focus": "Главный культурно-природный день Ubud.",
       "fallback": "Если жарко/устали, выбрать только Tegallalang + Tirta Empul.",
       "foodRest": "Обед по дороге или после храмов; вечер без дальних планов.",
-      "warnings": ["Храмы требуют уважительной одежды; ступени и жара могут утомлять."]
+      "warnings": [
+        "Храмы требуют уважительной одежды; ступени и жара могут утомлять."
+      ]
     },
     {
       "date": "26 Oct",
-      "timing": ["очень ранний старт - sunrise jeep", "утро - Mount Batur / Kintamani", "день - Lake Batur или hot springs", "вечер - сон/отдых"],
+      "timing": [
+        "очень ранний старт - sunrise jeep",
+        "утро - Mount Batur / Kintamani",
+        "день - Lake Batur или hot springs",
+        "вечер - сон/отдых"
+      ],
       "focus": "Вулканический опыт без пешего подъёма.",
       "fallback": "Если ранний старт не подходит, сделать дневной Kintamani viewpoint без sunrise.",
       "foodRest": "После тура нужен нормальный завтрак/обед и отдых.",
-      "warnings": ["Ребёнка по умолчанию не брать; цену и оператора тура проверить."]
+      "warnings": [
+        "Ребёнка по умолчанию не брать; цену и оператора тура проверить."
+      ]
     },
     {
       "date": "27 Oct",
-      "timing": ["утро - лёгкий выезд", "день - Tegenungan или Bali Zoo/Bird Park", "вечер - бассейн/массаж"],
-      "focus": "Восстановиться перед свадебным блоком.",
-      "fallback": "Если все устали, оставить только villa/pool/rest.",
-      "foodRest": "День без жёстких timed tickets.",
-      "warnings": ["Не превращать fallback-день в ещё один плотный тур."]
+      "timing": [
+        "утро - без раннего старта",
+        "день - отдых / Bali Zoo/Bird Park / Водопад TBD только если есть хорошая локальная рекомендация",
+        "вечер - бассейн/массаж"
+      ],
+      "focus": "Восстановиться перед свадебным блоком без старого туристического водопада.",
+      "fallback": "Если локального водопада нет, не заменять его другим случайным туристическим местом; оставить отдых.",
+      "foodRest": "Кафе рядом с Ubud, бассейн, массаж, ранний сон.",
+      "warnings": [
+        "Старый туристический водопад исключён по локальному фидбеку сестры.",
+        "Водопад добавлять только после проверки дороги, безопасности и смысла для ребёнка."
+      ]
     },
     {
       "date": "28 Oct",
-      "timing": ["09:30-11:00 - выезд из Ubud", "день - переезд в Umalas/Berawa/Canggu", "вечер - лёгкий ужин"],
+      "timing": [
+        "09:30-11:00 - выезд из Ubud",
+        "день - переезд в Umalas/Berawa/Canggu",
+        "вечер - лёгкий ужин"
+      ],
       "focus": "Подойти к свадьбе уже в нужной географии.",
       "fallback": "Если дорога затянется, отменить любые планы кроме ужина.",
       "foodRest": "Ужин рядом с жильём.",
-      "warnings": ["Не ехать на свадьбу из Ubud в день свадьбы."]
+      "warnings": [
+        "Не ехать на свадьбу из Ubud в день свадьбы."
+      ]
     },
     {
       "date": "29 Oct",
-      "timing": ["утро - свободно", "день - семейные дела", "вечер - пляж/кафе или Seminyak"],
+      "timing": [
+        "утро - свободно",
+        "день - семейные дела",
+        "вечер - пляж/кафе или Seminyak"
+      ],
       "focus": "Подготовка к свадьбе и спокойный день рядом.",
       "fallback": "Если появятся семейные задачи, экскурсии не нужны.",
       "foodRest": "Нормальный сон и без позднего возвращения.",
-      "warnings": ["Не перегружать день перед свадьбой."]
+      "warnings": [
+        "Не перегружать день перед свадьбой."
+      ]
     },
     {
       "date": "30 Oct",
-      "timing": ["день - свадебная логистика", "вечер - свадьба"],
+      "timing": [
+        "день - свадебная логистика",
+        "вечер - свадьба"
+      ],
       "focus": "Свадьба сестры в районе Umalas.",
       "fallback": "План дня подстраивается под семейную программу.",
       "foodRest": "Держать запас времени на сборы и дорогу.",
-      "warnings": ["Не добавлять туристическую программу."]
+      "warnings": [
+        "Не добавлять туристическую программу."
+      ]
     },
     {
       "date": "31 Oct",
-      "timing": ["утро - поздний старт", "день - семья/отдых", "вечер - короткая прогулка"],
+      "timing": [
+        "утро - поздний старт",
+        "день - семья/отдых",
+        "вечер - короткая прогулка"
+      ],
       "focus": "Пост-свадебное восстановление.",
       "fallback": "Если есть силы, короткий Berawa/Canggu sunset.",
       "foodRest": "Кафе рядом, без дальних дорог.",
-      "warnings": ["Не ставить переезд и экскурсию в один день после свадьбы."]
+      "warnings": [
+        "Не ставить переезд и экскурсию в один день после свадьбы."
+      ]
     },
     {
       "date": "1 Nov",
-      "timing": ["утро - checkout", "день - переезд Umalas -> Uluwatu/Bukit", "вечер - Melasti или Jimbaran sunset"],
+      "timing": [
+        "утро - checkout",
+        "день - переезд Umalas -> Uluwatu/Bukit",
+        "вечер - Melasti или Jimbaran sunset"
+      ],
       "focus": "Сменить ритм на южные пляжи и скалы.",
       "fallback": "Если дорога тяжёлая, только ужин и отдых.",
       "foodRest": "Вечер без обязательного шоу.",
-      "warnings": ["Не планировать Kecak в день переезда, если нет запаса."]
+      "warnings": [
+        "Не планировать Kecak в день переезда, если нет запаса."
+      ]
     },
     {
       "date": "2 Nov",
-      "timing": ["утро - Melasti Beach", "день - Padang Padang / Bingin / Balangan по энергии", "вечер - свободно"],
+      "timing": [
+        "утро - Melasti Beach",
+        "день - Padang Padang / Bingin / Balangan по энергии",
+        "вечер - свободно"
+      ],
       "focus": "Пляжи Bukit без гонки.",
       "fallback": "Оставить один пляж и бассейн, если жарко или ребёнок устал.",
       "foodRest": "Обед рядом с пляжем или в районе жилья.",
-      "warnings": ["Некоторые пляжи со ступенями; заранее оценивать доступность."]
+      "warnings": [
+        "Некоторые пляжи со ступенями; заранее оценивать доступность."
+      ]
     },
     {
       "date": "3 Nov",
-      "timing": ["утро - отдых", "день - пляж/бассейн", "вечер - Uluwatu Temple + Kecak"],
+      "timing": [
+        "утро - отдых",
+        "день - пляж/бассейн",
+        "вечер - Uluwatu Temple + Kecak"
+      ],
       "focus": "Сильный вечерний блок: храм на скале, закат, Kecak.",
       "fallback": "Если билеты/погода не складываются, заменить на Jimbaran seafood.",
       "foodRest": "Поесть до шоу или планировать поздний ужин.",
-      "warnings": ["Билеты и время шоу проверить заранее."]
+      "warnings": [
+        "Билеты и время шоу проверить заранее."
+      ]
     },
     {
       "date": "4 Nov",
-      "timing": ["09:00-10:00 - выезд", "по дороге - Keramas Beach optional", "день - заселение в Sanur", "вечер - promenade"],
-      "focus": "Финальная база и чёрный песок без отдельного дня.",
-      "fallback": "Если дорога/жара мешают, Keramas перенести или отменить.",
-      "foodRest": "Лёгкий ужин на набережной Sanur.",
-      "warnings": ["Не добавлять много остановок на transfer day."]
+      "timing": [
+        "утро - checkout в Uluwatu/Bukit",
+        "день - переезд в Canggu/Berawa/Umalas",
+        "вечер - заселение и спокойный ужин"
+      ],
+      "focus": "Вернуться в знакомую семейную географию перед финалом поездки.",
+      "fallback": "Если переезд тяжёлый, не добавлять Keramas или дальние остановки.",
+      "foodRest": "Ужин рядом с финальной базой, без поездок через весь остров.",
+      "warnings": [
+        "Sanur больше не финальная база.",
+        "Не перегружать день с чемоданами."
+      ]
     },
     {
       "date": "5 Nov",
-      "timing": ["раннее утро - Sanur Port", "утро/день - Nusa Lembongan / Ceningan", "вечер - лодка обратно в Sanur"],
-      "focus": "Главный островной день: пляжи, вода, кафе и снорклинг - плавание с маской у рифов.",
-      "fallback": "Если море/погода плохие, заменить на Sanur или Nusa Dua/Geger Beach.",
-      "foodRest": "Обед на острове, вечером простой ужин в Sanur.",
-      "warnings": ["Speedboat, погоду, волны и оператора проверить ближе к дате."]
+      "timing": [
+        "очень ранний выезд - если подтверждаем островной день",
+        "утро - Sanur Port и speedboat",
+        "день - Nusa Lembongan / Ceningan",
+        "вечер - возвращение в Canggu/Berawa/Umalas"
+      ],
+      "focus": "Optional островной день, если семья готова к раннему старту и логистике.",
+      "fallback": "Если море, волны, усталость или логистика плохие - заменить на спокойный день в финальной базе.",
+      "foodRest": "Обед на острове или простой ужин после возвращения.",
+      "warnings": [
+        "Проверить speedboat, погоду, волны и трансфер до Sanur Port.",
+        "Это optional, не обязательный день маршрута."
+      ]
     },
     {
       "date": "6 Nov",
-      "timing": ["утро - Sanur breakfast/promenade", "день - пляж или Nusa Dua/Geger", "вечер - сборы"],
-      "focus": "Спокойный финал без дальних дорог.",
-      "fallback": "Если все хотят только отдых, весь день оставить в Sanur.",
-      "foodRest": "Последний нормальный ужин без спешки.",
-      "warnings": ["Не ставить тяжёлые экскурсии перед ночным вылетом."]
+      "timing": [
+        "утро - завтрак/кафе",
+        "день - финальный отдых, семья, пляж или optional Keramas/Nusa Dua",
+        "вечер - сборы"
+      ],
+      "focus": "Последний полный день без обязательных дальних переездов.",
+      "fallback": "Если все устали, оставить день полностью в Canggu/Berawa/Umalas.",
+      "foodRest": "Нормально поесть, собрать вещи, не планировать поздние дальние активности.",
+      "warnings": [
+        "Не ставить обязательный дальний выезд перед ночным вылетом на следующий день."
+      ]
     },
     {
       "date": "7 Nov",
-      "timing": ["утро - checkout/багаж", "день - лёгкий Sanur", "19:45-20:00 - выезд в DPS", "23:10 - вылет"],
+      "timing": [
+        "утро - поздний старт",
+        "день - багаж и лёгкий финал",
+        "вечер - выезд в DPS с большим буфером",
+        "23:10 - вылет"
+      ],
       "focus": "Закрыть поездку без риска опоздать в аэропорт.",
-      "fallback": "Если отель не хранит багаж, заранее найти luggage option.",
-      "foodRest": "Финальный ужин до аэропорта.",
-      "warnings": ["Оставить аэропортовый буфер; не уезжать далеко от Sanur."]
+      "fallback": "Если трафик выглядит тяжёлым, выехать раньше и поесть уже ближе к аэропорту.",
+      "foodRest": "Лёгкий ужин до выезда или в аэропорту.",
+      "warnings": [
+        "Canggu/Umalas traffic can be unpredictable; финальный выезд не делать впритык."
+      ]
     }
   ],
   "budgetSummary": [
@@ -969,7 +1227,7 @@
     {
       "category": "Жильё",
       "status": "TBD",
-      "note": "Нужно подобрать виллы/отели по пяти базам: Canggu/Berawa/Umalas, Ubud, Umalas wedding, Uluwatu/Bukit, Sanur."
+      "note": "Нужно подобрать жильё по 5 блокам жилья: старт Canggu/Berawa/Umalas, Ubud, свадебный Umalas, Uluwatu/Bukit, финальный Canggu/Berawa/Umalas."
     },
     {
       "category": "Трансферы",
@@ -995,8 +1253,18 @@
   "decisions": [
     {
       "status": "done",
-      "title": "Маршрут строится вокруг пяти баз",
-      "details": "Это снижает ежедневные переезды и сохраняет свадебный блок в правильной географии."
+      "title": "Маршрут строится вокруг 4 смысловых зон",
+      "details": "Жильё остаётся в 5 блоках, потому что Canggu/Berawa/Umalas используется и в начале, и в финале."
+    },
+    {
+      "status": "done",
+      "title": "Финал возвращён в Umalas/Canggu/Berawa",
+      "details": "Sanur больше не финальная база; завершаем поездку рядом с семейной географией и сестрой."
+    },
+    {
+      "status": "done",
+      "title": "Старый туристический водопад исключён",
+      "details": "По локальному фидбеку сестры это туристический потоковый водопад; вместо него оставлен Водопад TBD только по хорошей рекомендации."
     },
     {
       "status": "done",
@@ -1005,18 +1273,18 @@
     },
     {
       "status": "done",
-      "title": "Nusa Lembongan выбран как основной островной день",
-      "details": "Он мягче для семьи, чем Nusa Penida, и лучше ложится из Sanur."
-    },
-    {
-      "status": "done",
       "title": "Pink Beach / Komodo не включаем",
-      "details": "Это отдельная экспедиция, а не простой day trip с Бали."
+      "details": "Это отдельная экспедиция, а не простой day trip с Бали; в текущий семейный маршрут не добавляем."
     },
     {
       "status": "todo",
-      "title": "Подобрать жильё по базам",
-      "details": "Нужно проверить цены, районы и логистику относительно выбранных точек."
+      "title": "Решить Nusa Lembongan",
+      "details": "Оставлен как optional day trip через Sanur Port из финальной базы; нужно проверить логистику, море и готовность семьи к раннему старту."
+    },
+    {
+      "status": "todo",
+      "title": "Подобрать жильё по 5 блокам",
+      "details": "Нужно проверить цены, районы и логистику относительно обновлённого порядка баз."
     },
     {
       "status": "todo",

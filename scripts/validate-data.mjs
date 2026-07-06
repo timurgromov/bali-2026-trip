@@ -28,15 +28,15 @@ if (!routeLabels?.main || !routeLabels?.island || !routeLabels?.optional) {
   throw new Error("Map routeLabels must explain main, island, and optional lines");
 }
 
-if (points.length !== 20) {
-  throw new Error(`Expected 20 map points, got ${points.length}`);
+if (points.length < 10) {
+  throw new Error(`Expected at least 10 map points, got ${points.length}`);
 }
 
 if (uniqueOrders.size !== points.length) {
   throw new Error("Map point orders must be unique");
 }
 
-for (let order = 1; order <= 20; order += 1) {
+for (let order = 1; order <= points.length; order += 1) {
   if (!uniqueOrders.has(order)) {
     throw new Error(`Missing map point order ${order}`);
   }

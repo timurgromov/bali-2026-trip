@@ -2,6 +2,7 @@
 import trip from "../data/trip.json";
 import "leaflet/dist/leaflet.css";
 
+const pointCount = trip.map.points.length;
 const mapPayload = JSON.stringify({
   points: trip.map.points,
   routes: trip.map.routes,
@@ -13,7 +14,7 @@ const mapPayload = JSON.stringify({
 <section class="map-shell" aria-labelledby="map-title">
   <div class="map-copy">
     <p class="eyebrow">Карта маршрута</p>
-    <h2 id="map-title">20 точек с понятным порядком</h2>
+    <h2 id="map-title">{pointCount} точек с понятным порядком</h2>
     <p>
       Цифры показывают порядок маршрута. Сплошная линия - основные базы, пунктир - островной день и optional-направления.
       В карточках справа у каждой точки указано, к какой дате или блоку поездки она относится.
@@ -35,7 +36,7 @@ const mapPayload = JSON.stringify({
     <article>
       <span class="line-sample island"></span>
       <strong>{trip.map.routeLabels.island}</strong>
-      <p>Отдельный день Sanur -> порт -> Nusa Lembongan / Ceningan -> обратно.</p>
+      <p>Optional-день из финальной базы через Sanur Port на Nusa Lembongan / Ceningan и обратно.</p>
     </article>
     <article>
       <span class="line-sample optional"></span>
