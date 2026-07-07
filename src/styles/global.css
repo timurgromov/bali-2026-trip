@@ -235,6 +235,10 @@ dt {
   align-items: start;
 }
 
+.intro {
+  padding-bottom: 42px;
+}
+
 .section-head {
   max-width: 840px;
   margin-bottom: 28px;
@@ -243,7 +247,7 @@ dt {
 .map-shell {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 58px clamp(18px, 4vw, 56px);
+  padding: 42px clamp(18px, 4vw, 56px) 58px;
   min-width: 0;
 }
 
@@ -252,7 +256,23 @@ dt {
   grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1fr);
   gap: 22px;
   margin-bottom: 22px;
-  align-items: end;
+  align-items: start;
+}
+
+.map-copy .eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.map-copy h2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.map-copy > p:not(.eyebrow) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin-top: 0;
 }
 
 .map-copy p:last-of-type {
@@ -748,9 +768,9 @@ dt {
 }
 
 .day-place div {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) minmax(0, max-content);
+  gap: 6px 12px;
   align-items: start;
 }
 
@@ -765,10 +785,12 @@ dt {
 }
 
 .day-place small {
-  flex: 0 0 auto;
+  max-width: 16rem;
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
+  line-height: 1.35;
+  text-align: right;
 }
 
 .day-place p {
@@ -877,16 +899,18 @@ dt {
 }
 
 .place-title {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) minmax(0, max-content);
+  gap: 6px 12px;
   align-items: start;
 }
 
 .place-title small {
-  flex: 0 0 auto;
+  max-width: 16rem;
   color: var(--muted);
   font-weight: 800;
+  line-height: 1.35;
+  text-align: right;
 }
 
 .badges {
@@ -1071,6 +1095,13 @@ code {
   .place-group-head {
     position: static;
   }
+
+  .map-copy .eyebrow,
+  .map-copy h2,
+  .map-copy > p:not(.eyebrow) {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
 
 @media (max-width: 560px) {
@@ -1105,5 +1136,16 @@ code {
     min-height: auto;
     justify-items: start;
     padding: 12px;
+  }
+
+  .day-place div,
+  .place-title {
+    grid-template-columns: 1fr;
+  }
+
+  .day-place small,
+  .place-title small {
+    max-width: 100%;
+    text-align: left;
   }
 }

@@ -5,6 +5,7 @@ import "../styles/global.css";
 
 const baseUrl = import.meta.env.BASE_URL;
 const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
+const accommodationMoves = Math.max(trip.bases.length - 1, 0);
 const placesByBase = trip.bases.map((base) => ({
   base,
   places: trip.places.filter((place) => place.base === base.name)
@@ -98,11 +99,11 @@ const navItems = [
           </div>
           <div>
             <span>Жильё</span>
-            <strong>{trip.bases.length} блоков</strong>
+            <strong>{trip.bases.length} точек</strong>
           </div>
           <div>
-            <span>Карта</span>
-            <strong>{trip.map.points.length} точек</strong>
+            <span>Смены жилья</span>
+            <strong>{accommodationMoves} переезда</strong>
           </div>
         </aside>
       </div>
@@ -119,8 +120,9 @@ const navItems = [
           <h2>Живём базами, а не ездим через весь остров каждый день</h2>
         </div>
         <p>
-          Маршрут собран вокруг районов проживания: рядом смотрим локальные места, а между базами делаем ограниченное число крупных переездов.
-          Свадебный блок в Umalas остаётся фиксированным якорем.
+          Маршрут собран вокруг точек проживания: каждый переезд в новый блок жилья считается новой точкой, даже если район уже знакомый.
+          Сейчас это 5 точек проживания и 4 основных переезда между ними. Отдельно идут прилёт из DPS, финальный выезд в DPS и optional-выезд через Sanur Port.
+          Свадебный блок в Umalas остаётся отдельной точкой проживания и фиксированным якорем.
         </p>
       </section>
 
@@ -163,7 +165,7 @@ const navItems = [
       <section id="bases" class="section">
         <div class="section-head">
           <p class="eyebrow">Базы проживания</p>
-          <h2>Четыре смысловые зоны и пять блоков жилья</h2>
+          <h2>5 точек проживания и 4 переезда между ними</h2>
         </div>
         <div class="base-grid">
           {trip.bases.map((base) => (
