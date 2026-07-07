@@ -1227,7 +1227,7 @@
     {
       "category": "Жильё",
       "status": "TBD",
-      "note": "Нужно подобрать жильё по 5 блокам жилья: старт Canggu/Berawa/Umalas, Ubud, свадебный Umalas, Uluwatu/Bukit, финальный Canggu/Berawa/Umalas."
+      "note": "Нужно подобрать жильё по 5 точкам проживания: старт Canggu/Berawa/Umalas, Ubud, свадебный Umalas, Uluwatu/Bukit, финальный Canggu/Berawa/Umalas."
     },
     {
       "category": "Трансферы",
@@ -1283,7 +1283,7 @@
     },
     {
       "status": "todo",
-      "title": "Подобрать жильё по 5 блокам",
+      "title": "Подобрать жильё по 5 точкам проживания",
       "details": "Нужно проверить цены, районы и логистику относительно обновлённого порядка баз."
     },
     {
