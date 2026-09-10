@@ -108,6 +108,18 @@ const navItems = [
           </div>
         </aside>
       </div>
+      <div class="hero-route" aria-label="Пять баз маршрута">
+        <p>Пять баз · один спокойный маршрут</p>
+        <ol>
+          {trip.bases.map((base) => (
+            <li>
+              <span>{String(base.order).padStart(2, "0")}</span>
+              <strong>{base.name}</strong>
+              <small>{base.dates}</small>
+            </li>
+          ))}
+        </ol>
+      </div>
     </header>
 
     <nav class="section-tabs" aria-label="Разделы маршрута">

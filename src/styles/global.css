@@ -1,18 +1,20 @@
 :root {
   color-scheme: light;
-  --bg: #f4f6f3;
-  --panel: #ffffff;
-  --text: #17211b;
-  --muted: #5c6b60;
-  --line: #d9dfd8;
-  --soft: #eef3ee;
-  --base: #166534;
-  --day: #1d4ed8;
-  --airport: #4b5563;
-  --ferry: #7c3aed;
-  --optional: #a16207;
-  --route: #0f766e;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg: #f6f0e5;
+  --panel: #fffdf8;
+  --text: #17302d;
+  --muted: #62716b;
+  --line: #ded2be;
+  --soft: #eee5d5;
+  --base: #27654c;
+  --day: #2e6e93;
+  --airport: #536667;
+  --ferry: #7656a7;
+  --optional: #ae662a;
+  --route: #22766f;
+  --sea: #123f43;
+  --sand: #e9c98d;
+  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
 }
 
 * {
@@ -27,6 +29,8 @@ body {
   margin: 0;
   width: 100%;
   background: var(--bg);
+  background-image: linear-gradient(90deg, rgba(126, 88, 42, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
   color: var(--text);
   overflow-x: hidden;
 }
@@ -160,14 +164,16 @@ h1 {
   margin: 0;
   font-size: clamp(46px, 8vw, 84px);
   line-height: 0.95;
-  letter-spacing: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.045em;
 }
 
 h2 {
   margin: 0;
   font-size: clamp(28px, 4vw, 44px);
   line-height: 1.02;
-  letter-spacing: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.035em;
 }
 
 h3 {
@@ -1052,6 +1058,401 @@ code {
   padding: 2px 6px;
   border-radius: 6px;
   background: #e8eee8;
+}
+
+/* Family route journal: visual system shared by every public module. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 34px;
+  color: #f9f4e9;
+  background:
+    radial-gradient(circle at 88% 22%, rgba(233, 201, 141, 0.2), transparent 26%),
+    linear-gradient(135deg, #123f43 0%, #164f55 60%, #1d5e58 100%);
+  border-bottom: 0;
+}
+
+.hero::after {
+  position: absolute;
+  right: -8vw;
+  bottom: -18vw;
+  width: min(52vw, 720px);
+  height: min(52vw, 720px);
+  border: 1px solid rgba(249, 244, 233, 0.16);
+  border-radius: 50%;
+  box-shadow: 0 0 0 46px rgba(249, 244, 233, 0.04), 0 0 0 92px rgba(249, 244, 233, 0.03);
+  content: "";
+  pointer-events: none;
+}
+
+.topbar,
+.hero-grid,
+.hero-route {
+  position: relative;
+  z-index: 1;
+}
+
+.topbar {
+  margin-bottom: 66px;
+}
+
+.brand {
+  color: var(--sand);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+}
+
+.topbar div a {
+  border-color: rgba(249, 244, 233, 0.22);
+  border-radius: 999px;
+  background: rgba(11, 45, 48, 0.22);
+  color: rgba(249, 244, 233, 0.88);
+}
+
+.topbar div a:hover,
+.topbar div a:focus-visible {
+  border-color: var(--sand);
+  background: rgba(249, 244, 233, 0.14);
+  color: #fffdf8;
+  outline: none;
+}
+
+.hero-copy .eyebrow {
+  color: var(--sand);
+}
+
+.hero-copy h1 {
+  max-width: 8ch;
+  color: #fffdf8;
+}
+
+.hero-copy p:not(.eyebrow) {
+  color: rgba(249, 244, 233, 0.87);
+}
+
+.hero-copy .lead {
+  max-width: 26ch;
+  color: #fffdf8;
+}
+
+.trip-facts div {
+  min-height: 118px;
+  padding: 18px;
+  border-color: rgba(233, 201, 141, 0.28);
+  border-radius: 16px;
+  background: rgba(255, 253, 248, 0.1);
+  box-shadow: none;
+}
+
+.trip-facts span {
+  color: rgba(249, 244, 233, 0.7);
+}
+
+.trip-facts strong {
+  color: #fffdf8;
+}
+
+.hero-route {
+  max-width: 1180px;
+  margin: 32px auto 0;
+  padding: 16px 20px 18px;
+  border: 1px solid rgba(233, 201, 141, 0.28);
+  border-radius: 18px;
+  background: rgba(10, 49, 51, 0.3);
+}
+
+.hero-route > p {
+  margin: 0 0 14px;
+  color: var(--sand);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.hero-route ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-route li {
+  position: relative;
+  min-width: 0;
+  padding-left: 30px;
+}
+
+.hero-route li:not(:last-child)::after {
+  position: absolute;
+  top: 12px;
+  right: -7px;
+  width: 14px;
+  border-top: 1px solid rgba(233, 201, 141, 0.6);
+  content: "";
+}
+
+.hero-route li > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid var(--sand);
+  border-radius: 50%;
+  color: var(--sand);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.hero-route strong,
+.hero-route small {
+  display: block;
+}
+
+.hero-route strong {
+  color: #fffdf8;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.hero-route small {
+  margin-top: 4px;
+  color: rgba(249, 244, 233, 0.68);
+  font-size: 11px;
+}
+
+.section-tabs {
+  border-bottom-color: rgba(222, 210, 190, 0.9);
+  background: rgba(246, 240, 229, 0.93);
+}
+
+.section-tabs a,
+.legend span,
+.map-filters button {
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.82);
+}
+
+.section-tabs a:hover,
+.section-tabs a:focus-visible,
+.map-filters button:hover,
+.map-filters button:focus-visible,
+.map-filters button.active {
+  border-color: #8db6a4;
+  background: #e1eee5;
+}
+
+.section {
+  padding-top: 76px;
+  padding-bottom: 76px;
+}
+
+.intro,
+.safety {
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  position: relative;
+  padding-left: 24px;
+}
+
+.section-head::before {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--sand);
+  content: "";
+}
+
+.map-shell {
+  padding-top: 64px;
+  padding-bottom: 76px;
+}
+
+.route-map,
+.route-panel {
+  border-radius: 18px;
+}
+
+.route-map {
+  border-color: #bdc9bf;
+}
+
+.route-point,
+.route-explainer article,
+.flight-card,
+.budget-card,
+.decision-card,
+.place-card,
+.notice,
+.resources,
+.base-card,
+.day-card,
+.transfer-card {
+  border-radius: 16px;
+  box-shadow: 0 10px 26px rgba(74, 57, 30, 0.055);
+}
+
+.route-explainer article,
+.base-card,
+.flight-card,
+.budget-card,
+.decision-card,
+.place-card,
+.transfer-card {
+  border-top: 3px solid rgba(39, 101, 76, 0.42);
+}
+
+.base-card,
+.flight-card,
+.budget-card,
+.decision-card,
+.place-card,
+.transfer-card {
+  padding: 22px;
+}
+
+.card-topline span {
+  width: 40px;
+  height: 40px;
+  background: var(--route);
+}
+
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 48px;
+  width: 1px;
+  background: var(--line);
+  content: "";
+}
+
+.day-card {
+  position: relative;
+  gap: 22px;
+  padding: 20px;
+}
+
+.date-box {
+  position: relative;
+  z-index: 1;
+  border: 1px solid #d4c8b5;
+  border-radius: 14px;
+  background: #f2e8d8;
+}
+
+.day-card h3,
+.base-card h3,
+.flight-card h3,
+.transfer-card h3,
+.decision-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.025em;
+}
+
+.day-places,
+.detail-grid section,
+.segment,
+.resource-list article,
+.day-place {
+  border-radius: 12px;
+  background: #f6efe3;
+}
+
+.place-group-head {
+  border-radius: 16px;
+  background: #f1e7d6;
+}
+
+.place-group-head > span {
+  background: var(--route);
+}
+
+.badge.must {
+  background: #dcefe1;
+  color: #245a40;
+}
+
+.badge.optional {
+  background: #e0edf3;
+  color: #285e7c;
+}
+
+.badge.fallback {
+  background: #f8e8c7;
+  color: #8a551f;
+}
+
+@media (max-width: 920px) {
+  .hero-route ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-route li:not(:last-child)::after {
+    display: none;
+  }
+
+  .timeline::before {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-bottom: 24px;
+  }
+
+  .topbar {
+    margin-bottom: 46px;
+  }
+
+  .topbar div {
+    gap: 6px;
+  }
+
+  .topbar div a {
+    padding: 7px 9px;
+    font-size: 13px;
+  }
+
+  .hero-route {
+    margin-top: 24px;
+    padding: 15px;
+  }
+
+  .hero-route ol {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .section {
+    padding-top: 54px;
+    padding-bottom: 54px;
+  }
+
+  .map-shell {
+    padding-top: 54px;
+    padding-bottom: 54px;
+  }
+
+  .section-head {
+    padding-left: 17px;
+  }
 }
 
 @media (max-width: 920px) {

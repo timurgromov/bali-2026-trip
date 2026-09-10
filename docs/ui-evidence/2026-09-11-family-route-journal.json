@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-11-family-route-journal",
+  "change_kind": "full-page-visual-redesign",
+  "status": "passed",
+  "requested_visible_change": "Улучшить дизайн публичной страницы семейного маршрута через Atlas, не меняя данные поездки.",
+  "expected_visible_delta": "Вместо светлого generic hero пользователь видит океанскую редакционную обложку и связанную полосу пяти баз из trip.json; ниже остаются тёплая поверхность, карта и хронология.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "844a73e5ae76d643714a954dc59445a64abb94819b428c84c12d43cd93543c23",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4322/bali-2026-trip/",
+    "source_ref": "staged working tree",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/",
+    "state": "публичный маршрут, без авторизации",
+    "selector_or_slide_id": ".hero-route",
+    "action": "Открыть страницу после свежего reload; для сохранённой интерактивности выбрать фильтр карты «Базы»."
+  },
+  "must_remain_unchanged": [
+    "Данные, порядок и даты trip.json",
+    "Якорная навигация",
+    "Карта Leaflet и фильтры точек",
+    "Отсутствие горизонтального overflow"
+  ],
+  "required_viewports": [
+    "390x844",
+    "921x820",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "In-app browser viewport; innerWidth=390; innerHeight=844; scrollWidth=390",
+      "before_signature": "Baseline before edit: pale green/blue hero and no .hero-route in the rendered document.",
+      "after_signature": "inner=390x844; .hero-route has 5 bases in one column; scrollWidth=390; overflow=false.",
+      "observed_visible_result": "Mobile hero stacks facts and the five-base route without clipping; map changes to one 354px column.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "921x820",
+      "viewport_source": "In-app browser breakpoint probe; innerWidth=921; innerHeight=820; scrollWidth=921",
+      "before_signature": "Baseline before edit: pale green/blue hero and no .hero-route in the rendered document.",
+      "after_signature": "inner=921x820; .hero-route has five columns; all labels wrap inside their cells; scrollWidth=921; overflow=false.",
+      "observed_visible_result": "The 920px transition is visible: the hero changes to its wide route strip and no labels clip.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "In-app browser viewport; innerWidth=1440; innerHeight=900; scrollWidth=1440",
+      "before_signature": "Live baseline before edit: pale green/blue hero, sans-serif display type, square white facts and no route strip.",
+      "after_signature": "inner=1440x900; ocean editorial hero, Georgia display type, five rendered route items, warm paper cards; scrollWidth=1440; overflow=false.",
+      "observed_visible_result": "The complete desktop hero, map and day timeline were viewed live; map retained 722px plus 330px two-column layout.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ],
+  "comparison_review": {
+    "variants_shown": 0,
+    "selected_variant": "",
+    "owner_approval_reference": ""
+  }
+}
