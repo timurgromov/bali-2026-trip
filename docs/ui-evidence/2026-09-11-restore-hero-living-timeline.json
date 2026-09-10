@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-11-restore-hero-living-timeline",
+  "change_kind": "full-page-visual-correction",
+  "status": "passed",
+  "requested_visible_change": "Сохранить красивый тёмно-океанский верх и сделать нижние базы и дни визуально живыми.",
+  "expected_visible_delta": "Hero возвращён к тёмной океанской обложке; базы и дни получают насыщенные, но географически осмысленные цветные поверхности и дата-плашки.",
+  "attempt_number": 3,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "b7e5984b83729dbf47d0d23a381387444d2ccbbe542d7fb887ef37d3810ef405",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/",
+    "source_ref": "staged working tree",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/",
+    "state": "публичный маршрут, без авторизации",
+    "selector_or_slide_id": ".hero, .base-card, .day-card, .date-box",
+    "action": "Открыть страницу после fresh reload; перейти к дням; для сохранённой интерактивности выбрать фильтр карты «Базы»."
+  },
+  "must_remain_unchanged": [
+    "Данные, порядок и даты trip.json",
+    "Якорная навигация",
+    "Карта Leaflet и фильтры точек",
+    "Отсутствие горизонтального overflow"
+  ],
+  "required_viewports": ["390x844", "559x844", "560x844", "561x844", "768x1024", "919x820", "920x820", "921x820", "1180x820", "1366x768", "1440x900", "1984x1046"],
+  "observations": [
+    {"viewport":"390x844","viewport_source":"In-app browser; inner=390x844; scrollWidth=390","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмная океанская обложка и 5 route stops.","observed_visible_result":"Mobile hero и карточки не выходят за viewport.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"559x844","viewport_source":"In-app browser; inner=559x844; scrollWidth=559","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero без clipping.","observed_visible_result":"Compact layout stable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"560x844","viewport_source":"In-app browser; inner=560x844; scrollWidth=560","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero без clipping.","observed_visible_result":"Compact breakpoint stable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"561x844","viewport_source":"In-app browser; inner=561x844; scrollWidth=561","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero без clipping.","observed_visible_result":"One-pixel transition stable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"768x1024","viewport_source":"In-app browser; inner=768x1024; scrollWidth=768","before_signature":"Ошибочно осветлённый hero и слишком бледные дни.","after_signature":"Тёмная обложка; насыщенные дата-плашки и tinted day cards.","observed_visible_result":"Tablet has 5 route stops and 22 day cards.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"919x820","viewport_source":"In-app browser; inner=919x820; scrollWidth=919","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero и живые карточки.","observed_visible_result":"No horizontal overflow below breakpoint.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"920x820","viewport_source":"In-app browser; inner=920x820; scrollWidth=920","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero и живые карточки.","observed_visible_result":"Breakpoint stable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"921x820","viewport_source":"In-app browser; inner=921x820; scrollWidth=921","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero с пятиколоночным route strip.","observed_visible_result":"Labels wrap inside cells without clipping.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1180x820","viewport_source":"In-app browser; inner=1180x820; scrollWidth=1180","before_signature":"Сильный hero над бледной хронологией.","after_signature":"Hero сохранён; база и каждый тип дня имеют насыщенную surface и дату в своём маршрутном цвете.","observed_visible_result":"Фильтр «Базы» active и оставляет 6 видимых пунктов; console errors none.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1366x768","viewport_source":"In-app browser; inner=1366x768; scrollWidth=1366","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный океанский hero и route strip.","observed_visible_result":"Desktop has no horizontal overflow.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1440x900","viewport_source":"In-app browser; inner=1440x900; scrollWidth=1440","before_signature":"Сильный hero над бледной хронологией.","after_signature":"Тёмный hero; даты побережья, Ubud, свадьбы и Bukit имеют свои насыщенные контрастные плашки.","observed_visible_result":"Hero and day cards visually reviewed after fresh reload.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1984x1046","viewport_source":"In-app browser; inner=1984x1046; scrollWidth=1984","before_signature":"Ошибочно осветлённый hero.","after_signature":"Тёмный hero и пять баз.","observed_visible_result":"Wide desktop has no horizontal overflow.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]}
+  ],
+  "comparison_review": {
+    "variants_shown": 2,
+    "selected_variant": "Сохранённый тёмный hero и насыщенные маршрутные карточки ниже.",
+    "owner_approval_reference": "Пояснение владельца: верх был красивый; исправить нужно было нижнюю часть."
+  }
+}

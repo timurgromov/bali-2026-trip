@@ -1065,13 +1065,24 @@ code {
   position: relative;
   overflow: hidden;
   padding-bottom: 34px;
-  color: var(--text);
-  background: linear-gradient(135deg, #fbf8f1 0%, #f2f0e7 72%, #eaf0e8 100%);
-  border-bottom: 1px solid var(--line);
+  color: #f9f4e9;
+  background:
+    radial-gradient(circle at 88% 22%, rgba(233, 201, 141, 0.2), transparent 26%),
+    linear-gradient(135deg, #123f43 0%, #164f55 60%, #1d5e58 100%);
+  border-bottom: 0;
 }
 
 .hero::after {
-  display: none;
+  position: absolute;
+  right: -8vw;
+  bottom: -18vw;
+  width: min(52vw, 720px);
+  height: min(52vw, 720px);
+  border: 1px solid rgba(249, 244, 233, 0.16);
+  border-radius: 50%;
+  box-shadow: 0 0 0 46px rgba(249, 244, 233, 0.04), 0 0 0 92px rgba(249, 244, 233, 0.03);
+  content: "";
+  pointer-events: none;
 }
 
 .topbar,
@@ -1086,80 +1097,74 @@ code {
 }
 
 .brand {
-  color: var(--text);
+  color: var(--sand);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 20px;
   letter-spacing: -0.04em;
 }
 
 .topbar div a {
-  border-color: var(--line);
+  border-color: rgba(249, 244, 233, 0.22);
   border-radius: 999px;
-  background: rgba(255, 253, 248, 0.76);
-  color: var(--muted);
+  background: rgba(11, 45, 48, 0.22);
+  color: rgba(249, 244, 233, 0.88);
 }
 
 .topbar div a:hover,
 .topbar div a:focus-visible {
-  border-color: #7d9c8d;
-  background: #e4eee8;
-  color: var(--text);
+  border-color: var(--sand);
+  background: rgba(249, 244, 233, 0.14);
+  color: #fffdf8;
   outline: none;
 }
 
 .hero-copy .eyebrow {
-  color: #376d62;
+  color: var(--sand);
 }
 
 .hero-copy h1 {
   max-width: 8ch;
-  color: var(--text);
+  color: #fffdf8;
 }
 
 .hero-copy p:not(.eyebrow) {
-  color: var(--muted);
+  color: rgba(249, 244, 233, 0.87);
 }
 
 .hero-copy .lead {
   max-width: 26ch;
-  color: var(--text);
+  color: #fffdf8;
 }
 
 .trip-facts div {
   min-height: 118px;
   padding: 18px;
-  border-color: var(--line);
-  border-top: 4px solid var(--fact-accent, #5e8e80);
+  border-color: rgba(233, 201, 141, 0.28);
   border-radius: 16px;
-  background: rgba(255, 253, 248, 0.88);
+  background: rgba(255, 253, 248, 0.1);
   box-shadow: none;
 }
 
-.trip-facts div:nth-child(1) { --fact-accent: #c47b56; }
-.trip-facts div:nth-child(2) { --fact-accent: #5e8995; }
-.trip-facts div:nth-child(3) { --fact-accent: #5f8767; }
-.trip-facts div:nth-child(4) { --fact-accent: #947a50; }
-
 .trip-facts span {
-  color: var(--muted);
+  color: rgba(249, 244, 233, 0.7);
 }
 
 .trip-facts strong {
-  color: var(--text);
+  color: #fffdf8;
 }
 
 .hero-route {
   max-width: 1180px;
   margin: 32px auto 0;
   padding: 16px 20px 18px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(233, 201, 141, 0.28);
   border-radius: 18px;
-  background: rgba(255, 253, 248, 0.76);
+  background: rgba(10, 49, 51, 0.3);
 }
 
 .hero-route > p {
   margin: 0 0 14px;
-  color: #567168;
+  color: var(--sand);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.09em;
@@ -1179,21 +1184,14 @@ code {
   position: relative;
   min-width: 0;
   padding-left: 30px;
-  --route-stop: #5e8995;
 }
-
-.hero-route .route-stop--1 { --route-stop: #5e8995; }
-.hero-route .route-stop--2 { --route-stop: #5f8767; }
-.hero-route .route-stop--3 { --route-stop: #c47b56; }
-.hero-route .route-stop--4 { --route-stop: #6d7ea0; }
-.hero-route .route-stop--5 { --route-stop: #947a50; }
 
 .hero-route li:not(:last-child)::after {
   position: absolute;
   top: 12px;
   right: -7px;
   width: 14px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(233, 201, 141, 0.6);
   content: "";
 }
 
@@ -1205,9 +1203,9 @@ code {
   width: 22px;
   height: 22px;
   place-items: center;
-  border: 1px solid var(--route-stop);
+  border: 1px solid var(--sand);
   border-radius: 50%;
-  color: var(--route-stop);
+  color: var(--sand);
   font-size: 10px;
   font-weight: 900;
 }
@@ -1218,14 +1216,14 @@ code {
 }
 
 .hero-route strong {
-  color: var(--text);
+  color: #fffdf8;
   font-size: 13px;
   line-height: 1.25;
 }
 
 .hero-route small {
   margin-top: 4px;
-  color: var(--muted);
+  color: rgba(249, 244, 233, 0.68);
   font-size: 11px;
 }
 
@@ -1326,14 +1324,16 @@ code {
 
 .base-card {
   --base-accent: #5e8995;
+  --base-wash: #dceef0;
   border-top-color: var(--base-accent);
+  background: linear-gradient(145deg, #fffdf8 0%, #fffdf8 54%, var(--base-wash) 100%);
 }
 
-.base-card--1 { --base-accent: #5e8995; }
-.base-card--2 { --base-accent: #5f8767; }
-.base-card--3 { --base-accent: #c47b56; }
-.base-card--4 { --base-accent: #6d7ea0; }
-.base-card--5 { --base-accent: #947a50; }
+.base-card--1 { --base-accent: #277b91; --base-wash: #dceff2; }
+.base-card--2 { --base-accent: #3d7a50; --base-wash: #dcebd8; }
+.base-card--3 { --base-accent: #b65b3b; --base-wash: #f5dccd; }
+.base-card--4 { --base-accent: #536fa5; --base-wash: #e0e6f5; }
+.base-card--5 { --base-accent: #9b7140; --base-wash: #f3e4c9; }
 
 .base-card .card-topline span {
   background: var(--base-accent);
@@ -1363,27 +1363,33 @@ code {
   position: relative;
   gap: 22px;
   padding: 20px;
-  --day-accent: #5e8995;
-  --day-wash: #e8f0f0;
+  --day-accent: #277b91;
+  --day-wash: #dceff2;
   border-left: 5px solid var(--day-accent);
+  background: linear-gradient(145deg, #fffdf8 0%, #fffdf8 58%, var(--day-wash) 100%);
   box-shadow: 0 10px 26px rgba(74, 57, 30, 0.045);
 }
 
-.day-card--travel { --day-accent: #747d86; --day-wash: #eceff1; }
-.day-card--coast { --day-accent: #5e8995; --day-wash: #e7f0f1; }
-.day-card--forest { --day-accent: #5f8767; --day-wash: #e9f0e5; }
-.day-card--ceremony { --day-accent: #c47b56; --day-wash: #f6e8de; }
-.day-card--cliff { --day-accent: #6d7ea0; --day-wash: #e9edf5; }
+.day-card--travel { --day-accent: #68737e; --day-wash: #e4e7eb; }
+.day-card--coast { --day-accent: #277b91; --day-wash: #dceff2; }
+.day-card--forest { --day-accent: #3d7a50; --day-wash: #dcebd8; }
+.day-card--ceremony { --day-accent: #b65b3b; --day-wash: #f5dccd; }
+.day-card--cliff { --day-accent: #536fa5; --day-wash: #e0e6f5; }
 
 .date-box {
   position: relative;
   z-index: 1;
   border: 1px solid var(--day-accent);
   border-radius: 14px;
-  background: var(--day-wash);
+  background: var(--day-accent);
+  color: #fffdf8;
 }
 
 .date-box strong,
+.date-box span {
+  color: #fffdf8;
+}
+
 .day-card .day-base {
   color: var(--day-accent);
 }
@@ -1411,7 +1417,7 @@ code {
 }
 
 .day-place {
-  background: rgba(255, 253, 248, 0.75);
+  background: rgba(255, 253, 248, 0.88);
 }
 
 .place-group-head {
