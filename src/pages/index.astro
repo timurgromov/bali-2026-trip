@@ -26,6 +26,16 @@ const placeAliases: Record<string, string[]> = {
   "Nusa Dua / Geger Beach": ["Nusa Dua", "Geger Beach"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
+const getDayTone = (day: Day) => {
+  const base = normalize(day.base);
+
+  if (base.includes("москва") || base.includes("chengdu")) return "travel";
+  if (base.includes("ubud")) return "forest";
+  if (base.includes("uluwatu") || base.includes("bukit")) return "cliff";
+  if (base === "umalas" || base.includes("umalas berawa canggu")) return "ceremony";
+
+  return "coast";
+};
 const includesTerm = (text: string, term: string) => {
   const normalizedTerm = normalize(term);
   return normalizedTerm.length > 2 && normalize(text).includes(normalizedTerm);
@@ -112,7 +122,7 @@ const navItems = [
         <p>Пять баз · один спокойный маршрут</p>
         <ol>
           {trip.bases.map((base) => (
-            <li>
+            <li class={`route-stop--${base.order}`}>
               <span>{String(base.order).padStart(2, "0")}</span>
               <strong>{base.name}</strong>
               <small>{base.dates}</small>
@@ -182,7 +192,7 @@ const navItems = [
         </div>
         <div class="base-grid">
           {trip.bases.map((base) => (
-            <article class="base-card">
+            <article class={`base-card base-card--${base.order}`}>
               <div class="card-topline">
                 <span>{String(base.order).padStart(2, "0")}</span>
                 <small>{base.dates} · {base.nights} ночи</small>
@@ -211,7 +221,7 @@ const navItems = [
             const details = dayDetailsByDate.get(day.date);
             const dayPlaces = getDayPlaces(day, details);
             return (
-              <article class="day-card">
+              <article class={`day-card day-card--${getDayTone(day)}`}>
                 <div class="date-box">
                   <strong>{day.date}</strong>
                   <span>{day.weekday}</span>

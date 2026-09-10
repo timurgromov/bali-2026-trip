@@ -28,21 +28,21 @@
 
 ### Direction
 
-Сайт — спокойный семейный маршрутный журнал, а не рекламный туристический лендинг. Тёмная океанская обложка, тёплый бумажный фон и маршрутная полоса из реальных пяти баз помогают сначала понять логику пути, а затем изучать карту и план. Заголовки используют спокойный редакционный serif, служебная навигация и данные остаются компактными и легко сканируются.
+Сайт — спокойный семейный маршрутный журнал, а не рекламный туристический лендинг и не безжизненная распечатка. Первый экран — светлая нейтральная обложка: он быстро объясняет логику маршрута, но не перетягивает внимание насыщенным фоном. Цвет появляется только там, где помогает ориентироваться в реальных данных: пять баз, их порядок и карточки дней. Заголовки используют спокойный редакционный serif, служебная навигация и данные остаются компактными и легко сканируются.
 
 ### Atlas design decision
 
 - Job and user: родственник открывает одну публичную страницу, быстро понимает порядок баз и затем переходит к нужной дате, карте или переезду. Основное действие — навигация по маршруту, не бронирование и не продажа.
 - Evidence: проект не имеет Figma или утверждённой библиотеки. Локальный Atlas-референсер был запущен с обезличенным brief, но предложил B2B/fintech-направление, поэтому оно сознательно отвергнуто как нерелевантное. Взяты только совместимые паттерны: прокручиваемая якорная навигация для длинной страницы и компактные фильтры карты; реализованы нативно в Astro/CSS.
-- Reusable rules: тёмная океанская обложка содержит только факты и порядок пяти баз; тёплая поверхность отделяет длинное чтение от навигации; Georgia — display, Avenir Next — body; карточки имеют крупный мягкий радиус, а цвет объясняет тип маршрута, а не украшает каждый блок.
-- Anti-patterns: не добавлять стоковые туристические фото, маркетинговые CTA, dashboard-сайдбар, анимацию ради эффекта, glassmorphism или новые зависимости.
+- Reusable rules: светлая обложка содержит только факты и порядок пяти баз; тёплая поверхность отделяет длинное чтение от навигации; Georgia — display, Avenir Next — body; пять последовательных акцентов привязаны к порядку баз, а тон карточки дня — к её реальной географии (дорога, побережье, Ubud, свадьба, Bukit); цвет объясняет маршрут, а не украшает каждый блок.
+- Anti-patterns: не добавлять стоковые туристические фото, маркетинговые CTA, dashboard-сайдбар, анимацию ради эффекта, glassmorphism, декоративные кольца в hero, насыщенный баннер над нейтральным контентом или новые зависимости.
 - Constraints: `trip.json`, Leaflet-карта и текущие интерактивные фильтры остаются авторитетными; mobile — вертикальная композиция без горизонтальной прокрутки; motion не добавляется.
 
 ### Layout contract
 
 - Modes: mobile `390x844`, tablet `768x1024`, windowed desktop `1180x820`, desktop `1366x768`/`1440x900`, wide desktop `1984x1046`.
 - Modules: hero, route strip, sticky section navigation, overview, map, cards and long-form timeline. Within each module text and cards share the section container width; map and its control panel keep their existing content and action model.
-- Hero: desktop keeps copy and four facts side by side; the five-base route strip spans the same container beneath them. Mobile stacks copy, facts and route strip without clipping.
+- Hero: desktop keeps copy and four facts side by side; the five-base route strip spans the same container beneath them. Он остаётся светлым и спокойным, а цветные маркеры показывают реальный порядок баз. Mobile stacks copy, facts and route strip without clipping.
 - Breakpoint: the current one-column transition remains `920px`; probes are `919`, `920`, `921`. The compact phone rules remain at `560px`; probes are `559`, `560`, `561`.
 - Preserved invariants: `trip.json` remains the sole route source, all navigation anchors, map filters and marker interactions work, and no viewport has horizontal overflow.
 
@@ -53,10 +53,10 @@
 - Exact target: the visual system of the full page, with the hero as the signature change.
 - Action to reveal target: open the route at the listed viewport; click a map filter to confirm the existing interactive element stays usable.
 - Baseline visible signature: pale green/blue generic hero, sans-serif headlines, square white fact cards; no visual route strip.
-- Expected visible signature: deep ocean hero with editorial headline and a visible five-base route strip rendered from `trip.bases`; warm paper surface and rounded route-journal cards below.
+- Expected visible signature: light editorial hero with a visible five-base route strip rendered from `trip.bases`; restrained цветные маркеры и географически осмысленные акценты на карточках дней; warm paper surface and rounded route-journal cards below.
 - Must remain unchanged: route text, dates, pins, ordering, map filtering, anchors and public-data safety.
 - Required viewports: `390x844`, `559x844`, `560x844`, `561x844`, `768x1024`, `919x820`, `920x820`, `921x820`, `1180x820`, `1366x768`, `1440x900`, `1984x1046`.
-- Attempt number: 1.
+- Attempt number: 2.
 
 ## Place Descriptions
 

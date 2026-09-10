@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-11-quiet-hero-living-route",
+  "change_kind": "full-page-visual-rebalance",
+  "status": "passed",
+  "requested_visible_change": "Сделать hero менее красочным, а дни и базы — живыми и читаемыми, не меняя данные маршрута.",
+  "expected_visible_delta": "Нейтральный светлый hero вместо насыщенной океанской обложки; цветные маркеры пяти реальных баз и географически осмысленные акценты на карточках дней.",
+  "attempt_number": 2,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "f9632d70720c8895f75acad57d0f4818ea07abd300f423e0b2146dd3cef876ed",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4322/bali-2026-trip/",
+    "source_ref": "staged working tree",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/",
+    "state": "публичный маршрут, без авторизации",
+    "selector_or_slide_id": ".hero, .hero-route, .day-card",
+    "action": "Открыть страницу после свежего reload; перейти к дням; для сохранённой интерактивности выбрать фильтр карты «Базы»."
+  },
+  "must_remain_unchanged": [
+    "Данные, порядок и даты trip.json",
+    "Якорная навигация",
+    "Карта Leaflet и фильтры точек",
+    "Отсутствие горизонтального overflow"
+  ],
+  "required_viewports": [
+    "390x844",
+    "559x844",
+    "560x844",
+    "561x844",
+    "768x1024",
+    "919x820",
+    "920x820",
+    "921x820",
+    "1180x820",
+    "1366x768",
+    "1440x900",
+    "1984x1046"
+  ],
+  "observations": [
+    {"viewport":"390x844","viewport_source":"In-app browser; inner=390x844; scrollWidth=390","before_signature":"Насыщенный тёмно-океанский hero над нейтральными днями.","after_signature":"Светлый hero; цветные границы фактов; маршрут виден без clipping.","observed_visible_result":"Mobile stacks copy and facts without overflow.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"559x844","viewport_source":"In-app browser; inner=559x844; scrollWidth=559","before_signature":"Насыщенный hero.","after_signature":"Светлая обложка и route strip без overflow.","observed_visible_result":"Compact route layout remains readable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"560x844","viewport_source":"In-app browser; inner=560x844; scrollWidth=560","before_signature":"Насыщенный hero.","after_signature":"Светлая обложка и route strip без overflow.","observed_visible_result":"Compact breakpoint has no horizontal scroll.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"561x844","viewport_source":"In-app browser; inner=561x844; scrollWidth=561","before_signature":"Насыщенный hero.","after_signature":"Светлая обложка и route strip без overflow.","observed_visible_result":"One-pixel transition remains stable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"768x1024","viewport_source":"In-app browser; inner=768x1024; scrollWidth=768","before_signature":"Насыщенный hero.","after_signature":"Светлая обложка и пять цветных маркеров баз.","observed_visible_result":"Tablet route and days render without clipping.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"919x820","viewport_source":"In-app browser; inner=919x820; scrollWidth=919","before_signature":"Насыщенный hero.","after_signature":"Светлый hero и responsive route strip.","observed_visible_result":"Below desktop transition there is no horizontal overflow.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"920x820","viewport_source":"In-app browser; inner=920x820; scrollWidth=920","before_signature":"Насыщенный hero.","after_signature":"Светлый hero и responsive route strip.","observed_visible_result":"Breakpoint itself is stable.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"921x820","viewport_source":"In-app browser; inner=921x820; scrollWidth=921","before_signature":"Насыщенный hero.","after_signature":"Пятиколоночная светлая route strip с цветными маркерами.","observed_visible_result":"Labels wrap inside cells; no clipping.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1180x820","viewport_source":"In-app browser; inner=1180x820; scrollWidth=1180","before_signature":"Насыщенный hero и одинаково нейтральные дни.","after_signature":"Полный desktop проход: спокойный hero, цвета баз и географические тональности дней.","observed_visible_result":"Карта сохранила фильтр «Базы»: active, 6 видимых пунктов; console errors none.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1366x768","viewport_source":"In-app browser; inner=1366x768; scrollWidth=1366","before_signature":"Насыщенный hero.","after_signature":"Светлый hero и пять последовательных маркеров баз.","observed_visible_result":"Desktop has no horizontal overflow.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1440x900","viewport_source":"In-app browser; inner=1440x900; scrollWidth=1440","before_signature":"Насыщенный океанский hero над бледным планом.","after_signature":"Светлый editorial hero; акценты facts и route strip; карточки дней получают тон от дороги, побережья, Ubud, свадьбы или Bukit.","observed_visible_result":"Desktop hero and day cards were visually reviewed after fresh reload.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1984x1046","viewport_source":"In-app browser; inner=1984x1046; scrollWidth=1984","before_signature":"Насыщенный hero.","after_signature":"Светлый hero и пять последовательных цветных маркеров баз.","observed_visible_result":"Wide desktop has no horizontal overflow.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]}
+  ],
+  "comparison_review": {
+    "variants_shown": 0,
+    "selected_variant": "Светлая нейтральная обложка и цвет только на маршрутных данных.",
+    "owner_approval_reference": "Фидбек владельца: верх слишком красочный, нижние блоки безжизненны."
+  }
+}
