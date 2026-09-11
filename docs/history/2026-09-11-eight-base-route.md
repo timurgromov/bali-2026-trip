@@ -8,4 +8,7 @@
 
 - Публичны только отельные кандидаты и прямые ссылки на них; частное жильё Umalas и телефон лодочника исключены.
 - Нуса-Пенида — optional-ветка, требующая отдельной ночёвки вместо одной ночи Nusa Dua или Uluwatu.
-- Gili T, обратная лодка Gili Air -> Bali и названия отдельных ресторанов остаются `TBD` до фактического подтверждения.
+- Agoda-ссылка Gili T распознана как Villa Gili Bali Beach; даты и условия остаются к подтверждению.
+- Присланные Maps-ссылки распознаны как Tsavo Lion Restaurant, Mowie’s Gili Air, SANDS Beach Club, Single Fin Bali и SUKA ULUWATU.
+- В возврат добавлена обязательная остановка Padang Bai -> Jivva за чемоданами -> Umalas; хранение багажа остаётся к подтверждению.
+- Резерв Penida раскрыт отдельными точками Hotel Arsa Santhi, Diamond Beach и Kelingking Beach, но не включён в 19 основных ночей.

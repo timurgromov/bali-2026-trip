@@ -27,10 +27,12 @@ type DayDetail = (typeof trip.dayDetails)[number];
 const placeAliases: Record<string, string[]> = {
   "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
   "Пляж Ayodya": ["Ayodya", "пляж Ayodya"],
-  "Ужин у Bali Safari — название уточняется": ["Bali Safari", "ужин у Bali Safari"],
-  "Ресторан с тунцом-стейком — название уточняется": ["туна-стейк", "туна стейк"],
-  "Ужин в Uluwatu в 16:00 — название уточняется": ["ресторан из заметки", "16:00"],
-  "Кафе в Uluwatu — название уточняется": ["второе кафе", "кафе из заметки"]
+  "Tsavo Lion Restaurant": ["Tsavo", "Bali Safari", "ужин со львами"],
+  "Подводные статуи BASK NEST": ["статуи", "BASK", "BASK NEST"],
+  "Mowie’s Gili Air — туна-стейк": ["Mowie", "туна-стейк", "туна стейк"],
+  "SANDS Beach Club": ["SANDS", "SANDS Bakery"],
+  "Single Fin Bali": ["Single Fin", "16:00"],
+  "SUKA ULUWATU": ["SUKA"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
 const getDayTone = (day: Day) => {
@@ -64,7 +66,7 @@ const getDayPlaces = (day: Day, details?: DayDetail) => {
     : "";
   const dayText = [day.title, day.plan, day.notes, detailText].join(" ");
 
-  return trip.places.filter((place) => getPlaceTerms(place).some((term) => includesTerm(dayText, term)));
+  return trip.places.filter((place) => place.base === day.base && getPlaceTerms(place).some((term) => includesTerm(dayText, term)));
 };
 const getMapsSearchUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
 const tripNowPayload = JSON.stringify({
@@ -319,6 +321,7 @@ const navItems = [
                     </div>
                     <p>{place.description}</p>
                     <p class="note">{place.familyNote}</p>
+                    <a class="maps-link" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Открыть в Google Maps</a>
                   </article>
                 ))}
               </div>

@@ -3,6 +3,11 @@ import trip from "../data/trip.json";
 import "leaflet/dist/leaflet.css";
 
 const pointCount = trip.map.points.length;
+const pointLabel = pointCount % 10 === 1 && pointCount % 100 !== 11
+  ? "точка"
+  : pointCount % 10 >= 2 && pointCount % 10 <= 4 && !(pointCount % 100 >= 12 && pointCount % 100 <= 14)
+    ? "точки"
+    : "точек";
 const mapPayload = JSON.stringify({
   points: trip.map.points,
   routes: trip.map.routes,
@@ -14,10 +19,10 @@ const mapPayload = JSON.stringify({
 <section class="map-shell" aria-labelledby="map-title">
   <div class="map-copy">
     <p class="eyebrow">Карта маршрута</p>
-    <h2 id="map-title">{pointCount} точек с понятным порядком</h2>
+    <h2 id="map-title">{pointCount} {pointLabel} с понятным порядком</h2>
     <p>
-      Цифры показывают порядок основного маршрута и островного сценария. Метка ALT - запасные альтернативы, а не следующий шаг маршрута.
-      Сплошная линия - основные базы, пунктир - островной день и optional-направления.
+      Цифры показывают порядок точек в маршруте: линии соединяют только крупные переезды, а синие точки — локальные места дня.
+      Метка ALT обозначает запасные альтернативы, а не следующий обязательный шаг.
       В карточках справа у каждой точки указано, к какой дате или блоку поездки она относится.
     </p>
     <div class="legend" aria-label="Легенда карты">
@@ -37,7 +42,7 @@ const mapPayload = JSON.stringify({
     <article>
       <span class="line-sample island"></span>
       <strong>{trip.map.routeLabels.island}</strong>
-      <p>Переезды через Padang Bai: Гили T, Gili Air и дневной выезд на Gili Meno.</p>
+      <p>Переезды через Padang Bai: Гили T, Gili Air, дневной выезд на Gili Meno и возврат за багажом в Jivva.</p>
     </article>
     <article>
       <span class="line-sample optional"></span>
@@ -79,6 +84,8 @@ const mapPayload = JSON.stringify({
     lat: number;
     lng: number;
     description: string;
+    mapsUrl?: string;
+    linkLabel?: string;
   };
 
   type MapPayload = {
@@ -142,14 +149,14 @@ const mapPayload = JSON.stringify({
 
     function popupFor(point: RoutePoint) {
       const label = data.typeLabels[point.type];
-      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${point.lat},${point.lng}`)}`;
+      const mapsUrl = point.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${point.lat},${point.lng}`)}`;
       return `
         <article class="map-popup">
           <h3>${titlePrefixFor(point)}. ${point.title}</h3>
           <p class="popup-date">${point.dateLabel}</p>
           <p class="popup-meta">${label} · ${point.role}</p>
           <p>${point.description}</p>
-          <a class="maps-link" href="${mapsUrl}" target="_blank" rel="noreferrer">Открыть в Google Maps</a>
+          <a class="maps-link" href="${mapsUrl}" target="_blank" rel="noreferrer">${point.linkLabel ?? "Открыть в Google Maps"}</a>
         </article>
       `;
     }
@@ -173,7 +180,7 @@ const mapPayload = JSON.stringify({
       }
 
       if (filter === "island") {
-        return islandOrders.has(point.order) || point.title.includes("Nusa Penida");
+        return islandOrders.has(point.order) || point.lng > 115.9 || point.title.includes("Nusa Penida");
       }
 
       return point.type === filter;

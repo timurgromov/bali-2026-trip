@@ -95,6 +95,17 @@
 - Отдельный справочник мест остаётся как полный каталог для сравнения, фильтрации решений и будущего редактирования.
 - Описания мест не дублируются вручную: карточки дней подтягивают их из общего блока `places`.
 
+## UI Change Contract (2026-09-11-full-notes-map-audit)
+
+- Requested visible change: после полной сверки исходного конспекта показать на карте все распознанные места и восстановить заезд в Jivva за багажом.
+- Surface and state: `/bali-2026-trip/#map`, публичная страница без авторизации.
+- Exact target and action: открыть карту, проверить общий список, фильтры «Острова» и «Optional», открыть popup Tsavo, Mowie’s, Single Fin и Hotel Arsa Santhi.
+- Baseline signature: 16 точек; отсутствовали Monkey Forest, ресторанные пины, Gili T-кандидат, Jivva после возвращения и подробный Penida-сценарий.
+- Expected signature: 33 точки; основная линия после Padang Bai ведёт в Jivva за багажом, затем в Umalas; Penida остаётся пунктиром и содержит отель, Diamond и Kelingking.
+- Must remain unchanged: 8 баз, 19 ночей, свадьба 30 Oct, телефон лодочника и точные частные адреса не публикуются, mobile не имеет горизонтального overflow.
+- Required viewports: `390x844`, `1180x820`, `1440x900`.
+- Attempt number: 1.
+
 ## Map
 
 - Пины должны быть цифровыми, видимыми сразу.

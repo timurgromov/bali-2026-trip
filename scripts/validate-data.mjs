@@ -19,6 +19,35 @@ if (hits.length > 0) {
   throw new Error(`Forbidden public data/reference found: ${hits.join(", ")}`);
 }
 
+if (/\+?62[\s()-]*\d{3}[\s()-]*\d{3,4}[\s()-]*\d{3,4}/.test(serialized)) {
+  throw new Error("Public trip data must not contain an Indonesian phone number");
+}
+
+const expectedBases = [
+  "Canggu / LV8",
+  "Ubud / Metland Venya",
+  "Keramas / Jivva",
+  "Gili Trawangan",
+  "Gili Air",
+  "Umalas",
+  "Nusa Dua",
+  "Uluwatu"
+];
+
+const actualBases = data.bases.map((base) => base.name);
+if (JSON.stringify(actualBases) !== JSON.stringify(expectedBases)) {
+  throw new Error(`Unexpected base order: ${actualBases.join(" -> ")}`);
+}
+
+const totalNights = data.bases.reduce((sum, base) => sum + base.nights, 0);
+if (totalNights !== 19) {
+  throw new Error(`Expected 19 nights, got ${totalNights}`);
+}
+
+if (!data.days.some((day) => day.date === "30 Oct" && day.title === "Свадьба" && day.base === "Umalas")) {
+  throw new Error("Wedding day must remain in Umalas on 30 Oct");
+}
+
 const points = data.map.points;
 const orders = points.map((point) => point.order);
 const uniqueOrders = new Set(orders);
@@ -34,6 +63,41 @@ if (points.length < 10) {
 
 if (uniqueOrders.size !== points.length) {
   throw new Error("Map point orders must be unique");
+}
+
+const routeOrders = [
+  ...data.map.routes.main,
+  ...data.map.routes.island,
+  ...data.map.routes.optional.flat()
+];
+
+for (const order of routeOrders) {
+  if (!uniqueOrders.has(order)) {
+    throw new Error(`Map route references missing point order ${order}`);
+  }
+}
+
+for (const baseName of expectedBases) {
+  const surfaces = {
+    days: data.days.some((day) => day.base === baseName),
+    places: data.places.some((place) => place.base === baseName),
+    map: points.some((point) => point.title.includes(baseName)),
+    transfers: data.transfers.some((transfer) => transfer.from.includes(baseName) || transfer.to.includes(baseName))
+  };
+
+  const missing = Object.entries(surfaces).filter(([, present]) => !present).map(([surface]) => surface);
+  if (missing.length > 0) {
+    throw new Error(`Base "${baseName}" is missing from: ${missing.join(", ")}`);
+  }
+}
+
+if (data.bases.some((base) => /Penida/i.test(base.name))) {
+  throw new Error("Nusa Penida must not be a main accommodation base");
+}
+
+const penidaPoints = points.filter((point) => /Penida/i.test(point.title));
+if (penidaPoints.length === 0 || penidaPoints.some((point) => point.type !== "optional")) {
+  throw new Error("All Nusa Penida points must remain optional");
 }
 
 for (let order = 1; order <= points.length; order += 1) {
