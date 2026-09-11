@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-11-eight-base-route",
+  "change_kind": "route-data-and-rendering",
+  "status": "passed",
+  "requested_visible_change": "Replace the five-base Bali route with the confirmed eight-base sequence, external stay candidates and an optional-only Penida branch.",
+  "expected_visible_delta": "Hero and base heading show 8 bases and 7 moves; the map exposes Gili T, Gili Air and Gili Meno under Islands while Penida stays ALT; stay links are visible and safe.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "f5dd8a2ec774b32f15d43c973db6137f548794ad1feab9286e09e40ca19c5aa6",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4323/bali-2026-trip/",
+    "source_ref": "working-tree static preview after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/",
+    "state": "public route with final trip.json data",
+    "selector_or_slide_id": ".hero-route, #bases, #route-map, .accommodation-options",
+    "action": "Open the freshly built preview, click the Islands map filter, and navigate to Bases."
+  },
+  "must_remain_unchanged": [
+    "trip.json remains the route source of truth",
+    "map filters remain interactive",
+    "no horizontal overflow",
+    "private accommodation and boat contact remain absent"
+  ],
+  "required_viewports": ["390x844", "1180x820", "1440x900"],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "In-app browser viewport override; innerWidth=390; innerHeight=844",
+      "before_signature": "Hero summary: 5 points and 4 moves; route strip: five bases; Islands map filter: Sanur/Lembongan branch.",
+      "after_signature": "Hero summary: 8 points and 7 moves; route strip lists Canggu, Ubud, Keramas/Jivva, Gili T, Gili Air, Umalas, Nusa Dua and Uluwatu; Islands filter lists Padang Bai, Gili T, Gili Air, Gili Meno, return Padang Bai and ALT Penida.",
+      "observed_visible_result": "The mobile preview showed the new island sequence and ALT Penida without horizontal overflow; 10 public hotel links were rendered.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1180x820",
+      "viewport_source": "In-app browser viewport override; innerWidth=1180; innerHeight=820",
+      "before_signature": "Hero route strip contained 5 stops and the summary displayed 5 points / 4 moves.",
+      "after_signature": "Hero route strip contains 8 stops and the summary displays 19 nights, 8 points and 7 moves.",
+      "observed_visible_result": "The desktop preview showed the complete eight-stop hero route without horizontal overflow and rendered eight base cards.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "In-app browser viewport override; innerWidth=1440; innerHeight=900",
+      "before_signature": "Bases heading: 5 points of accommodation and 4 moves; no contextual stay-candidate link list.",
+      "after_signature": "Bases heading: 8 points of accommodation and 7 moves; each selected hotel candidate is a target=_blank rel=noreferrer link.",
+      "observed_visible_result": "The Bases action showed all eight cards; all ten rendered hotel links used safe external-link attributes and no horizontal overflow occurred.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ]
+}

@@ -6,6 +6,16 @@ import "../styles/global.css";
 const baseUrl = import.meta.env.BASE_URL;
 const totalNights = trip.bases.reduce((sum, base) => sum + base.nights, 0);
 const accommodationMoves = Math.max(trip.bases.length - 1, 0);
+const plural = (count: number, forms: [string, string, string]) => {
+  const remainder = count % 100;
+  const last = count % 10;
+  if (remainder > 10 && remainder < 20) return forms[2];
+  if (last === 1) return forms[0];
+  if (last > 1 && last < 5) return forms[1];
+  return forms[2];
+};
+const formatNights = (count: number) => `${count} ${plural(count, ["ночь", "ночи", "ночей"])}`;
+const formatMoves = (count: number) => `${count} ${plural(count, ["переезд", "переезда", "переездов"])}`;
 const placesByBase = trip.bases.map((base) => ({
   base,
   places: trip.places.filter((place) => place.base === base.name)
@@ -15,15 +25,12 @@ type Place = (typeof trip.places)[number];
 type Day = (typeof trip.days)[number];
 type DayDetail = (typeof trip.dayDetails)[number];
 const placeAliases: Record<string, string[]> = {
-  "Batu Bolong / Echo Beach": ["Batu Bolong", "Echo Beach"],
-  "Seminyak / Petitenget": ["Seminyak", "Petitenget"],
   "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
-  "Mount Batur / Kintamani": ["Mount Batur", "Batur", "Kintamani", "вулкан"],
-  "Uluwatu Temple + Kecak": ["Uluwatu Temple", "Kecak", "храм Uluwatu", "Kecak dance"],
-  "Nusa Lembongan / Ceningan": ["Nusa Lembongan", "Lembongan", "Ceningan"],
-  "Snorkeling - снорклинг": ["snorkeling", "снорклинг"],
-  "Sanur Beach Promenade": ["Sanur Beach", "promenade"],
-  "Nusa Dua / Geger Beach": ["Nusa Dua", "Geger Beach"]
+  "Пляж Ayodya": ["Ayodya", "пляж Ayodya"],
+  "Ужин у Bali Safari — название уточняется": ["Bali Safari", "ужин у Bali Safari"],
+  "Ресторан с тунцом-стейком — название уточняется": ["туна-стейк", "туна стейк"],
+  "Ужин в Uluwatu в 16:00 — название уточняется": ["ресторан из заметки", "16:00"],
+  "Кафе в Uluwatu — название уточняется": ["второе кафе", "кафе из заметки"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
 const getDayTone = (day: Day) => {
@@ -59,7 +66,7 @@ const getDayPlaces = (day: Day, details?: DayDetail) => {
 
   return trip.places.filter((place) => getPlaceTerms(place).some((term) => includesTerm(dayText, term)));
 };
-const getMapsSearchUrl = (place: Place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
+const getMapsSearchUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
 const tripNowPayload = JSON.stringify({
   year: 2026,
   days: trip.days.map((day, index) => ({
@@ -120,12 +127,12 @@ const navItems = [
           </div>
           <div>
             <span>Смены жилья</span>
-            <strong>{accommodationMoves} переезда</strong>
+            <strong>{formatMoves(accommodationMoves)}</strong>
           </div>
         </aside>
       </div>
-      <div class="hero-route" aria-label="Пять баз маршрута">
-        <p>Пять баз · один спокойный маршрут</p>
+      <div class="hero-route" aria-label={`Маршрут из ${trip.bases.length} баз`}>
+        <p>{trip.bases.length} баз · один спокойный маршрут</p>
         <ol>
           {trip.bases.map((base) => (
             <li class={`route-stop--${base.order}`}>
@@ -245,18 +252,30 @@ const navItems = [
       <section id="bases" class="section">
         <div class="section-head">
           <p class="eyebrow">Базы проживания</p>
-          <h2>5 точек проживания и 4 переезда между ними</h2>
+          <h2>{trip.bases.length} точек проживания и {accommodationMoves} переездов между ними</h2>
         </div>
         <div class="base-grid">
           {trip.bases.map((base) => (
             <article class={`base-card base-card--${base.order}`}>
               <div class="card-topline">
                 <span>{String(base.order).padStart(2, "0")}</span>
-                <small>{base.dates} · {base.nights} ночи</small>
+                <small>{base.dates} · {formatNights(base.nights)}</small>
               </div>
               <h3>{base.name}</h3>
               <p class="role">{base.role}</p>
               <p>{base.why}</p>
+              {base.accommodation.options.length > 0 ? (
+                <div class="accommodation-options" aria-label={`Варианты размещения: ${base.name}`}>
+                  <strong>Варианты размещения</strong>
+                  {base.accommodation.options.map((option) => (
+                    <a class="maps-link" href={option.url} target="_blank" rel="noreferrer">
+                      {option.name} · {option.priority}
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <p class="accommodation-note">{base.accommodation.status === "private" ? "Жильё в этом блоке — частное; название и адрес не публикуются." : "Вариант жилья ещё нужно подтвердить."}</p>
+              )}
               <div class="chips">
                 {base.nearby.map((item) => {
                   const place = trip.places.find((entry) => entry.name === item || item.includes(entry.name) || entry.name.includes(item));
@@ -336,6 +355,7 @@ const navItems = [
                 </div>
               </dl>
               <p>{transfer.note}</p>
+              {transfer.bookingUrl && <a class="maps-link" href={transfer.bookingUrl} target="_blank" rel="noreferrer">{transfer.bookingLabel}</a>}
             </article>
           ))}
         </div>
@@ -415,7 +435,7 @@ const navItems = [
                 <strong>{resource.title}</strong>
                 <span>{resource.type} · {resource.status}</span>
                 {resource.url ? (
-                  <a href={resource.url}>{resource.url}</a>
+                  <a href={resource.url} target="_blank" rel="noreferrer">{resource.url}</a>
                 ) : resource.type === "maps" && resource.status === "active" ? (
                   <em>Ссылки доступны в карточках дней и на карте</em>
                 ) : (

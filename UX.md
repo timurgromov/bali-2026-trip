@@ -36,13 +36,13 @@
 
 ### Direction
 
-Сайт — спокойный семейный маршрутный журнал, а не рекламный туристический лендинг и не безжизненная распечатка. Тёмная океанская обложка — утверждённый сильный первый экран: она быстро объясняет логику маршрута и задаёт настроение. Ниже страница продолжает этот язык более светлыми, но заметно цветными карточками: цвет появляется только в реальных данных — пяти базах, их порядке и днях по географии. Заголовки используют спокойный редакционный serif, служебная навигация и данные остаются компактными и легко сканируются.
+Сайт — спокойный семейный маршрутный журнал, а не рекламный туристический лендинг и не безжизненная распечатка. Тёмная океанская обложка быстро объясняет логику маршрута и задаёт настроение. Ниже страница продолжает этот язык более светлыми, но заметно цветными карточками: цвет появляется только в реальных данных — восьми базах, их порядке и днях по географии. Заголовки используют спокойный редакционный serif, служебная навигация и данные остаются компактными и легко сканируются.
 
 ### Atlas design decision
 
 - Job and user: родственник открывает одну публичную страницу, быстро понимает порядок баз и затем переходит к нужной дате, карте или переезду. Основное действие — навигация по маршруту, не бронирование и не продажа.
 - Evidence: проект не имеет Figma или утверждённой библиотеки. Локальный Atlas-референсер был запущен с обезличенным brief, но предложил B2B/fintech-направление, поэтому оно сознательно отвергнуто как нерелевантное. Взяты только совместимые паттерны: прокручиваемая якорная навигация для длинной страницы и компактные фильтры карты; реализованы нативно в Astro/CSS.
-- Reusable rules: тёмная океанская обложка содержит только факты и порядок пяти баз; тёплая поверхность отделяет длинное чтение от навигации; Georgia — display, Avenir Next — body; пять последовательных акцентов привязаны к порядку баз, а тон карточки дня — к её реальной географии (дорога, побережье, Ubud, свадьба, Bukit); акцентные дата-плашки и цветные поверхности карточек делают план живым, не меняя сами данные.
+- Reusable rules: тёмная океанская обложка содержит только факты и порядок баз, вычисляемый из `trip.bases`; тёплая поверхность отделяет длинное чтение от навигации; Georgia — display, Avenir Next — body; тон карточки дня привязан к реальной географии; акцентные дата-плашки и цветные поверхности карточек делают план живым, не меняя сами данные.
 - Anti-patterns: не добавлять стоковые туристические фото, маркетинговые CTA, dashboard-сайдбар, анимацию ради эффекта, glassmorphism, серую распечаточную хронологию или новые зависимости.
 - Constraints: `trip.json`, Leaflet-карта и текущие интерактивные фильтры остаются авторитетными; mobile — вертикальная композиция без горизонтальной прокрутки; motion не добавляется.
 
@@ -50,7 +50,7 @@
 
 - Modes: mobile `390x844`, tablet `768x1024`, windowed desktop `1180x820`, desktop `1366x768`/`1440x900`, wide desktop `1984x1046`.
 - Modules: hero, route strip, sticky section navigation, overview, map, cards and long-form timeline. Within each module text and cards share the section container width; map and its control panel keep their existing content and action model.
-- Hero: desktop keeps copy and four facts side by side; the five-base route strip spans the same container beneath them. Он остаётся тёмной океанской обложкой; тёплый золотой маршрутный трек удерживает визуальную связь с последующими карточками. Mobile stacks copy, facts and route strip without clipping.
+- Hero: desktop keeps copy and four facts side by side; the route strip spans the same container beneath them and derives its count and stops from `trip.bases`. Он остаётся тёмной океанской обложкой; тёплый золотой маршрутный трек удерживает визуальную связь с последующими карточками. Mobile stacks copy, facts and route strip without clipping.
 - Breakpoint: the current one-column transition remains `920px`; probes are `919`, `920`, `921`. The compact phone rules remain at `560px`; probes are `559`, `560`, `561`.
 - Preserved invariants: `trip.json` remains the sole route source, all navigation anchors, map filters and marker interactions work, and no viewport has horizontal overflow.
 
@@ -61,7 +61,7 @@
 - Exact target: the visual system of the full page, with the hero as the signature change.
 - Action to reveal target: open the route at the listed viewport; click a map filter to confirm the existing interactive element stays usable.
 - Baseline visible signature: pale green/blue generic hero, sans-serif headlines, square white fact cards; no visual route strip.
-- Expected visible signature: deep ocean editorial hero with a visible five-base route strip rendered from `trip.bases`; насыщенные, но привязанные к географии акценты на базах и карточках дней; warm paper surface and rounded route-journal cards below.
+- Expected visible signature: deep ocean editorial hero with a route strip rendered from `trip.bases`; насыщенные, но привязанные к географии акценты на базах и карточках дней; warm paper surface and rounded route-journal cards below.
 - Must remain unchanged: route text, dates, pins, ordering, map filtering, anchors and public-data safety.
 - Required viewports: `390x844`, `559x844`, `560x844`, `561x844`, `768x1024`, `919x820`, `920x820`, `921x820`, `1180x820`, `1366x768`, `1440x900`, `1984x1046`.
 - Attempt number: 3.
@@ -75,6 +75,18 @@
 - Expected signature: до длинной страницы виден блок «Сейчас» с одним планом и действиями; выбор даты скроллит к конкретной карточке; детали мест по умолчанию закрыты; пины карты открывают Google Maps.
 - Must remain unchanged: `trip.json` как единственный источник, даты, порядок баз/пинов, фильтры карты, public-data safety и отсутствие горизонтального overflow.
 - Required viewports: `390x844`, `559x844`, `560x844`, `561x844`, `768x1024`, `919x820`, `920x820`, `921x820`, `1180x820`, `1366x768`, `1440x900`, `1984x1046`.
+- Attempt number: 1.
+
+## UI Change Contract (2026-09-11-eight-base-route)
+
+- Requested visible change: заменить пятибазовый маршрут на восемь последовательных баз с островами Гили, публичными ссылками на жильё и веткой Penida только как резервом.
+- Surface and state: `/bali-2026-trip/`, публичная страница без авторизации.
+- Exact target: hero route strip, заголовок `#bases`, карточки баз, `#map` и карточка переезда Padang Bai -> Gili T.
+- Action to reveal target: открыть маршрут; нажать фильтр карты «Острова»; раскрыть нужный день и перейти к базам.
+- Baseline signature: hero показывал «5 точек» и «Пять баз», карта — Sanur/Lembongan и финальный Canggu.
+- Expected signature: hero показывает «8 точек», восемь карточек в порядке Canggu -> Uluwatu, карта показывает Gili T/Gili Air/Gili Meno и Penida только с ALT, а варианты жилья открываются внешними ссылками.
+- Must remain unchanged: `trip.json` остаётся единственным источником, карта и её фильтры работают, в mobile нет горизонтального overflow, приватные контакты не выводятся.
+- Required viewports: `390x844`, `1180x820`, `1440x900`.
 - Attempt number: 1.
 
 ## Place Descriptions

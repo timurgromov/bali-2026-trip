@@ -701,6 +701,28 @@ dt {
   font-size: 13px;
 }
 
+.accommodation-options {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.accommodation-options > strong,
+.accommodation-note {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.accommodation-options .maps-link {
+  justify-content: flex-start;
+  width: fit-content;
+  min-height: 36px;
+  padding: 7px 9px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
 .timeline {
   display: grid;
   gap: 12px;
@@ -1334,6 +1356,9 @@ code {
 .base-card--3 { --base-accent: #b65b3b; --base-wash: #f5dccd; }
 .base-card--4 { --base-accent: #536fa5; --base-wash: #e0e6f5; }
 .base-card--5 { --base-accent: #9b7140; --base-wash: #f3e4c9; }
+.base-card--6 { --base-accent: #a14d72; --base-wash: #f5dfe8; }
+.base-card--7 { --base-accent: #2f7d71; --base-wash: #d9eeea; }
+.base-card--8 { --base-accent: #5c629a; --base-wash: #e5e6f5; }
 
 .base-card .card-topline span {
   background: var(--base-accent);
