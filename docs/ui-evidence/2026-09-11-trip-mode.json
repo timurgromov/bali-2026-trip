@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-11-trip-mode",
+  "change_kind": "responsive-trip-ux",
+  "status": "passed",
+  "requested_visible_change": "Сделать публичный маршрут практичным для быстрого использования с телефона в поездке, сохранив полный семейный план.",
+  "expected_visible_delta": "Блок «Сейчас» и дни становятся первыми операционными действиями; подробности мест закрыты до нажатия, а карта и карточки дня дают прямой переход в Google Maps.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "c039dc8ecd0935ace7c009df963c3482b989b8effc22b888040b266f4e389613",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/",
+    "source_ref": "staged working tree",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/",
+    "state": "публичная страница до начала поездки; выбран 24 Oct через быстрый переход",
+    "selector_or_slide_id": "#now, #day-picker, #day-7 details.day-places, .map-popup .maps-link",
+    "action": "Открыть страницу, выбрать 24 Oct, раскрыть места дня и открыть popup точки карты"
+  },
+  "must_remain_unchanged": [
+    "trip.json остаётся единственным источником данных",
+    "порядок баз и 19 пинов карты",
+    "фильтры карты",
+    "отсутствие горизонтального overflow"
+  ],
+  "required_viewports": [
+    "390x844",
+    "559x844",
+    "560x844",
+    "561x844",
+    "768x1024",
+    "919x820",
+    "920x820",
+    "921x820",
+    "1180x820",
+    "1366x768",
+    "1440x900",
+    "1984x1046"
+  ],
+  "observations": [
+    {"viewport":"390x844","viewport_source":"CUA Playwright resize; innerWidth=390; innerHeight=844","before_signature":"Дни начинались примерно после 9645px; описания мест были раскрыты.","after_signature":"hero=324px; #now начинается на 340px; 13 блоков details.day-places закрыты; documentWidth=390.","observed_visible_result":"Компактный верх сразу ведёт к блоку «Сейчас» без горизонтального скролла.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"559x844","viewport_source":"CUA Playwright resize; innerWidth=559; innerHeight=844","before_signature":"Длинная сводка и маршрут шли перед дневным действием.","after_signature":"#now=559px шириной; documentWidth=559; overflow=false.","observed_visible_result":"Операционный блок и дневной маршрут помещаются без обрезания.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"560x844","viewport_source":"CUA Playwright resize; innerWidth=560; innerHeight=844","before_signature":"На мобильной границе не было отдельного блока актуального дня.","after_signature":"#now=560px шириной; documentWidth=560; overflow=false.","observed_visible_result":"Граница компактной композиции не создаёт переполнение.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"561x844","viewport_source":"CUA Playwright resize; innerWidth=561; innerHeight=844","before_signature":"Дневной план был длинным списком раскрытых деталей.","after_signature":"#now=561px шириной; documentWidth=561; overflow=false.","observed_visible_result":"Следующий пиксель после мобильной границы сохраняет читаемую одну колонку.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"768x1024","viewport_source":"CUA Playwright resize; innerWidth=768; innerHeight=1024","before_signature":"Перед днями были обзор и карта.","after_signature":"#now=768px шириной; #days=768px шириной; overflow=false.","observed_visible_result":"План начинается с дня и не ломает средний экран.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"919x820","viewport_source":"CUA Playwright resize; innerWidth=919; innerHeight=820","before_signature":"Быстрого перехода к конкретной дате не было.","after_signature":"#now=919px шириной; documentWidth=919; overflow=false.","observed_visible_result":"Перед брейкпоинтом 920px доступен текущий день и селектор дат.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"920x820","viewport_source":"CUA Playwright resize; innerWidth=920; innerHeight=820","before_signature":"Операционный блок отсутствовал.","after_signature":"#now=920px шириной; documentWidth=920; overflow=false.","observed_visible_result":"На граничной ширине layout остаётся без горизонтальной прокрутки.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"921x820","viewport_source":"CUA Playwright resize; innerWidth=921; innerHeight=820","before_signature":"Карта не давала ссылку для внешней навигации.","after_signature":"#now=921px шириной; popup карты содержит Google Maps ссылку; overflow=false.","observed_visible_result":"После брейкпоинта сохраняется практический сценарий карты.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1180x820","viewport_source":"CUA Playwright resize; innerWidth=1180; innerHeight=820","before_signature":"Страница начиналась с общей справочной навигации.","after_signature":"#now=1180px шириной; #days=1180px шириной; overflow=false.","observed_visible_result":"Полная ширина показывает быстрый план перед архивом подготовки.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1366x768","viewport_source":"CUA Playwright resize; innerWidth=1366; innerHeight=768","before_signature":"Не было блока текущего дня и Google Maps переходов.","after_signature":"#now и #days ограничены 1180px; popup карты даёт Maps URL; overflow=false.","observed_visible_result":"На обычном экране просмотрены hero, «Сейчас» и рабочие разделы без визуальной поломки.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1440x900","viewport_source":"CUA Playwright resize; innerWidth=1440; innerHeight=900","before_signature":"Подробности 28 мест визуально перегружали дневной список.","after_signature":"Детали мест закрыты; #day-picker ведёт к #day-7 с top=76px под sticky nav; overflow=false.","observed_visible_result":"Десктопный маршрут остаётся полным, но не раскрывает справочник до действия пользователя.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]},
+    {"viewport":"1984x1046","viewport_source":"CUA Playwright resize; innerWidth=1984; innerHeight=1046","before_signature":"Страница не была ориентирована на действие текущего дня.","after_signature":"#now и #days ограничены 1180px; documentWidth=1984; overflow=false.","observed_visible_result":"На широком экране сохраняется журнальная композиция и полный доступ ко всем разделам.","delta_visible":true,"target_visible":true,"preserved_invariants_passed":true,"console_errors":[]}
+  ],
+  "comparison_review": {"variants_shown":0,"selected_variant":"","owner_approval_reference":""}
+}

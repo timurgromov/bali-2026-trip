@@ -142,12 +142,14 @@ const mapPayload = JSON.stringify({
 
     function popupFor(point: RoutePoint) {
       const label = data.typeLabels[point.type];
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${point.lat},${point.lng}`)}`;
       return `
         <article class="map-popup">
           <h3>${titlePrefixFor(point)}. ${point.title}</h3>
           <p class="popup-date">${point.dateLabel}</p>
           <p class="popup-meta">${label} · ${point.role}</p>
           <p>${point.description}</p>
+          <a class="maps-link" href="${mapsUrl}" target="_blank" rel="noreferrer">Открыть в Google Maps</a>
         </article>
       `;
     }

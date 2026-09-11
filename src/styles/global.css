@@ -1596,3 +1596,219 @@ code {
     text-align: left;
   }
 }
+
+/* Trip mode: act on the current day first, then open the full planning archive. */
+.trip-now {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.42fr);
+  gap: 20px 28px;
+  max-width: 1180px;
+  margin: 30px auto 0;
+  padding: 28px clamp(18px, 4vw, 56px);
+  border: 1px solid color-mix(in srgb, var(--route) 42%, var(--line));
+  border-radius: 20px;
+  background: linear-gradient(135deg, #eff5ef 0%, #f9f2e5 100%);
+  box-shadow: 0 12px 30px rgba(49, 72, 55, 0.08);
+}
+
+.trip-now-copy {
+  min-width: 0;
+}
+
+.trip-now .eyebrow {
+  color: var(--route);
+}
+
+.trip-now-status,
+.trip-now-base {
+  margin: 0;
+  color: var(--route);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.trip-now h2 {
+  margin: 8px 0;
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.trip-now-plan {
+  max-width: 62ch;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.trip-now-note,
+.trip-now-next {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.trip-now-actions {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+}
+
+.primary-action,
+.secondary-action,
+.maps-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--route);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.primary-action {
+  background: var(--route);
+  color: #fffdf8;
+}
+
+.secondary-action,
+.maps-link {
+  background: rgba(255, 253, 248, 0.78);
+  color: var(--route);
+}
+
+.primary-action:hover,
+.primary-action:focus-visible,
+.secondary-action:hover,
+.secondary-action:focus-visible,
+.maps-link:hover,
+.maps-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--sand) 70%, transparent);
+  outline-offset: 2px;
+}
+
+.trip-now-next {
+  grid-column: 1 / -1;
+  padding-top: 14px;
+  border-top: 1px solid color-mix(in srgb, var(--route) 25%, var(--line));
+}
+
+.day-picker-label {
+  display: grid;
+  gap: 6px;
+  max-width: 420px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.day-picker-label select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 800;
+}
+
+.day-places {
+  display: block;
+}
+
+.day-card {
+  scroll-margin-top: 76px;
+}
+
+.day-places summary {
+  width: fit-content;
+  padding: 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--day-accent) 40%, var(--line));
+  border-radius: 10px;
+  background: rgba(255, 253, 248, 0.74);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.day-places[open] summary {
+  margin-bottom: 12px;
+}
+
+.day-place .maps-link,
+.map-popup .maps-link {
+  width: fit-content;
+  min-height: 36px;
+  margin-top: 12px;
+  padding: 7px 9px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
+.map-popup .maps-link {
+  display: inline-flex;
+}
+
+.planning-section {
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 920px) {
+  .trip-now {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-now-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .topbar {
+    margin-bottom: 24px;
+  }
+
+  .trip-facts,
+  .hero-route {
+    display: none;
+  }
+
+  .hero-copy > p:not(.eyebrow):not(.lead) {
+    display: none;
+  }
+
+  .trip-now {
+    margin-top: 16px;
+    padding: 22px 20px;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+  }
+
+  .trip-now h2 {
+    font-size: 32px;
+  }
+
+  .trip-now-plan {
+    font-size: 16px;
+  }
+
+  .trip-now-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .day-picker-label {
+    max-width: none;
+  }
+}
