@@ -179,6 +179,22 @@ const navItems = [
               {trip.days.map((day, index) => <option value={index}>{day.date} · {day.title}</option>)}
             </select>
           </label>
+          <aside class="personal-tools" aria-labelledby="personal-tools-title">
+            <div>
+              <p class="personal-kicker">Личные записи</p>
+              <h3 id="personal-tools-title">Только на этом устройстве</h3>
+              <p>Добавляй заметки, тайминг, checklist и контакты в нужный день. Они не меняют маршрут или карту и не отправляются на сервер.</p>
+            </div>
+            <div class="personal-tools-actions">
+              <button id="personal-export" class="personal-action" type="button">Экспортировать</button>
+              <label class="personal-import-label">
+                <span>Импортировать</span>
+                <input id="personal-import" type="file" accept="application/json,.json" />
+              </label>
+              <button id="personal-clear-all" class="personal-action personal-action--quiet" type="button">Очистить всё</button>
+            </div>
+            <p id="personal-storage-status" class="personal-storage-status" aria-live="polite"></p>
+          </aside>
         </div>
         <div class="timeline">
           {trip.days.map((day, index) => {
@@ -244,6 +260,55 @@ const navItems = [
                       </div>
                     </details>
                   )}
+                  <section class="personal-day" data-personal-day data-day-id={`day-${index + 1}`} data-day-label={`${day.date} · ${day.title}`} aria-labelledby={`personal-day-heading-${index + 1}`}>
+                    <div class="personal-day-head">
+                      <div>
+                        <p class="personal-kicker">Личные записи на этом устройстве</p>
+                        <h4 id={`personal-day-heading-${index + 1}`}>Мой план и контакты</h4>
+                      </div>
+                      <button class="personal-edit" type="button" aria-controls={`personal-form-${index + 1}`} aria-expanded="false">Редактировать</button>
+                    </div>
+                    <p class="personal-empty" data-personal-empty>Пока пусто. Здесь можно сохранить оперативные детали для этого дня.</p>
+                    <div class="personal-summary" data-personal-summary hidden>
+                      <p class="personal-note" data-personal-note hidden></p>
+                      <section data-personal-timing-block hidden>
+                        <h5>Личный тайминг</h5>
+                        <ul data-personal-timing></ul>
+                      </section>
+                      <section data-personal-checklist-block hidden>
+                        <h5>Checklist</h5>
+                        <ul data-personal-checklist></ul>
+                      </section>
+                      <section data-personal-links-block hidden>
+                        <h5>Ссылки и контакты</h5>
+                        <ul data-personal-links></ul>
+                      </section>
+                    </div>
+                    <form id={`personal-form-${index + 1}`} class="personal-day-form" data-personal-form hidden>
+                      <label>
+                        <span>Заметка</span>
+                        <textarea name="note" rows="3" placeholder="Например: написать водителю после завтрака"></textarea>
+                      </label>
+                      <label>
+                        <span>Личный тайминг</span>
+                        <textarea name="timing" rows="3" placeholder="Каждая строка — отдельный пункт"></textarea>
+                      </label>
+                      <label>
+                        <span>Checklist</span>
+                        <textarea name="checklist" rows="3" placeholder="Каждая строка — отдельная задача"></textarea>
+                      </label>
+                      <label>
+                        <span>Ссылка или контакт</span>
+                        <textarea name="links" rows="3" placeholder="Каждая строка: название | ссылка или текст"></textarea>
+                      </label>
+                      <p class="personal-form-note">Эти значения видны только в этом браузере. Для переноса на другой телефон используй экспорт выше.</p>
+                      <div class="personal-form-actions">
+                        <button class="personal-save" type="submit">Сохранить</button>
+                        <button class="personal-cancel" type="button">Отмена</button>
+                        <button class="personal-clear-day" type="button">Очистить день</button>
+                      </div>
+                    </form>
+                  </section>
                 </div>
               </article>
             );
@@ -515,6 +580,217 @@ const navItems = [
           document.getElementById(target.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       }
+    </script>
+    <script is:inline>
+      (() => {
+        const storageKey = "bali-2026-personal-day-notes-v1";
+        const cards = Array.from(document.querySelectorAll("[data-personal-day]"));
+        const exportButton = document.getElementById("personal-export");
+        const importInput = document.getElementById("personal-import");
+        const clearAllButton = document.getElementById("personal-clear-all");
+        const status = document.getElementById("personal-storage-status");
+        const knownIds = new Set(cards.map((card) => card.dataset.personalDayId || ""));
+        const emptyStore = () => ({ version: 1, days: {} });
+        const isText = (value) => typeof value === "string";
+        const toLines = (value) => (isText(value) ? value.split(/\r?\n/u).map((line) => line.trim()).filter(Boolean).slice(0, 80) : []);
+        const normalizeEntry = (value) => {
+          const entry = value && typeof value === "object" ? value : {};
+          return {
+            note: isText(entry.note) ? entry.note.trim().slice(0, 6000) : "",
+            timing: Array.isArray(entry.timing) ? entry.timing.filter(isText).map((line) => line.trim()).filter(Boolean).slice(0, 80) : [],
+            checklist: Array.isArray(entry.checklist) ? entry.checklist.filter(isText).map((line) => line.trim()).filter(Boolean).slice(0, 80) : [],
+            links: Array.isArray(entry.links) ? entry.links.filter(isText).map((line) => line.trim()).filter(Boolean).slice(0, 80) : []
+          };
+        };
+        const hasEntry = (entry) => Boolean(entry.note || entry.timing.length || entry.checklist.length || entry.links.length);
+        const setStatus = (message) => {
+          if (status) status.textContent = message;
+        };
+        const loadStore = () => {
+          try {
+            const raw = window.localStorage.getItem(storageKey);
+            if (!raw) return emptyStore();
+            const parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== "object" || !parsed.days || typeof parsed.days !== "object") return emptyStore();
+            const days = Object.fromEntries(Object.entries(parsed.days)
+              .filter(([id]) => knownIds.has(id))
+              .map(([id, entry]) => [id, normalizeEntry(entry)])
+              .filter(([, entry]) => hasEntry(entry)));
+            return { version: 1, days };
+          } catch {
+            setStatus("Не удалось прочитать локальные записи. Начинаем с пустого списка.");
+            return emptyStore();
+          }
+        };
+        let store = loadStore();
+        const persist = () => {
+          try {
+            if (Object.keys(store.days).length === 0) {
+              window.localStorage.removeItem(storageKey);
+            } else {
+              window.localStorage.setItem(storageKey, JSON.stringify(store));
+            }
+            return true;
+          } catch {
+            setStatus("Браузер не дал сохранить записи локально. Проверь режим приватного просмотра и память браузера.");
+            return false;
+          }
+        };
+        const renderList = (list, values, type) => {
+          list.replaceChildren();
+          values.forEach((value) => {
+            const item = document.createElement("li");
+            if (type === "links") {
+              const [rawLabel, rawTarget] = value.split("|").map((part) => part.trim());
+              const target = rawTarget || rawLabel;
+              const label = rawTarget ? rawLabel || rawTarget : target;
+              if (/^https?:\/\//iu.test(target)) {
+                const link = document.createElement("a");
+                link.href = target;
+                link.target = "_blank";
+                link.rel = "noreferrer";
+                link.textContent = label;
+                item.append(link);
+              } else if (/^\+?[0-9][0-9\s()\-]{5,}$/u.test(target)) {
+                const link = document.createElement("a");
+                link.href = `tel:${target.replace(/[^+0-9]/gu, "")}`;
+                link.textContent = label;
+                item.append(link);
+              } else {
+                item.textContent = value;
+              }
+            } else {
+              item.textContent = value;
+            }
+            list.append(item);
+          });
+        };
+        const renderCard = (card) => {
+          const id = card.dataset.personalDayId || "";
+          const entry = normalizeEntry(store.days[id]);
+          const summary = card.querySelector("[data-personal-summary]");
+          const empty = card.querySelector("[data-personal-empty]");
+          const note = card.querySelector("[data-personal-note]");
+          const timingBlock = card.querySelector("[data-personal-timing-block]");
+          const checklistBlock = card.querySelector("[data-personal-checklist-block]");
+          const linksBlock = card.querySelector("[data-personal-links-block]");
+          const timingList = card.querySelector("[data-personal-timing]");
+          const checklistList = card.querySelector("[data-personal-checklist]");
+          const linksList = card.querySelector("[data-personal-links]");
+          const present = hasEntry(entry);
+
+          summary.hidden = !present;
+          empty.hidden = present;
+          note.hidden = !entry.note;
+          note.textContent = entry.note;
+          timingBlock.hidden = entry.timing.length === 0;
+          checklistBlock.hidden = entry.checklist.length === 0;
+          linksBlock.hidden = entry.links.length === 0;
+          renderList(timingList, entry.timing, "text");
+          renderList(checklistList, entry.checklist, "text");
+          renderList(linksList, entry.links, "links");
+        };
+        const renderAll = () => cards.forEach(renderCard);
+        const openEditor = (card) => {
+          const id = card.dataset.personalDayId || "";
+          const entry = normalizeEntry(store.days[id]);
+          const form = card.querySelector("[data-personal-form]");
+          const editButton = card.querySelector(".personal-edit");
+          form.elements.note.value = entry.note;
+          form.elements.timing.value = entry.timing.join("\n");
+          form.elements.checklist.value = entry.checklist.join("\n");
+          form.elements.links.value = entry.links.join("\n");
+          form.hidden = false;
+          editButton.setAttribute("aria-expanded", "true");
+          form.elements.note.focus();
+        };
+        const closeEditor = (card) => {
+          const form = card.querySelector("[data-personal-form]");
+          const editButton = card.querySelector(".personal-edit");
+          form.hidden = true;
+          editButton.setAttribute("aria-expanded", "false");
+        };
+
+        cards.forEach((card) => {
+          const form = card.querySelector("[data-personal-form]");
+          const id = card.dataset.personalDayId || "";
+          const label = card.dataset.personalDayLabel || "Этот день";
+          card.querySelector(".personal-edit").addEventListener("click", () => openEditor(card));
+          card.querySelector(".personal-cancel").addEventListener("click", () => closeEditor(card));
+          card.querySelector(".personal-clear-day").addEventListener("click", () => {
+            if (!store.days[id]) {
+              closeEditor(card);
+              return;
+            }
+            if (!window.confirm(`Очистить личные записи: ${label}?`)) return;
+            delete store.days[id];
+            persist();
+            renderCard(card);
+            closeEditor(card);
+            setStatus(`${label}: личные записи очищены.`);
+          });
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const entry = normalizeEntry({
+              note: formData.get("note"),
+              timing: toLines(formData.get("timing")),
+              checklist: toLines(formData.get("checklist")),
+              links: toLines(formData.get("links"))
+            });
+            if (hasEntry(entry)) {
+              store.days[id] = entry;
+            } else {
+              delete store.days[id];
+            }
+            persist();
+            renderCard(card);
+            closeEditor(card);
+            setStatus(`${label}: личные записи сохранены на этом устройстве.`);
+          });
+        });
+
+        exportButton?.addEventListener("click", () => {
+          const payload = JSON.stringify({ ...store, exportedAt: new Date().toISOString() }, null, 2);
+          const url = URL.createObjectURL(new Blob([payload], { type: "application/json" }));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "bali-2026-lichnye-zametki.json";
+          link.click();
+          window.setTimeout(() => URL.revokeObjectURL(url), 0);
+          setStatus("Файл с личными записями экспортирован.");
+        });
+        importInput?.addEventListener("change", async () => {
+          const file = importInput.files?.[0];
+          if (!file) return;
+          try {
+            const parsed = JSON.parse(await file.text());
+            if (!parsed || typeof parsed !== "object" || !parsed.days || typeof parsed.days !== "object") throw new Error("format");
+            const days = Object.fromEntries(Object.entries(parsed.days)
+              .filter(([id]) => knownIds.has(id))
+              .map(([id, entry]) => [id, normalizeEntry(entry)])
+              .filter(([, entry]) => hasEntry(entry)));
+            store = { version: 1, days };
+            persist();
+            renderAll();
+            setStatus("Личные записи импортированы на это устройство.");
+          } catch {
+            setStatus("Не удалось импортировать файл: нужен экспорт личных записей этого сайта в JSON.");
+          } finally {
+            importInput.value = "";
+          }
+        });
+        clearAllButton?.addEventListener("click", () => {
+          if (Object.keys(store.days).length === 0) return;
+          if (!window.confirm("Очистить все личные записи на этом устройстве? Это не затронет общий маршрут.")) return;
+          store = emptyStore();
+          persist();
+          renderAll();
+          cards.forEach(closeEditor);
+          setStatus("Все личные записи на этом устройстве очищены.");
+        });
+        renderAll();
+      })();
     </script>
   </body>
 </html>

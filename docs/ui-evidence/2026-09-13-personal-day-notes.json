@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-13-personal-day-notes",
+  "change_kind": "interactive-day-card",
+  "status": "passed",
+  "requested_visible_change": "В каждой дневной карточке должен появиться личный редактируемый слой, не меняющий опубликованный маршрут.",
+  "expected_visible_delta": "В разделе дней виден один блок инструментов и 22 компактных блока личных записей; форма каждого дня скрыта до нажатия «Редактировать».",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "6a3e61ef19c0df488f91d274998482f91087bc51a79b17fb44dac819ea4a56ea",
+  "served_candidate": {
+    "url": "http://localhost:4321/bali-2026-trip/#day-1",
+    "source_ref": "working-tree, Astro production preview after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#day-1",
+    "state": "день 18 Oct, пустой личный слой; форма до редактирования скрыта",
+    "selector_or_slide_id": "#day-1 [data-personal-day], #personal-form-1, .personal-tools",
+    "action": "открыть карточку дня; нажать «Редактировать»; сохранить заметку и checklist; обновить страницу"
+  },
+  "must_remain_unchanged": [
+    "8 баз маршрута",
+    "22 дневные карточки",
+    "даты, карта и переезды из trip.json",
+    "отсутствие горизонтальной прокрутки"
+  ],
+  "required_viewports": [
+    "390x844",
+    "768x1024",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "Playwright resize; innerWidth=390; innerHeight=844",
+      "before_signature": "published baseline: personalBlocks=0; personalTools=0; baseCards=8; scrollWidth=390; clientWidth=390",
+      "after_signature": "production preview: personalBlocks=22; personalTools=1; formHidden=true; computed formDisplay=none; scrollWidth=390; clientWidth=390",
+      "observed_visible_result": "На телефоне под опубликованным планом дня виден компактный блок «Личные записи на этом устройстве» и одна кнопка «Редактировать»; пустая форма не занимает место.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "768x1024",
+      "viewport_source": "Playwright resize; innerWidth=768; innerHeight=1024",
+      "before_signature": "published baseline: personalBlocks=0; personalTools=0; scrollWidth=768; clientWidth=768",
+      "after_signature": "production preview: personalBlocks=22; personalTools=1; formDisplay=none; scrollWidth=768; clientWidth=768",
+      "observed_visible_result": "На tablet личные инструменты переходят в одну колонку без переполнения, а блоки записей остаются в каждой карточке дня.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "Playwright resize; innerWidth=1440; innerHeight=900",
+      "before_signature": "published baseline: personalBlocks=0; personalTools=0; baseCards=8; scrollWidth=1440; clientWidth=1440",
+      "after_signature": "production preview: personalBlocks=22; personalTools=1; formDisplay=none; baseCards=8; scrollWidth=1440; clientWidth=1440",
+      "observed_visible_result": "На desktop личный блок остаётся компактной вставкой в карточке дня, не изменяя число баз и не растягивая страницу по горизонтали.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ],
+  "comparison_review": {
+    "variants_shown": 0,
+    "selected_variant": "",
+    "owner_approval_reference": ""
+  }
+}
