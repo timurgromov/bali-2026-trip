@@ -1398,8 +1398,8 @@ code {
 
 .day-card {
   position: relative;
-  gap: 22px;
-  padding: 20px;
+  display: block;
+  padding: 0;
   --day-accent: #277b91;
   --day-wash: #dceff2;
   border-left: 5px solid var(--day-accent);
@@ -1431,13 +1431,63 @@ code {
   color: var(--day-accent);
 }
 
-.day-card h3,
+.day-toggle {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  gap: 22px;
+  width: 100%;
+  padding: 20px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.day-toggle:hover {
+  background: color-mix(in srgb, var(--day-wash) 42%, transparent);
+}
+
+.day-toggle:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--sand) 70%, transparent);
+  outline-offset: -3px;
+}
+
+.day-toggle-copy {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+}
+
+.day-toggle-title,
 .base-card h3,
 .flight-card h3,
 .transfer-card h3,
 .decision-card h3 {
   font-family: Georgia, "Times New Roman", serif;
   letter-spacing: -0.025em;
+}
+
+.day-toggle-title {
+  font-size: clamp(23px, 2.2vw, 30px);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.day-toggle-status {
+  align-self: center;
+  padding: 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--day-accent) 45%, var(--line));
+  border-radius: 999px;
+  color: var(--day-accent);
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.day-content {
+  padding: 0 20px 20px 138px;
 }
 
 .day-places,
@@ -1613,13 +1663,31 @@ code {
   }
 
   .day-card {
-    grid-template-columns: 1fr;
+    display: block;
   }
 
   .date-box {
     min-height: auto;
     justify-items: start;
     padding: 12px;
+  }
+
+  .day-toggle {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .day-toggle .date-box {
+    grid-column: 1 / -1;
+  }
+
+  .day-toggle-title {
+    font-size: 24px;
+  }
+
+  .day-content {
+    padding: 0 14px 14px;
   }
 
   .day-place div,

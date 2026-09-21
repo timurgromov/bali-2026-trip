@@ -187,14 +187,19 @@ const navItems = [
             const details = dayDetailsByDate.get(day.date);
             const dayPlaces = getDayPlaces(day, details);
             return (
-              <article id={`day-${index + 1}`} class={`day-card day-card--${getDayTone(day)}`}>
-                <div class="date-box">
-                  <strong>{day.date}</strong>
-                  <span>{day.weekday}</span>
-                </div>
-                <div>
-                  <p class="day-base">{day.base}</p>
-                  <h3>{day.title}</h3>
+              <article id={`day-${index + 1}`} class={`day-card day-card--${getDayTone(day)}`} data-day-card data-day-id={`day-${index + 1}`}>
+                <button class="day-toggle" type="button" data-day-toggle aria-expanded="false" aria-controls={`day-content-${index + 1}`}>
+                  <span class="date-box" aria-hidden="true">
+                    <strong>{day.date}</strong>
+                    <span>{day.weekday}</span>
+                  </span>
+                  <span class="day-toggle-copy">
+                    <span class="day-base">{day.base}</span>
+                    <span class="day-toggle-title" role="heading" aria-level="3">{day.title}</span>
+                  </span>
+                  <span class="day-toggle-status" data-day-toggle-status>Развернуть</span>
+                </button>
+                <div id={`day-content-${index + 1}`} class="day-content" data-day-content hidden>
                   <p>{day.plan}</p>
                   <p class="note">{day.notes}</p>
                   {dayPlaces.length > 0 && (
@@ -474,6 +479,55 @@ const navItems = [
     </main>
     <script id="trip-now-data" type="application/json" set:html={tripNowPayload} is:inline></script>
     <script is:inline>
+      const dayDisclosureStorageKey = "bali-2026-day-disclosure-v1";
+      const dayCards = Array.from(document.querySelectorAll("[data-day-card]"));
+      const loadDayDisclosureState = () => {
+        try {
+          const raw = window.localStorage.getItem(dayDisclosureStorageKey);
+          if (!raw) return {};
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== "object") return {};
+          return Object.fromEntries(Object.entries(parsed).filter(([, value]) => typeof value === "boolean"));
+        } catch {
+          return {};
+        }
+      };
+      let dayDisclosureState = loadDayDisclosureState();
+      const saveDayDisclosureState = () => {
+        try {
+          window.localStorage.setItem(dayDisclosureStorageKey, JSON.stringify(dayDisclosureState));
+        } catch {
+          // Сайт остаётся рабочим, если браузер не даёт сохранить настройку отображения.
+        }
+      };
+      const setDayExpanded = (dayId, expanded, persist = true) => {
+        const card = document.getElementById(dayId);
+        const toggle = card?.querySelector("[data-day-toggle]");
+        const content = card?.querySelector("[data-day-content]");
+        const status = card?.querySelector("[data-day-toggle-status]");
+        if (!(card instanceof HTMLElement) || !(toggle instanceof HTMLButtonElement) || !(content instanceof HTMLElement) || !(status instanceof HTMLElement)) return;
+
+        content.hidden = !expanded;
+        toggle.setAttribute("aria-expanded", String(expanded));
+        status.textContent = expanded ? "Свернуть" : "Развернуть";
+        card.dataset.expanded = String(expanded);
+        dayDisclosureState[dayId] = expanded;
+        if (persist) saveDayDisclosureState();
+      };
+
+      dayCards.forEach((card) => {
+        const dayId = card.getAttribute("data-day-id");
+        const toggle = card.querySelector("[data-day-toggle]");
+        if (!dayId || !(toggle instanceof HTMLButtonElement)) return;
+        setDayExpanded(dayId, dayDisclosureState[dayId] === true, false);
+        toggle.addEventListener("click", () => setDayExpanded(dayId, toggle.getAttribute("aria-expanded") !== "true"));
+      });
+
+      const hashDayId = window.location.hash.slice(1);
+      if (document.getElementById(hashDayId)?.matches("[data-day-card]") && !(hashDayId in dayDisclosureState)) {
+        setDayExpanded(hashDayId, true);
+      }
+
       const tripNowData = document.getElementById("trip-now-data");
       const tripNowStatus = document.getElementById("trip-now-status");
       const tripNowTitle = document.getElementById("trip-now-title");
@@ -523,8 +577,10 @@ const navItems = [
 
         dayPicker.addEventListener("change", () => {
           const target = tripNow.days[Number(dayPicker.value)];
+          setDayExpanded(target.id, true);
           document.getElementById(target.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
+        tripNowDayLink.addEventListener("click", () => setDayExpanded(activeDay.id, true));
       }
     </script>
   </body>
