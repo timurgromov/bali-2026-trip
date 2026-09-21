@@ -851,15 +851,9 @@ dt {
   padding-top: 12px;
 }
 
-.day-details summary {
-  width: fit-content;
-  padding: 8px 10px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--soft);
-  color: var(--text);
-  cursor: pointer;
-  font-weight: 800;
+.day-details-title {
+  margin: 0;
+  font-size: 15px;
 }
 
 .detail-grid {
@@ -879,7 +873,7 @@ dt {
   grid-column: 1 / -1;
 }
 
-.detail-grid h4,
+.detail-grid h5,
 .place-card h4 {
   margin: 0 0 8px;
   font-size: 15px;
@@ -1761,232 +1755,8 @@ code {
   font-weight: 800;
 }
 
-.personal-tools {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 14px 20px;
-  max-width: 760px;
-  margin-top: 24px;
-  padding: 18px;
-  border: 1px solid color-mix(in srgb, var(--route) 32%, var(--line));
-  border-radius: 14px;
-  background: rgba(255, 253, 248, 0.7);
-}
-
-.personal-tools h3,
-.personal-day h4,
-.personal-day h5 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  letter-spacing: -0.02em;
-}
-
-.personal-tools p:not(.personal-kicker):not(.personal-storage-status) {
-  margin: 7px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.personal-kicker {
-  margin: 0 0 5px;
-  color: var(--route);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.personal-tools-actions,
-.personal-form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.personal-tools-actions {
-  align-content: start;
-  justify-content: flex-end;
-}
-
-.personal-action,
-.personal-import-label,
-.personal-edit,
-.personal-save,
-.personal-cancel,
-.personal-clear-day {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-  padding: 8px 11px;
-  border: 1px solid color-mix(in srgb, var(--route) 55%, var(--line));
-  border-radius: 10px;
-  background: #fffdf8;
-  color: var(--route);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.personal-import-label input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-}
-
-.personal-action--quiet,
-.personal-clear-day,
-.personal-cancel {
-  border-color: var(--line);
-  color: var(--muted);
-}
-
-.personal-save {
-  border-color: var(--route);
-  background: var(--route);
-  color: #fffdf8;
-}
-
-.personal-action:hover,
-.personal-action:focus-visible,
-.personal-import-label:hover,
-.personal-import-label:focus-within,
-.personal-edit:hover,
-.personal-edit:focus-visible,
-.personal-save:hover,
-.personal-save:focus-visible,
-.personal-cancel:hover,
-.personal-cancel:focus-visible,
-.personal-clear-day:hover,
-.personal-clear-day:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--sand) 70%, transparent);
-  outline-offset: 2px;
-}
-
-.personal-storage-status {
-  grid-column: 1 / -1;
-  min-height: 1.25em;
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.personal-day {
-  margin-top: 18px;
-  padding: 16px;
-  border: 1px solid color-mix(in srgb, var(--day-accent) 32%, var(--line));
-  border-radius: 12px;
-  background: rgba(255, 253, 248, 0.72);
-}
-
-.personal-day-head {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.personal-empty,
-.personal-form-note {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.personal-summary {
-  display: grid;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.personal-summary[hidden],
-.personal-day-form[hidden] {
-  display: none;
-}
-
-.personal-note {
-  margin: 0;
-  white-space: pre-wrap;
-}
-
-.personal-summary section {
-  padding: 11px 12px;
-  border-radius: 9px;
-  background: var(--day-wash);
-}
-
-.personal-summary h5 {
-  font-size: 15px;
-}
-
-.personal-summary ul {
-  display: grid;
-  gap: 5px;
-  margin: 7px 0 0;
-  padding-left: 20px;
-}
-
-.personal-summary a {
-  color: var(--route);
-  font-weight: 800;
-}
-
-.personal-day-form {
-  display: grid;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid color-mix(in srgb, var(--day-accent) 25%, var(--line));
-}
-
-.personal-day-form label {
-  display: grid;
-  gap: 6px;
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.personal-day-form textarea {
-  width: 100%;
-  resize: vertical;
-  min-height: 74px;
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: #fffdf8;
-  color: var(--text);
-  line-height: 1.45;
-}
-
-.day-places {
-  display: block;
-}
-
 .day-card {
   scroll-margin-top: 76px;
-}
-
-.day-places summary {
-  width: fit-content;
-  padding: 8px 10px;
-  border: 1px solid color-mix(in srgb, var(--day-accent) 40%, var(--line));
-  border-radius: 10px;
-  background: rgba(255, 253, 248, 0.74);
-  color: var(--text);
-  cursor: pointer;
-  font-weight: 900;
-}
-
-.day-places[open] summary {
-  margin-bottom: 12px;
 }
 
 .day-place .maps-link,
@@ -2016,13 +1786,6 @@ code {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .personal-tools {
-    grid-template-columns: 1fr;
-  }
-
-  .personal-tools-actions {
-    justify-content: flex-start;
-  }
 }
 
 @media (max-width: 560px) {
@@ -2068,27 +1831,4 @@ code {
     max-width: none;
   }
 
-  .personal-tools {
-    padding: 16px;
-  }
-
-  .personal-tools-actions,
-  .personal-form-actions {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .personal-action,
-  .personal-import-label,
-  .personal-edit,
-  .personal-save,
-  .personal-cancel,
-  .personal-clear-day {
-    width: 100%;
-  }
-
-  .personal-day-head {
-    align-items: stretch;
-    flex-direction: column;
-  }
 }
