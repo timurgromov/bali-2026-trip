@@ -68,7 +68,9 @@ const getDayPlaces = (day: Day, details?: DayDetail) => {
 
   return trip.places.filter((place) => place.base === day.base && getPlaceTerms(place).some((term) => includesTerm(dayText, term)));
 };
-const getMapsSearchUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
+const getGoogleMapsSearchUrl = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${query}, Bali, Indonesia`)}`;
+const getMapsSearchUrl = (place: Place) => place.mapsUrl ?? getGoogleMapsSearchUrl(place.name);
+const isNavigablePlace = (place: Place) => !place.badges.includes("TBD");
 const tripNowPayload = JSON.stringify({
   year: 2026,
   days: trip.days.map((day, index) => ({
@@ -223,7 +225,7 @@ const navItems = [
                             </div>
                             <p>{place.description}</p>
                             <p class="note">{place.familyNote}</p>
-                            {!place.name.includes("TBD") && <a class="maps-link" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Открыть в Google Maps</a>}
+                            {isNavigablePlace(place) && <a class="maps-link" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Открыть в Google Maps</a>}
                           </article>
                         ))}
                       </div>
@@ -335,9 +337,14 @@ const navItems = [
                 <div class="accommodation-options" aria-label={`Варианты размещения: ${base.name}`}>
                   <strong>Варианты размещения</strong>
                   {base.accommodation.options.map((option) => (
-                    <a class="maps-link" href={option.url} target="_blank" rel="noreferrer">
-                      {option.name} · {option.priority}
-                    </a>
+                    <div class="accommodation-option">
+                      <a class="maps-link" href={option.url} target="_blank" rel="noreferrer">
+                        {option.name} · {option.priority}
+                      </a>
+                      <a class="maps-link accommodation-maps-link" href={getGoogleMapsSearchUrl(option.name)} target="_blank" rel="noreferrer" aria-label={`Открыть ${option.name} в Google Maps`}>
+                        Открыть в Google Maps
+                      </a>
+                    </div>
                   ))}
                 </div>
               ) : (
@@ -346,7 +353,11 @@ const navItems = [
               <div class="chips">
                 {base.nearby.map((item) => {
                   const place = trip.places.find((entry) => entry.name === item || item.includes(entry.name) || entry.name.includes(item));
-                  return <span title={place?.description}>{item}</span>;
+                  return place && isNavigablePlace(place) ? (
+                    <a class="place-chip" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer" title={place.description}>
+                      {item}
+                    </a>
+                  ) : <span>{item}</span>;
                 })}
               </div>
             </article>
@@ -386,7 +397,7 @@ const navItems = [
                     </div>
                     <p>{place.description}</p>
                     <p class="note">{place.familyNote}</p>
-                    <a class="maps-link" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Открыть в Google Maps</a>
+                    {isNavigablePlace(place) && <a class="maps-link" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Открыть в Google Maps</a>}
                   </article>
                 ))}
               </div>

@@ -693,7 +693,8 @@ dt {
   margin-top: 16px;
 }
 
-.chips span {
+.chips span,
+.place-chip {
   padding: 7px 9px;
   border-radius: 8px;
   background: var(--soft);
@@ -701,10 +702,22 @@ dt {
   font-size: 13px;
 }
 
+.place-chip:hover,
+.place-chip:focus-visible {
+  outline: 2px solid var(--route);
+  outline-offset: 2px;
+  color: var(--route);
+}
+
 .accommodation-options {
   display: grid;
   gap: 8px;
   margin-top: 16px;
+}
+
+.accommodation-option {
+  display: grid;
+  gap: 6px;
 }
 
 .accommodation-options > strong,
@@ -721,6 +734,11 @@ dt {
   padding: 7px 9px;
   border-radius: 9px;
   font-size: 12px;
+}
+
+.accommodation-options .accommodation-maps-link {
+  background: transparent;
+  color: var(--route);
 }
 
 .timeline {

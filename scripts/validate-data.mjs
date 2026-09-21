@@ -120,6 +120,10 @@ for (const place of data.places) {
   if (!place.name || !place.description || !place.familyNote || !place.duration) {
     throw new Error(`Place "${place.name || "unknown"}" is missing required public description fields`);
   }
+
+  if (place.mapsUrl && !/^https:\/\/(?:www\.)?(?:google\.com\/maps|maps\.app\.goo\.gl)/.test(place.mapsUrl)) {
+    throw new Error(`Place "${place.name}" mapsUrl must open Google Maps`);
+  }
 }
 
 if (!Array.isArray(data.dayDetails) || data.dayDetails.length < 20) {
