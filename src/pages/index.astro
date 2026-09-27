@@ -225,18 +225,20 @@ const navItems = [
                   )}
                   {details && (
                     <section class="day-details" aria-label={`Детали дня: ${day.title}`}>
-                      <h4 class="day-details-title">Детали дня</h4>
-                      <p class="detail-disclaimer">Время и расстояния — рабочий маршрут с запасами; билет на лодку, водитель и брони уточняются перед поездкой.</p>
-                      <div class="detail-grid">
-                        <section>
-                          <h5>Тайминг дня</h5>
-                          <ul>
+                      <div class="day-details-head">
+                        <h4 class="day-details-title">План и дорога</h4>
+                        <p class="detail-disclaimer">Рабочие окна с запасом; лодки, водитель и брони подтверждаются перед поездкой.</p>
+                      </div>
+                      <div class="day-ops-grid">
+                        <section class="day-timing">
+                          <h5>По времени</h5>
+                          <ol class="timing-list">
                             {details.timing.map((item) => <li>{item}</li>)}
-                          </ul>
+                          </ol>
                         </section>
                         {details.routes?.length > 0 && (
                           <section class="day-logistics">
-                            <h5>Дорога и расстояние</h5>
+                            <h5>Дорога</h5>
                             <div class="day-logistics-list">
                               {details.routes.map((route) => (
                                 <div>
@@ -247,25 +249,22 @@ const navItems = [
                             </div>
                           </section>
                         )}
-                        <section>
-                          <h5>Смысл дня</h5>
-                          <p>{details.focus}</p>
-                        </section>
-                        <section>
-                          <h5>Fallback</h5>
-                          <p>{details.fallback}</p>
-                        </section>
-                        <section>
-                          <h5>Еда / отдых</h5>
-                          <p>{details.foodRest}</p>
-                        </section>
-                        <section>
-                          <h5>Важно</h5>
-                          <ul>
-                            {details.warnings.map((item) => <li>{item}</li>)}
-                          </ul>
-                        </section>
                       </div>
+                      <dl class="day-quick-facts">
+                        <div>
+                          <dt>Смысл</dt>
+                          <dd>{details.focus}</dd>
+                        </div>
+                        <div>
+                          <dt>План Б</dt>
+                          <dd>{details.fallback}</dd>
+                        </div>
+                        <div>
+                          <dt>Еда / пауза</dt>
+                          <dd>{details.foodRest}</dd>
+                        </div>
+                      </dl>
+                      <p class="day-warning"><strong>Важно:</strong> {details.warnings.join(" ")}</p>
                     </section>
                   )}
                 </div>

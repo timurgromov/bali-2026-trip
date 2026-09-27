@@ -848,7 +848,14 @@ dt {
 .day-details {
   margin-top: 14px;
   border-top: 1px solid var(--line);
-  padding-top: 12px;
+  padding-top: 14px;
+}
+
+.day-details-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .day-details-title {
@@ -857,45 +864,56 @@ dt {
 }
 
 .detail-disclaimer {
-  margin: 8px 0 0;
+  margin: 0;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
+  text-align: right;
 }
 
-.detail-grid {
+.day-ops-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(220px, 0.82fr) minmax(0, 1.18fr);
+  gap: 18px;
   margin-top: 14px;
 }
 
-.detail-grid section {
-  padding: 12px;
-  border-radius: 8px;
-  background: #fbfcfb;
+.day-ops-grid h5,
+.place-card h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
 }
 
-.detail-grid section:last-child {
-  grid-column: 1 / -1;
+.timing-list {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.detail-grid .day-logistics {
-  grid-column: 1 / -1;
+.timing-list li {
+  padding-left: 12px;
+  border-left: 2px solid color-mix(in srgb, var(--day-accent) 52%, var(--line));
+  font-size: 14px;
+  line-height: 1.42;
 }
 
 .day-logistics-list {
   display: grid;
-  gap: 8px;
+  gap: 7px;
 }
 
 .day-logistics-list div {
   display: grid;
   gap: 3px;
-  padding: 9px;
-  border: 1px solid color-mix(in srgb, var(--day-accent) 24%, var(--line));
-  border-radius: 8px;
-  background: rgba(255, 253, 248, 0.72);
+  padding: 0 0 7px;
+  border-bottom: 1px solid color-mix(in srgb, var(--day-accent) 22%, var(--line));
+}
+
+.day-logistics-list div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .day-logistics-list strong {
@@ -909,21 +927,44 @@ dt {
   line-height: 1.4;
 }
 
-.detail-grid h5,
-.place-card h4 {
-  margin: 0 0 8px;
-  font-size: 15px;
+.day-quick-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 15px 0 0;
 }
 
-.detail-grid ul {
+.day-quick-facts div {
+  min-width: 0;
+  padding-left: 11px;
+  border-left: 2px solid color-mix(in srgb, var(--day-accent) 32%, var(--line));
+}
+
+.day-quick-facts dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.day-quick-facts dd {
   margin: 0;
-  padding-left: 18px;
+  margin-top: 3px;
+  font-size: 14px;
+  line-height: 1.42;
 }
 
-.detail-grid p,
-.detail-grid li {
+.day-warning {
+  margin: 14px 0 0;
+  padding: 8px 11px;
+  border-left: 2px solid color-mix(in srgb, var(--day-accent) 52%, var(--line));
+  color: var(--muted);
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.42;
+}
+
+.day-warning strong {
+  color: var(--ink);
 }
 
 .places-groups {
@@ -1527,7 +1568,6 @@ code {
 }
 
 .day-places,
-.detail-grid section,
 .segment,
 .resource-list article,
 .day-place {
@@ -1635,13 +1675,24 @@ code {
   .flight-grid,
   .budget-grid,
   .decision-grid,
-  .detail-grid,
+  .day-ops-grid,
+  .day-quick-facts,
   .route-explainer,
   .day-place-grid,
   .place-group,
   .place-list,
   .resource-list {
     grid-template-columns: 1fr;
+  }
+
+  .day-details-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detail-disclaimer {
+    text-align: left;
   }
 
   .topbar {
