@@ -60,10 +60,11 @@ const getDayPlaces = (day: Day, details?: DayDetail) => {
   const detailText = details
     ? [
         ...details.timing,
-        details.focus,
-        details.fallback,
-        details.foodRest,
-        ...details.warnings
+      details.focus,
+      details.fallback,
+      details.foodRest,
+      ...(details.routes ?? []).flatMap((route) => [route.route, route.distance, route.duration, route.transport]),
+      ...details.warnings
       ].join(" ")
     : "";
   const dayText = [day.title, day.plan, day.notes, detailText].join(" ");
@@ -225,13 +226,27 @@ const navItems = [
                   {details && (
                     <section class="day-details" aria-label={`Детали дня: ${day.title}`}>
                       <h4 class="day-details-title">Детали дня</h4>
+                      <p class="detail-disclaimer">Время и расстояния — рабочий маршрут с запасами; билет на лодку, водитель и брони уточняются перед поездкой.</p>
                       <div class="detail-grid">
                         <section>
-                          <h5>Тайминг</h5>
+                          <h5>Тайминг дня</h5>
                           <ul>
                             {details.timing.map((item) => <li>{item}</li>)}
                           </ul>
                         </section>
+                        {details.routes?.length > 0 && (
+                          <section class="day-logistics">
+                            <h5>Дорога и расстояние</h5>
+                            <div class="day-logistics-list">
+                              {details.routes.map((route) => (
+                                <div>
+                                  <strong>{route.window} · {route.route}</strong>
+                                  <span>{route.distance} · {route.duration} · {route.transport}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </section>
+                        )}
                         <section>
                           <h5>Смысл дня</h5>
                           <p>{details.focus}</p>

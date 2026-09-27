@@ -12,6 +12,7 @@
 
 - [ ] Проверить даты и условия Villa Gili Bali Beach на Gili T: блок должен быть 22-24 Oct.
 - [ ] Купить билеты Padang Bai -> Gili T и Gili Air -> Padang Bai только после подтверждения оператора, расписания и моря; подтвердить локальные лодки Gili T -> Gili Air и Gili Air -> Gili Meno -> Gili Air.
+- [ ] За 7-10 дней до островного блока сверить рабочие окна 07:30/08:30 22 Oct и 09:45/10:45 26 Oct с выбранным оператором: опубликованный сайт показывает расчётный план, а не билет.
 - [ ] Заказать наземные трансферы Canggu -> Padang Bai и Padang Bai -> Canggu на 26 Oct с запасом под раннюю лодку.
 - [ ] Проверить визы, e-VOA, arrival card и требования въезда ближе к поездке.
 - [ ] Подтвердить часы и брони Tsavo Lion Restaurant, Mowie’s Gili Air, SANDS Beach Club, Single Fin Bali и SUKA ULUWATU.

@@ -132,8 +132,14 @@ if (!Array.isArray(data.dayDetails) || data.dayDetails.length < 20) {
 }
 
 for (const detail of data.dayDetails) {
-  if (!detail.date || !detail.focus || !detail.fallback || !Array.isArray(detail.timing) || detail.timing.length === 0) {
+  if (!detail.date || !detail.focus || !detail.fallback || !Array.isArray(detail.timing) || detail.timing.length === 0 || !Array.isArray(detail.routes) || detail.routes.length === 0) {
     throw new Error(`Day detail "${detail.date || "unknown"}" is incomplete`);
+  }
+
+  for (const route of detail.routes) {
+    if (!route.window || !route.route || !route.distance || !route.duration || !route.transport) {
+      throw new Error(`Day detail "${detail.date}" has incomplete route timing`);
+    }
   }
 }
 
