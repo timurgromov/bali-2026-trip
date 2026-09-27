@@ -16,10 +16,12 @@ const plural = (count: number, forms: [string, string, string]) => {
 };
 const formatNights = (count: number) => `${count} ${plural(count, ["ночь", "ночи", "ночей"])}`;
 const formatMoves = (count: number) => `${count} ${plural(count, ["переезд", "переезда", "переездов"])}`;
-const placesByBase = trip.bases.map((base) => ({
-  base,
-  places: trip.places.filter((place) => place.base === base.name)
-}));
+const placesByBase = trip.bases
+  .map((base) => ({
+    base,
+    places: trip.places.filter((place) => place.base === base.name)
+  }))
+  .filter(({ places }) => places.length > 0);
 const dayDetailsByDate = new Map(trip.dayDetails.map((detail) => [detail.date, detail]));
 type Place = (typeof trip.places)[number];
 type Day = (typeof trip.days)[number];

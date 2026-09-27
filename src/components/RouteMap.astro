@@ -42,7 +42,7 @@ const mapPayload = JSON.stringify({
     <article>
       <span class="line-sample island"></span>
       <strong>{trip.map.routeLabels.island}</strong>
-      <p>Переезды через Padang Bai: Гили T, Gili Air, дневной выезд на Gili Meno и возврат за багажом в Jivva.</p>
+      <p>Переезды через Padang Bai: Gili T, Gili Air, дневной выезд на Gili Meno и возврат в Чангу.</p>
     </article>
     <article>
       <span class="line-sample optional"></span>
@@ -180,7 +180,7 @@ const mapPayload = JSON.stringify({
       }
 
       if (filter === "island") {
-        return islandOrders.has(point.order) || point.lng > 115.9 || point.title.includes("Nusa Penida");
+        return islandOrders.has(point.order) || point.lng > 115.9;
       }
 
       return point.type === filter;

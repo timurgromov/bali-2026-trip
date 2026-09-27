@@ -25,12 +25,11 @@ if (/\+?62[\s()-]*\d{3}[\s()-]*\d{3,4}[\s()-]*\d{3,4}/.test(serialized)) {
 
 const expectedBases = [
   "Canggu / LV8",
-  "Ubud / Metland Venya",
-  "Keramas / Jivva",
   "Gili Trawangan",
   "Gili Air",
-  "Umalas",
-  "Nusa Dua",
+  "Canggu — возвращение",
+  "Umalas — семейная вилла",
+  "Ubud / Metland Venya",
   "Uluwatu"
 ];
 
@@ -44,8 +43,8 @@ if (totalNights !== 19) {
   throw new Error(`Expected 19 nights, got ${totalNights}`);
 }
 
-if (!data.days.some((day) => day.date === "30 Oct" && day.title === "Свадьба" && day.base === "Umalas")) {
-  throw new Error("Wedding day must remain in Umalas on 30 Oct");
+if (!data.days.some((day) => day.date === "30 Oct" && day.base === "Umalas — семейная вилла")) {
+  throw new Error("Wedding day must remain on the private family villa on 30 Oct");
 }
 
 const points = data.map.points;
@@ -80,7 +79,6 @@ for (const order of routeOrders) {
 for (const baseName of expectedBases) {
   const surfaces = {
     days: data.days.some((day) => day.base === baseName),
-    places: data.places.some((place) => place.base === baseName),
     map: points.some((point) => point.title.includes(baseName)),
     transfers: data.transfers.some((transfer) => transfer.from.includes(baseName) || transfer.to.includes(baseName))
   };
@@ -91,13 +89,16 @@ for (const baseName of expectedBases) {
   }
 }
 
-if (data.bases.some((base) => /Penida/i.test(base.name))) {
-  throw new Error("Nusa Penida must not be a main accommodation base");
-}
-
-const penidaPoints = points.filter((point) => /Penida/i.test(point.title));
-if (penidaPoints.length === 0 || penidaPoints.some((point) => point.type !== "optional")) {
-  throw new Error("All Nusa Penida points must remain optional");
+const activeRouteText = JSON.stringify({
+  bases: data.bases,
+  places: data.places,
+  map: data.map,
+  days: data.days,
+  dayDetails: data.dayDetails,
+  transfers: data.transfers
+});
+if (/Nusa Penida|Nusa Dua/i.test(activeRouteText)) {
+  throw new Error("Nusa Penida and Nusa Dua must not remain in the active route data");
 }
 
 for (let order = 1; order <= points.length; order += 1) {
@@ -112,8 +113,8 @@ for (const point of points) {
   }
 }
 
-if (!Array.isArray(data.places) || data.places.length < 20) {
-  throw new Error("Expected places directory with at least 20 entries");
+if (!Array.isArray(data.places) || data.places.length < 15) {
+  throw new Error("Expected places directory with at least 15 entries");
 }
 
 for (const place of data.places) {
