@@ -273,8 +273,8 @@ const navItems = [
               <p class="role">{base.role}</p>
               <p>{base.why}</p>
               {base.accommodation.options.length > 0 ? (
-                <div class="accommodation-options" aria-label={`Варианты размещения: ${base.name}`}>
-                  <strong>Варианты размещения</strong>
+                <div class="accommodation-options" aria-label={`Размещение: ${base.name}`}>
+                  <strong>{base.accommodation.status === "booked" ? "Забронировано" : "Варианты размещения"}</strong>
                   {base.accommodation.options.map((option) => (
                     <div class="accommodation-option">
                       <a class="maps-link" href={option.url} target="_blank" rel="noreferrer">

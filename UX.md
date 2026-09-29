@@ -54,6 +54,17 @@
 - Required viewports: `390x844`, `1440x900`.
 - Attempt number: 1.
 
+## UI Change Contract (2026-09-29-kemilau-canggu-stay)
+
+- Requested visible change: заменить проживание первой базы 19-22 Oct с LV8 на забронированный The Kemilau Hotel & Villa Canggu Bali и дать публичную ссылку на карточку отеля и Google Maps.
+- Surface and state: `/bali-2026-trip/#bases`, публичная страница; также день 20 Oct и карта с фильтром «Базы».
+- Exact target and action: первая карточка базы, строка дороги 20 Oct и пин №2; открыть карточку базы, раскрыть день 20 Oct и нажать пин №2.
+- Baseline visible signature: первая база и связанные строки содержат `LV8`; карточка помечена «Варианты размещения» и ведёт на сокращённую ссылку Trip.com.
+- Expected visible signature: первая база содержит `Canggu / The Kemilau`; карточка помечена «Забронировано», показывает полное название The Kemilau Hotel & Villa Canggu Bali и отдельные ссылки на публичную карточку Trip.com и Google Maps. Пин №2 ведёт к этому же отелю.
+- Must remain unchanged: даты 19-22 Oct, три ночи, порядок семи баз, дневной план, карта, пины и отсутствие горизонтальной прокрутки.
+- Required viewports: `390x844`, `1440x900`.
+- Attempt number: 1.
+
 ## Актуальная конфигурация маршрута (2026-09-27)
 
 - В поездке участвуют четыре человека; маршрут не проектируется как поездка большой группы.

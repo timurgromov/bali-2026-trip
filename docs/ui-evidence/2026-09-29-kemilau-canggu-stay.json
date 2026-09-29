@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-29-kemilau-canggu-stay",
+  "change_kind": "route-accommodation-update",
+  "status": "passed",
+  "requested_visible_change": "Заменить первую базу 19–22 Oct с LV8 на подтверждённый The Kemilau Hotel & Villa Canggu Bali, показывая отдельные публичные ссылки на карточку отеля и Google Maps.",
+  "expected_visible_delta": "Первая база, связанные первые три дня, переезды и пин №2 больше не содержат LV8; карточка базы помечена «Забронировано» и показывает The Kemilau Hotel & Villa Canggu Bali.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "a30da3ebaef7ba5c2314eb95c4304864a3076446f42dbaba6979055fb306ef2d",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/#bases",
+    "source_ref": "working tree, Astro local server after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#bases",
+    "state": "первая база; день 20 Oct развёрнут; карта отфильтрована по базам",
+    "selector_or_slide_id": ".base-card--1, #day-3, route point 02",
+    "action": "открыть первую базу, развернуть 20 Oct и выбрать пин №2 в фильтре «Базы»"
+  },
+  "must_remain_unchanged": [
+    "даты 19-22 Oct и три ночи",
+    "порядок семи баз",
+    "дневной план, карта и цифровые пины",
+    "отсутствие горизонтальной прокрутки"
+  ],
+  "required_viewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "isolated Playwright viewport; clientWidth=390",
+      "before_signature": "published baseline: первая база и строка дороги 20 Oct содержат LV8; первая карточка показывает «Варианты размещения».",
+      "after_signature": "candidate: первая база показывает Canggu / The Kemilau, статус «Забронировано», публичные Trip.com и Google Maps ссылки; scrollWidth=390; clientWidth=390.",
+      "observed_visible_result": "На телефоне карточка базы показывает полное название подтверждённого отеля и две отдельные внешние ссылки; связанные первые дни используют The Kemilau.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "In-app browser desktop viewport; clientWidth=1440",
+      "before_signature": "published baseline: герой, первая база, строка дороги 20 Oct и пин №2 показывают Canggu / LV8.",
+      "after_signature": "candidate: первая база Canggu / The Kemilau, статус «Забронировано», день 20 показывает «The Kemilau -> Pererenan», popup пина 02 ведёт к тому же отелю.",
+      "observed_visible_result": "На desktop был выбран фильтр «Базы» и открыт пин №2: popup показывает даты 19-22 Oct, три ночи и ссылку Google Maps для The Kemilau.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ]
+}

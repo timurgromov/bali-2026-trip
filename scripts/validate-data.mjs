@@ -24,7 +24,7 @@ if (/\+?62[\s()-]*\d{3}[\s()-]*\d{3,4}[\s()-]*\d{3,4}/.test(serialized)) {
 }
 
 const expectedBases = [
-  "Canggu / LV8",
+  "Canggu / The Kemilau",
   "Gili Trawangan",
   "Gili Air",
   "Canggu — возвращение",
