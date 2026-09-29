@@ -133,6 +133,6 @@
   "resources": [
     {"title":"Публичная витрина маршрута","type":"site","status":"active","url":"https://timurgromov.github.io/bali-2026-trip/"},
     {"title":"Google Maps по точкам маршрута","type":"maps","status":"active","url":""},
-    {"title":"Брони жилья и билетов","type":"booking","status":"candidate","url":""}
+    {"title":"Villa Flore — публичная страница Booking.com","type":"booking","status":"active","url":"https://www.booking.com/hotel/id/villa-flore-by-balisuperhost.en-gb.html"}
   ]
 }
