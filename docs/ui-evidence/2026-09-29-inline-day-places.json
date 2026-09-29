@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-29-inline-day-places",
+  "change_kind": "inline-place-disclosure",
+  "status": "passed",
+  "requested_visible_change": "Убрать самостоятельный блок «Места дня» и сделать названия мест в плане, тайминге и дороге кликабельными: по нажатию открываются описание и Google Maps рядом с этим названием.",
+  "expected_visible_delta": "До «План и дорога» не остаётся отдельной секции или строк «Что это». Только реальные названия мест в существующем тексте имеют пунктирное подчёркивание и раскрывают одну компактную справку по нажатию.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "4d00b3f328044e7d5f373c11923cad9b3d9ff5711dd85729f3daa77ca7dea2c3",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/#day-3",
+    "source_ref": "working tree, Astro development server after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#day-3",
+    "state": "день 20 Oct раскрыт; встроенные пояснения изначально закрыты",
+    "selector_or_slide_id": "#day-3 [data-inline-place-trigger], #day-3 [data-inline-place-popover]",
+    "action": "нажать Pererenan в строке «LV8 -> Pererenan»; затем нажать «Черепашье побережье» в плане дня 23 Oct"
+  },
+  "must_remain_unchanged": [
+    "текст плана, тайминга и дороги",
+    "Google Maps links с target=_blank и rel=noreferrer",
+    "карта, дни и данные trip.json",
+    "отсутствие горизонтальной прокрутки"
+  ],
+  "required_viewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "In-app browser viewport override; clientWidth=390",
+      "before_signature": "published baseline: перед «План и дорога» находилась отдельная секция «Места дня» из трёх строк с самостоятельными «Что это» и Google Maps",
+      "after_signature": "candidate: .day-places=0; на месте Черепашьего побережья в тексте есть один inline trigger; scrollWidth=390; clientWidth=390",
+      "observed_visible_result": "На телефоне название «Черепашье побережье» остаётся частью первой строки плана. После нажатия рядом появляются его описание, ограничение для ребёнка и Google Maps; другая открытая справка автоматически закрывается.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "In-app browser viewport override; clientWidth=1440",
+      "before_signature": "published baseline: отдельный блок «Места дня» располагался между вводным текстом дня и «План и дорога»",
+      "after_signature": "candidate: .day-places=0; 10 inline triggers в дне 20 Oct; scrollWidth=1440; clientWidth=1440",
+      "observed_visible_result": "На desktop Pererenan кликабелен непосредственно в строке дороги «LV8 -> Pererenan». Нажатие открыло компактное описание и ссылку Google Maps рядом с тем же названием; остальные справки закрыты.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ]
+}

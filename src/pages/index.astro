@@ -1,5 +1,6 @@
 ---
 import RouteMap from "../components/RouteMap.astro";
+import InlinePlace from "../components/InlinePlace.astro";
 import trip from "../data/trip.json";
 import "../styles/global.css";
 
@@ -203,33 +204,8 @@ const navItems = [
                   <span class="day-toggle-status" data-day-toggle-status>Развернуть</span>
                 </button>
                 <div id={`day-content-${index + 1}`} class="day-content" data-day-content hidden>
-                  <p>{day.plan}</p>
-                  <p class="note">{day.notes}</p>
-                  {dayPlaces.length > 0 && (
-                    <section class="day-places" aria-label={`Места дня: ${day.title}`}>
-                      <h4>Места дня</h4>
-                      <ul class="day-place-list">
-                        {dayPlaces.map((place) => (
-                          <li class="day-place">
-                            <details>
-                              <summary>
-                                <span class="day-place-summary">
-                                  <strong>{place.name}</strong>
-                                  <small>{place.duration}</small>
-                                </span>
-                                <span class="day-place-more">Что это</span>
-                              </summary>
-                              <div class="day-place-copy">
-                                <p>{place.description}</p>
-                                <p class="note">{place.familyNote}</p>
-                              </div>
-                            </details>
-                            {isNavigablePlace(place) && <a class="maps-link day-place-map" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Google Maps</a>}
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
-                  )}
+                  <p><InlinePlace text={day.plan} places={dayPlaces} id={`day-${index + 1}-plan`} /></p>
+                  <p class="note"><InlinePlace text={day.notes} places={dayPlaces} id={`day-${index + 1}-note`} /></p>
                   {details && (
                     <section class="day-details" aria-label={`Детали дня: ${day.title}`}>
                       <div class="day-details-head">
@@ -240,7 +216,7 @@ const navItems = [
                         <section class="day-timing">
                           <h5>По времени</h5>
                           <ol class="timing-list">
-                            {details.timing.map((item) => <li>{item}</li>)}
+                            {details.timing.map((item, timingIndex) => <li><InlinePlace text={item} places={dayPlaces} id={`day-${index + 1}-timing-${timingIndex}`} /></li>)}
                           </ol>
                         </section>
                         {details.routes?.length > 0 && (
@@ -249,7 +225,7 @@ const navItems = [
                             <div class="day-logistics-list">
                               {details.routes.map((route) => (
                                 <div>
-                                  <strong>{route.window} · {route.route}</strong>
+                                  <strong class="day-route-line">{route.window} · <InlinePlace text={route.route} places={dayPlaces} id={`day-${index + 1}-route-${route.window}`} /></strong>
                                   <span>{route.distance} · {route.duration} · {route.transport}</span>
                                 </div>
                               ))}
@@ -260,18 +236,18 @@ const navItems = [
                       <dl class="day-quick-facts">
                         <div>
                           <dt>Смысл</dt>
-                          <dd>{details.focus}</dd>
+                          <dd><InlinePlace text={details.focus} places={dayPlaces} id={`day-${index + 1}-focus`} /></dd>
                         </div>
                         <div>
                           <dt>План Б</dt>
-                          <dd>{details.fallback}</dd>
+                          <dd><InlinePlace text={details.fallback} places={dayPlaces} id={`day-${index + 1}-fallback`} /></dd>
                         </div>
                         <div>
                           <dt>Еда / пауза</dt>
-                          <dd>{details.foodRest}</dd>
+                          <dd><InlinePlace text={details.foodRest} places={dayPlaces} id={`day-${index + 1}-food`} /></dd>
                         </div>
                       </dl>
-                      <p class="day-warning"><strong>Важно:</strong> {details.warnings.join(" ")}</p>
+                      <p class="day-warning"><strong>Важно:</strong> <InlinePlace text={details.warnings.join(" ")} places={dayPlaces} id={`day-${index + 1}-warning`} /></p>
                     </section>
                   )}
                 </div>
@@ -544,6 +520,28 @@ const navItems = [
         if (!dayId || !(toggle instanceof HTMLButtonElement)) return;
         setDayExpanded(dayId, dayDisclosureState[dayId] === true, false);
         toggle.addEventListener("click", () => setDayExpanded(dayId, toggle.getAttribute("aria-expanded") !== "true"));
+      });
+
+      const closeInlinePlace = (trigger) => {
+        const popoverId = trigger.getAttribute("aria-controls");
+        const popover = popoverId ? document.getElementById(popoverId) : null;
+        trigger.setAttribute("aria-expanded", "false");
+        if (popover instanceof HTMLElement) popover.hidden = true;
+      };
+
+      document.querySelectorAll("[data-inline-place-trigger]").forEach((trigger) => {
+        if (!(trigger instanceof HTMLButtonElement)) return;
+        trigger.addEventListener("click", () => {
+          const willExpand = trigger.getAttribute("aria-expanded") !== "true";
+          document.querySelectorAll("[data-inline-place-trigger][aria-expanded='true']").forEach((openTrigger) => {
+            if (openTrigger instanceof HTMLButtonElement) closeInlinePlace(openTrigger);
+          });
+          if (!willExpand) return;
+          const popoverId = trigger.getAttribute("aria-controls");
+          const popover = popoverId ? document.getElementById(popoverId) : null;
+          trigger.setAttribute("aria-expanded", "true");
+          if (popover instanceof HTMLElement) popover.hidden = false;
+        });
       });
 
       const hashDayId = window.location.hash.slice(1);

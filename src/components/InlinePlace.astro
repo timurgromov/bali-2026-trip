@@ -1,0 +1,71 @@
+---
+import trip from "../data/trip.json";
+
+type Place = (typeof trip.places)[number];
+type InlinePart = { text: string; place?: Place };
+
+interface Props {
+  text: string;
+  places: Place[];
+  id: string;
+}
+
+const { text, places, id } = Astro.props;
+const aliases: Record<string, string[]> = {
+  "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
+  "Подводные статуи BASK NEST": ["статуи", "BASK NEST"],
+  "Mowie’s Gili Air — туна-стейк": ["Mowie", "туна-стейк", "туна стейк"],
+  "SANDS Beach Club": ["SANDS", "SANDS Bakery"],
+  "Single Fin Bali": ["Single Fin", "16:00"],
+  "SUKA ULUWATU": ["SUKA"],
+  "Pererenan": ["Pererenan"],
+  "Potato Head Beach Club": ["Potato Head"],
+  "Черепашье побережье Gili T": ["черепашье побережье"],
+  "BASK Gili Meno": ["BASK"],
+  "Mount Batur": ["Batur"]
+};
+const getMapsUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
+const terms = places
+  .filter((place) => !place.badges.includes("TBD"))
+  .flatMap((place) => [place.name, ...(aliases[place.name] ?? [])].map((term) => ({ place, term })))
+  .filter(({ term }) => term.length > 2)
+  .sort((left, right) => right.term.length - left.term.length);
+const lowerText = text.toLocaleLowerCase("ru");
+const parts: InlinePart[] = [];
+let cursor = 0;
+
+while (cursor < text.length) {
+  let match: { place: Place; term: string; index: number } | undefined;
+
+  for (const candidate of terms) {
+    const index = lowerText.indexOf(candidate.term.toLocaleLowerCase("ru"), cursor);
+    if (index < 0 || (match && index > match.index) || (match && index === match.index && candidate.term.length <= match.term.length)) continue;
+    match = { ...candidate, index };
+  }
+
+  if (!match) {
+    parts.push({ text: text.slice(cursor) });
+    break;
+  }
+
+  if (match.index > cursor) parts.push({ text: text.slice(cursor, match.index) });
+  parts.push({ text: text.slice(match.index, match.index + match.term.length), place: match.place });
+  cursor = match.index + match.term.length;
+}
+---
+
+{parts.map((part, index) => part.place ? (
+  <span class="inline-place" data-inline-place>
+    <button
+      class="inline-place-trigger"
+      type="button"
+      aria-expanded="false"
+      aria-controls={`${id}-place-${index}`}
+      data-inline-place-trigger
+    >{part.text}</button>
+    <span id={`${id}-place-${index}`} class="inline-place-popover" data-inline-place-popover hidden>
+      <span class="inline-place-description">{part.place.description} {part.place.familyNote}</span>
+      <a href={getMapsUrl(part.place)} target="_blank" rel="noreferrer">Google Maps</a>
+    </span>
+  </span>
+) : part.text)}
