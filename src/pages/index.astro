@@ -32,7 +32,9 @@ const placeAliases: Record<string, string[]> = {
   "Пляж Ayodya": ["Ayodya", "пляж Ayodya"],
   "Tsavo Lion Restaurant": ["Tsavo", "Bali Safari", "ужин со львами"],
   "Single Fin Bali": ["Single Fin", "16:00"],
-  "SUKA ULUWATU": ["SUKA"]
+  "SUKA ULUWATU": ["SUKA"],
+  "Nuanu Creative City": ["Nuanu", "Нуа́ну", "Нуану"],
+  "Splash Waterpark Bali": ["Splash", "аквапарк Splash"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
 const getDayTone = (day: Day) => {
