@@ -28,7 +28,8 @@ const expectedBases = [
   "Ubud / Villa Flore",
   "Canggu — возвращение",
   "Umalas — семейная вилла",
-  "Ubud / Metland Venya",
+  "Gili Trawangan",
+  "Gili Air",
   "Uluwatu"
 ];
 
@@ -51,8 +52,8 @@ const orders = points.map((point) => point.order);
 const uniqueOrders = new Set(orders);
 const routeLabels = data.map.routeLabels;
 
-if (!routeLabels?.main || !routeLabels?.island || !routeLabels?.optional) {
-  throw new Error("Map routeLabels must explain main, island, and optional lines");
+if (!routeLabels?.main || !routeLabels?.daytrip || !routeLabels?.island || !routeLabels?.optional) {
+  throw new Error("Map routeLabels must explain main, daytrip, island, and optional lines");
 }
 
 if (points.length < 10) {
@@ -65,6 +66,7 @@ if (uniqueOrders.size !== points.length) {
 
 const routeOrders = [
   ...data.map.routes.main,
+  ...data.map.routes.daytrip,
   ...data.map.routes.island,
   ...data.map.routes.optional.flat()
 ];
@@ -98,6 +100,27 @@ const activeRouteText = JSON.stringify({
 });
 if (/Nusa Penida|Nusa Dua/i.test(activeRouteText)) {
   throw new Error("Nusa Penida and Nusa Dua must not remain in the active route data");
+}
+
+if (/Metland Venya|Tegallalang|Monkey Forest|Single Fin|SUKA ULUWATU|Kuta Surf/i.test(activeRouteText)) {
+  throw new Error("Unconfirmed post-wedding places must not remain in the active route data");
+}
+
+const baturDays = data.days.filter((day) => /Batur/i.test(day.title));
+if (baturDays.length !== 1 || baturDays[0].date !== "24 Oct") {
+  throw new Error("Batur must appear as the active day plan only on 24 Oct");
+}
+
+const requiredPostWeddingDays = [
+  ["1 Nov", "Gili Trawangan"],
+  ["3 Nov", "Gili Air"],
+  ["4 Nov", "Gili Air"],
+  ["5 Nov", "Uluwatu"]
+];
+for (const [date, base] of requiredPostWeddingDays) {
+  if (!data.days.some((day) => day.date === date && day.base === base)) {
+    throw new Error(`Post-wedding route must include ${date} on ${base}`);
+  }
 }
 
 for (let order = 1; order <= points.length; order += 1) {

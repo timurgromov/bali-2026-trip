@@ -12,15 +12,15 @@ interface Props {
 
 const { text, places, id } = Astro.props;
 const aliases: Record<string, string[]> = {
-  "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
-  "Single Fin Bali": ["Single Fin", "16:00"],
-  "SUKA ULUWATU": ["SUKA"],
   "Pererenan": ["Pererenan"],
   "Potato Head Beach Club": ["Potato Head"],
   "Mount Batur": ["Batur"],
   "Nuanu Creative City": ["Nuanu", "Нуа́ну", "Нуану"],
   "Splash Waterpark Bali": ["Splash", "аквапарк Splash"],
-  "Cemagi Beach": ["Cemagi", "пляж Cemagi"]
+  "Cemagi Beach": ["Cemagi", "пляж Cemagi"],
+  "Gili Trawangan": ["Gili T", "Trawangan"],
+  "Gili Air": ["Gili Air"],
+  "Gili Meno": ["Gili Meno", "Meno"]
 };
 const getMapsUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
 const terms = places

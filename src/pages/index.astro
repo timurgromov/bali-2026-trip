@@ -28,14 +28,14 @@ type Place = (typeof trip.places)[number];
 type Day = (typeof trip.days)[number];
 type DayDetail = (typeof trip.dayDetails)[number];
 const placeAliases: Record<string, string[]> = {
-  "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
   "Пляж Ayodya": ["Ayodya", "пляж Ayodya"],
   "Tsavo Lion Restaurant": ["Tsavo", "Bali Safari", "ужин со львами"],
-  "Single Fin Bali": ["Single Fin", "16:00"],
-  "SUKA ULUWATU": ["SUKA"],
   "Nuanu Creative City": ["Nuanu", "Нуа́ну", "Нуану"],
   "Splash Waterpark Bali": ["Splash", "аквапарк Splash"],
-  "Cemagi Beach": ["Cemagi", "пляж Cemagi"]
+  "Cemagi Beach": ["Cemagi", "пляж Cemagi"],
+  "Gili Trawangan": ["Gili T", "Trawangan"],
+  "Gili Air": ["Gili Air"],
+  "Gili Meno": ["Gili Meno", "Meno"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
 const getDayTone = (day: Day) => {
@@ -74,6 +74,10 @@ const getDayPlaces = (day: Day, details?: DayDetail) => {
 };
 const getGoogleMapsSearchUrl = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${query}, Bali, Indonesia`)}`;
 const getMapsSearchUrl = (place: Place) => place.mapsUrl ?? getGoogleMapsSearchUrl(place.name);
+const getBaseMapsUrl = (baseName: string) => {
+  const point = trip.map.points.find((entry) => entry.type === "base" && (entry.title.includes(baseName) || baseName.includes(entry.title.replace(" — база", ""))));
+  return point ? point.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${point.lat},${point.lng}`)}` : undefined;
+};
 const isNavigablePlace = (place: Place) => !place.badges.includes("TBD");
 const tripNowPayload = JSON.stringify({
   year: 2026,
@@ -288,6 +292,9 @@ const navItems = [
                 </div>
               ) : (
                 <p class="accommodation-note">{base.accommodation.status === "private" ? "Жильё в этом блоке — частное; название и адрес не публикуются." : "Вариант жилья ещё нужно подтвердить."}</p>
+              )}
+              {base.accommodation.status === "candidate" && getBaseMapsUrl(base.name) && (
+                <a class="maps-link accommodation-maps-link" href={getBaseMapsUrl(base.name)} target="_blank" rel="noreferrer">Открыть базу в Google Maps</a>
               )}
               <div class="chips">
                 {base.nearby.map((item) => {
