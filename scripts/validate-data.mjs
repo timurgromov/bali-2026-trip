@@ -25,8 +25,7 @@ if (/\+?62[\s()-]*\d{3}[\s()-]*\d{3,4}[\s()-]*\d{3,4}/.test(serialized)) {
 
 const expectedBases = [
   "Canggu / The Kemilau",
-  "Gili Trawangan",
-  "Gili Air",
+  "Ubud / Villa Flore",
   "Canggu — возвращение",
   "Umalas — семейная вилла",
   "Ubud / Metland Venya",
@@ -113,8 +112,8 @@ for (const point of points) {
   }
 }
 
-if (!Array.isArray(data.places) || data.places.length < 15) {
-  throw new Error("Expected places directory with at least 15 entries");
+if (!Array.isArray(data.places) || data.places.length < 10) {
+  throw new Error("Expected places directory with at least 10 entries");
 }
 
 for (const place of data.places) {

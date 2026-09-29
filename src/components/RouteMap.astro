@@ -29,7 +29,6 @@ const mapPayload = JSON.stringify({
       <span><i class="dot airport"></i>Аэропорт</span>
       <span><i class="dot base"></i>База</span>
       <span><i class="dot day"></i>Выезд</span>
-      <span><i class="dot ferry"></i>Паром</span>
       <span><i class="dot optional"></i>Optional</span>
     </div>
   </div>
@@ -42,12 +41,12 @@ const mapPayload = JSON.stringify({
     <article>
       <span class="line-sample island"></span>
       <strong>{trip.map.routeLabels.island}</strong>
-      <p>Переезды через Padang Bai: Gili T, Gili Air, дневной выезд на Gili Meno и возврат в Чангу.</p>
+      <p>Ранний выезд из Villa Flore на Mount Batur 24 октября с возвратом на ту же базу.</p>
     </article>
     <article>
       <span class="line-sample optional"></span>
       <strong>{trip.map.routeLabels.optional}</strong>
-      <p>Запасные направления с меткой ALT. Они не идут подряд после островного дня и не являются обязательным скелетом маршрута.</p>
+      <p>Запасные направления с меткой ALT. Они не являются обязательным скелетом маршрута.</p>
     </article>
     <article>
       <span class="point-sample day"></span>
@@ -62,7 +61,7 @@ const mapPayload = JSON.stringify({
         <button type="button" class="active" data-filter="all">Все</button>
         <button type="button" data-filter="base">Базы</button>
         <button type="button" data-filter="day">Выезды</button>
-        <button type="button" data-filter="island">Острова</button>
+        <button type="button" data-filter="daytrip">Batur</button>
         <button type="button" data-filter="optional">Optional</button>
       </div>
       <nav id="route-list" class="route-list" aria-label="Точки маршрута"></nav>
@@ -78,7 +77,7 @@ const mapPayload = JSON.stringify({
   type RoutePoint = {
     order: number;
     title: string;
-    type: "airport" | "base" | "day" | "ferry" | "optional";
+    type: "airport" | "base" | "day" | "optional";
     dateLabel: string;
     role: string;
     lat: number;
@@ -179,8 +178,8 @@ const mapPayload = JSON.stringify({
         return point.type === "base" || point.type === "airport";
       }
 
-      if (filter === "island") {
-        return islandOrders.has(point.order) || point.lng > 115.9;
+      if (filter === "daytrip") {
+        return islandOrders.has(point.order);
       }
 
       return point.type === filter;

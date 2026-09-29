@@ -13,15 +13,10 @@ interface Props {
 const { text, places, id } = Astro.props;
 const aliases: Record<string, string[]> = {
   "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
-  "Подводные статуи BASK NEST": ["статуи", "BASK NEST"],
-  "Mowie’s Gili Air — туна-стейк": ["Mowie", "туна-стейк", "туна стейк"],
-  "SANDS Beach Club": ["SANDS", "SANDS Bakery"],
   "Single Fin Bali": ["Single Fin", "16:00"],
   "SUKA ULUWATU": ["SUKA"],
   "Pererenan": ["Pererenan"],
   "Potato Head Beach Club": ["Potato Head"],
-  "Черепашье побережье Gili T": ["черепашье побережье"],
-  "BASK Gili Meno": ["BASK"],
   "Mount Batur": ["Batur"]
 };
 const getMapsUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;

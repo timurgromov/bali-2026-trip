@@ -31,9 +31,6 @@ const placeAliases: Record<string, string[]> = {
   "Tegallalang Rice Terraces": ["Tegallalang", "рисовые террасы"],
   "Пляж Ayodya": ["Ayodya", "пляж Ayodya"],
   "Tsavo Lion Restaurant": ["Tsavo", "Bali Safari", "ужин со львами"],
-  "Подводные статуи BASK NEST": ["статуи", "BASK", "BASK NEST"],
-  "Mowie’s Gili Air — туна-стейк": ["Mowie", "туна-стейк", "туна стейк"],
-  "SANDS Beach Club": ["SANDS", "SANDS Bakery"],
   "Single Fin Bali": ["Single Fin", "16:00"],
   "SUKA ULUWATU": ["SUKA"]
 };
@@ -210,7 +207,7 @@ const navItems = [
                     <section class="day-details" aria-label={`Детали дня: ${day.title}`}>
                       <div class="day-details-head">
                         <h4 class="day-details-title">План и дорога</h4>
-                        <p class="detail-disclaimer">Рабочие окна с запасом; лодки, водитель и брони подтверждаются перед поездкой.</p>
+                        <p class="detail-disclaimer">Рабочие окна с запасом; водитель, оператор и брони подтверждаются перед поездкой.</p>
                       </div>
                       <div class="day-ops-grid">
                         <section class="day-timing">
@@ -373,7 +370,6 @@ const navItems = [
                 </div>
               </dl>
               <p>{transfer.note}</p>
-              {transfer.bookingUrl && <a class="maps-link" href={transfer.bookingUrl} target="_blank" rel="noreferrer">{transfer.bookingLabel}</a>}
             </article>
           ))}
         </div>

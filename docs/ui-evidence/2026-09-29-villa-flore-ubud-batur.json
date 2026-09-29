@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-29-villa-flore-ubud-batur",
+  "change_kind": "route-accommodation-and-day-trip-update",
+  "status": "passed",
+  "requested_visible_change": "Заменить Gili Trawangan/Gili Air 22-26 Oct на Villa Flore в Убуде, показать Batur 24 Oct туда-обратно без смены жилья, возврат в Canggu 26 Oct и пометку «бронь у Эли» с отдельными публичными ссылками Booking.com и Google Maps.",
+  "expected_visible_delta": "Маршрут состоит из шести баз: вторая — Ubud / Villa Flore 22-26 Oct на четыре ночи; карта, дневные планы и переезды больше не показывают Гили или Padang Bai, а Batur стоит 24 Oct с возвратом на Villa Flore.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "191bc1ed82731c6f764d4fe327833b43ae28b17cbd64e78ff6ee0848a29c7c3c",
+  "served_candidate": {
+    "url": "http://localhost:4321/bali-2026-trip/#bases",
+    "source_ref": "working tree, Astro preview after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#bases, #day-7, #map, #transfers",
+    "state": "вторая база; 24 Oct развёрнут; фильтр карты Batur; пин Mount Batur открыт",
+    "selector_or_slide_id": ".base-card--2, #day-7, route points 06-07",
+    "action": "открыть карточку Villa Flore, развернуть 24 Oct, выбрать фильтр Batur и открыть пин 07"
+  },
+  "must_remain_unchanged": [
+    "19 ночей",
+    "день рождения 27 Oct в Canggu",
+    "свадебная вилла 30 Oct-1 Nov остаётся приватной",
+    "публичные Google Maps ссылки и отсутствие горизонтальной прокрутки"
+  ],
+  "required_viewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "isolated Playwright viewport; clientWidth=390",
+      "before_signature": "published baseline: дни 22-26 Oct содержат Gili Trawangan, Gili Air, Gili Meno и лодки; Batur расположен 3 Nov.",
+      "after_signature": "candidate: день 24 Oct — Batur с ранним pickup, двумя дорогами Villa Flore -> Mount Batur -> Villa Flore и возвратом на ту же виллу; scrollWidth=390; clientWidth=390.",
+      "observed_visible_result": "На телефоне раскрытая карточка Batur полностью помещается по ширине и показывает возврат на Villa Flore без смены жилья.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "isolated Playwright viewport; clientWidth=1440",
+      "before_signature": "published baseline: семь баз, две островные базы Gili Trawangan и Gili Air; карта с островным фильтром и Padang Bai.",
+      "after_signature": "candidate: шесть баз, карточка Ubud / Villa Flore 22-26 Oct на четыре ночи со статусом «Забронировано», «бронь у Эли», публичными Booking.com и Google Maps ссылками.",
+      "observed_visible_result": "На desktop вторая карточка базы и карта показывают Villa Flore и Mount Batur; фильтр Batur оставляет только пины 06 и 07, popup 07 содержит Google Maps.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ]
+}
