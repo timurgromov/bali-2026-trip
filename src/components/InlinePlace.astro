@@ -19,7 +19,8 @@ const aliases: Record<string, string[]> = {
   "Potato Head Beach Club": ["Potato Head"],
   "Mount Batur": ["Batur"],
   "Nuanu Creative City": ["Nuanu", "Нуа́ну", "Нуану"],
-  "Splash Waterpark Bali": ["Splash", "аквапарк Splash"]
+  "Splash Waterpark Bali": ["Splash", "аквапарк Splash"],
+  "Cemagi Beach": ["Cemagi", "пляж Cemagi"]
 };
 const getMapsUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
 const terms = places
