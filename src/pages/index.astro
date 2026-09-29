@@ -208,19 +208,26 @@ const navItems = [
                   {dayPlaces.length > 0 && (
                     <section class="day-places" aria-label={`Места дня: ${day.title}`}>
                       <h4>Места дня</h4>
-                      <div class="day-place-grid">
+                      <ul class="day-place-list">
                         {dayPlaces.map((place) => (
-                          <article class="day-place">
-                            <div>
-                              <strong>{place.name}</strong>
-                              <small>{place.duration}</small>
-                            </div>
-                            <p>{place.description}</p>
-                            <p class="note">{place.familyNote}</p>
-                            {isNavigablePlace(place) && <a class="maps-link" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Открыть в Google Maps</a>}
-                          </article>
+                          <li class="day-place">
+                            <details>
+                              <summary>
+                                <span class="day-place-summary">
+                                  <strong>{place.name}</strong>
+                                  <small>{place.duration}</small>
+                                </span>
+                                <span class="day-place-more">Что это</span>
+                              </summary>
+                              <div class="day-place-copy">
+                                <p>{place.description}</p>
+                                <p class="note">{place.familyNote}</p>
+                              </div>
+                            </details>
+                            {isNavigablePlace(place) && <a class="maps-link day-place-map" href={getMapsSearchUrl(place)} target="_blank" rel="noreferrer">Google Maps</a>}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </section>
                   )}
                   {details && (

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-29-compact-day-places",
+  "change_kind": "compact-interactive-day-places",
+  "status": "passed",
+  "requested_visible_change": "Убрать из каждого раскрытого дня большие карточки «Места дня» с постоянно открытыми описаниями и оставить компактный способ посмотреть пояснение только по запросу.",
+  "expected_visible_delta": "Места дня показываются тонкими строками: название, длительность и отдельная ссылка Google Maps всегда видны; описание и семейная ремарка раскрываются только по нажатию «Что это» у конкретного места.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "1d789f995b3ce5b6cd48b7d15964968cf7a83e2d0419f6d8d4d3a2d6bf8905bf",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/#day-3",
+    "source_ref": "working tree, Astro development server after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#day-3",
+    "state": "раскрыт день 20 Oct; все три пояснения мест закрыты",
+    "selector_or_slide_id": "#day-3 .day-places, #day-3 .day-place details, #day-3 .day-place-map",
+    "action": "нажать «Что это» у Pererenan; отдельно повторить раскрытие у «Черепашье побережье Gili T» в дне 23 Oct"
+  },
+  "must_remain_unchanged": [
+    "названия и длительность мест",
+    "прямые Google Maps ссылки с target=_blank и rel=noreferrer",
+    "даты, карта, переезды и данные trip.json",
+    "отсутствие горизонтальной прокрутки"
+  ],
+  "required_viewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "In-app browser viewport override; clientWidth=390",
+      "before_signature": "в присланном пользователем baseline: голубая секция с тремя крупными белыми карточками; описания и большие кнопки Maps видны одновременно",
+      "after_signature": "candidate: 3 тонкие строки Pererenan, Potato Head Beach Club и La Brisa; у каждой видны «Что это» и Google Maps; descriptions closed=3; scrollWidth=390; clientWidth=390",
+      "observed_visible_result": "На телефоне компактный список остаётся в пределах карточки дня. Нажатие «Что это» у «Черепашье побережье Gili T» показывает только его описание и семейное ограничение, а его Google Maps остаётся рядом отдельной ссылкой.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "In-app browser viewport override; clientWidth=1440",
+      "before_signature": "в присланном пользователем baseline: «Места дня» занимают большую голубую панель с сеткой карточек и постоянным текстом",
+      "after_signature": "candidate: sectionHeight=204; rows=3; closed=3; Google Maps links=3; scrollWidth=1440; clientWidth=1440",
+      "observed_visible_result": "На desktop вместо панели с карточками видны три плоские строки. Нажатие «Что это» у Pererenan показывает его описание и семейную ремарку; остальные строки остаются закрытыми.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ]
+}
