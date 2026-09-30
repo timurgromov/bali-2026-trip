@@ -25,7 +25,7 @@ if (/\+?62[\s()-]*\d{3}[\s()-]*\d{3,4}[\s()-]*\d{3,4}/.test(serialized)) {
 
 const expectedBases = [
   "Canggu / The Kemilau",
-  "Ubud / Villa Flore",
+  "Ubud / Indica Luxury Villa",
   "Canggu — возвращение",
   "Umalas — семейная вилла",
   "Gili Trawangan",
@@ -41,6 +41,12 @@ if (JSON.stringify(actualBases) !== JSON.stringify(expectedBases)) {
 const totalNights = data.bases.reduce((sum, base) => sum + base.nights, 0);
 if (totalNights !== 19) {
   throw new Error(`Expected 19 nights, got ${totalNights}`);
+}
+
+const ubudBase = data.bases.find((base) => base.name === "Ubud / Indica Luxury Villa");
+const indicaBooking = ubudBase?.accommodation?.options?.[0];
+if (!indicaBooking || indicaBooking.name !== "Indica Luxury Villa Ubud" || !/^https:\/\/www\.booking\.com\/hotel\/id\/indica-luxury-villa-ubud/.test(indicaBooking.url)) {
+  throw new Error("Ubud base must include the active Indica Luxury Villa Ubud Booking.com link");
 }
 
 if (!data.days.some((day) => day.date === "30 Oct" && day.base === "Umalas — семейная вилла")) {

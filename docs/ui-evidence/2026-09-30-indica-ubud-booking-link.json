@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-09-30-indica-ubud-booking-link",
+  "change_kind": "accommodation-card",
+  "status": "passed",
+  "requested_visible_change": "Заменить второй отель на Indica Luxury Villa Ubud и дать в карточке жилья явные отдельные действия Booking.com и Google Maps.",
+  "expected_visible_delta": "Вторая карточка базы показывает Ubud / Indica Luxury Villa на 22-26 Oct, четыре ночи, статус «Забронировано» и две самостоятельные ссылки: Booking.com и Google Maps.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "8c29127b02931e8128f11976cf2d67b32c6a3af1de7105b9ed5f212191f7bd49",
+  "served_candidate": {
+    "url": "http://localhost:4330/bali-2026-trip/#bases",
+    "source_ref": "working tree, static Astro preview after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#bases",
+    "state": "публичная вторая карточка базы Ubud без авторизации",
+    "selector_or_slide_id": ".base-card containing Ubud / Indica Luxury Villa",
+    "action": "перейти к «Базы» и проверить отдельные ссылки «Открыть бронь на Booking.com» и «Открыть в Google Maps»"
+  },
+  "must_remain_unchanged": [
+    "22-26 Oct и четыре ночи",
+    "Batur только 24 Oct с возвратом на ту же базу",
+    "порядок семи баз",
+    "приватность семейной виллы",
+    "отсутствие горизонтальной прокрутки"
+  ],
+  "required_viewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "static Astro preview; innerWidth=390; innerHeight=844",
+      "before_signature": "Название объекта было единственной ссылкой, без явного действия бронирования.",
+      "after_signature": "Ubud / Indica Luxury Villa, 22-26 Oct и 4 ночи; отдельные ссылки Booking.com и Google Maps; scrollWidth не превышает clientWidth.",
+      "observed_visible_result": "На телефоне карточка шириной 354 px помещается в экран и содержит обе ссылки без горизонтального скролла.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "static Astro preview; innerWidth=1440; innerHeight=900",
+      "before_signature": "Название объекта было единственной ссылкой, без явного действия бронирования.",
+      "after_signature": "Вторая карточка содержит Indica Luxury Villa Ubud, Booking.com и Google Maps; обе внешние ссылки имеют target=_blank и rel=noreferrer.",
+      "observed_visible_result": "На desktop видны статус «Забронировано», две самостоятельные ссылки и возврат с Batur 24 Oct на ту же виллу.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ],
+  "comparison_review": {
+    "variants_shown": 0,
+    "selected_variant": "",
+    "owner_approval_reference": ""
+  }
+}

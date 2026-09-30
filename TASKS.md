@@ -10,9 +10,9 @@
 
 ## Next
 
-- [ ] Сверить с Элей детали брони Villa Flore by BaliSuperHost на 22-26 Oct; личную ссылку/номер брони в публичный сайт не добавлять.
-- [ ] Заказать наземные трансферы Canggu -> Villa Flore 22 Oct и Villa Flore -> Canggu 26 Oct с запасом на трафик.
-- [ ] Подтвердить оператору Batur на 24 Oct: формат, состав участников, погоду, pickup и возврат на Villa Flore.
+- [x] Убуда: Indica Luxury Villa Ubud на 22-26 Oct отмечена как забронированная; добавлены отдельные публичные ссылки Booking.com и Google Maps.
+- [ ] Заказать наземные трансферы Canggu -> Indica Luxury Villa Ubud 22 Oct и Indica Luxury Villa Ubud -> Canggu 26 Oct с запасом на трафик.
+- [ ] Подтвердить оператору Batur на 24 Oct: формат, состав участников, погоду, pickup и возврат на Indica Luxury Villa Ubud.
 - [ ] Подтвердить билеты и программу Nuanu Creative City на 28 Oct после обеда.
 - [ ] Подтвердить вход Splash Waterpark Bali к 09:10 29 Oct, часы работы и правила для ребёнка.
 - [ ] В день поездки проверить волны и погоду на Cemagi Beach к 16:00 29 Oct.

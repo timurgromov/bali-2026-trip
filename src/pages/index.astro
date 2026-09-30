@@ -282,11 +282,12 @@ const navItems = [
                   {base.accommodation.options.map((option) => (
                     <div class="accommodation-option">
                       <a class="maps-link" href={option.url} target="_blank" rel="noreferrer">
-                        {option.name} · {option.priority}
+                        {option.linkLabel ?? `Открыть жильё: ${option.name}`}
                       </a>
-                      <a class="maps-link accommodation-maps-link" href={getGoogleMapsSearchUrl(option.name)} target="_blank" rel="noreferrer" aria-label={`Открыть ${option.name} в Google Maps`}>
+                      <a class="maps-link accommodation-maps-link" href={option.mapsUrl ?? getGoogleMapsSearchUrl(option.name)} target="_blank" rel="noreferrer" aria-label={`Открыть ${option.name} в Google Maps`}>
                         Открыть в Google Maps
                       </a>
+                      <small>{option.name} · {option.priority}</small>
                     </div>
                   ))}
                 </div>
