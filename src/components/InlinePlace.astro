@@ -20,7 +20,10 @@ const aliases: Record<string, string[]> = {
   "Cemagi Beach": ["Cemagi", "пляж Cemagi"],
   "Gili Trawangan": ["Gili T", "Trawangan"],
   "Gili Air": ["Gili Air"],
-  "Gili Meno": ["Gili Meno", "Meno"]
+  "Gili Meno": ["Gili Meno", "Meno"],
+  "Народный парк Чэнду": ["Народного парка Чэнду", "Народному парку Чэнду", "Народного парка", "Народному парку"],
+  "Чайная Heming": ["чайной Heming", "Heming"],
+  "Аллеи Kuanzhai": ["аллей Kuanzhai", "аллеям Kuanzhai", "Kuanzhai"]
 };
 const getMapsUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
 const terms = places

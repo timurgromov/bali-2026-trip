@@ -23,6 +23,17 @@ const placesByBase = trip.bases
     places: trip.places.filter((place) => place.base === base.name)
   }))
   .filter(({ places }) => places.length > 0);
+const accommodationBaseNames = new Set(trip.bases.map((base) => base.name));
+const transitPlaceGroups = [...new Set(trip.places.map((place) => place.base).filter((baseName) => !accommodationBaseNames.has(baseName)))]
+  .map((baseName, index) => ({
+    base: {
+      order: trip.bases.length + index + 1,
+      name: baseName,
+      role: trip.days.find((day) => day.base === baseName)?.title ?? "Транзитная остановка"
+    },
+    places: trip.places.filter((place) => place.base === baseName)
+  }));
+const placeGroups = [...placesByBase, ...transitPlaceGroups];
 const dayDetailsByDate = new Map(trip.dayDetails.map((detail) => [detail.date, detail]));
 type Place = (typeof trip.places)[number];
 type Day = (typeof trip.days)[number];
@@ -35,7 +46,10 @@ const placeAliases: Record<string, string[]> = {
   "Cemagi Beach": ["Cemagi", "пляж Cemagi"],
   "Gili Trawangan": ["Gili T", "Trawangan"],
   "Gili Air": ["Gili Air"],
-  "Gili Meno": ["Gili Meno", "Meno"]
+  "Gili Meno": ["Gili Meno", "Meno"],
+  "Народный парк Чэнду": ["Народного парка Чэнду", "Народному парку Чэнду", "Народного парка", "Народному парку"],
+  "Чайная Heming": ["чайной Heming", "Heming"],
+  "Аллеи Kuanzhai": ["аллей Kuanzhai", "аллеям Kuanzhai", "Kuanzhai"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
 const getDayTone = (day: Day) => {
@@ -323,7 +337,7 @@ const navItems = [
           <p>Здесь каждая точка расшифрована простым языком: что это, зачем туда ехать, сколько занимает и что важно для семьи.</p>
         </div>
         <div class="places-groups">
-          {placesByBase.map(({ base, places }) => (
+          {placeGroups.map(({ base, places }) => (
             <section class="place-group">
               <div class="place-group-head">
                 <span>{String(base.order).padStart(2, "0")}</span>

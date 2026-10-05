@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-10-05-chengdu-layover",
+  "change_kind": "route-data-and-day-card",
+  "status": "passed",
+  "requested_visible_change": "Заменить пассивное ожидание 8 ноября на безопасную компактную прогулку по Чэнду во время обратной пересадки.",
+  "expected_visible_delta": "В карточке 8 Nov видны маршрут Народный парк -> чайная Heming -> аллеи Kuanzhai, документальные и багажные гейты, жёсткий возврат в 12:00 и план Б в TFU; три места есть в справочнике с Google Maps ссылками.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "a65995c92b03c129f5b11db59903d6ead75001cf3db8ce7cfc639e46f90a04ec",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/#days",
+    "source_ref": "staged working tree after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#days",
+    "state": "публичная страница; день 8 Nov выбран и развёрнут",
+    "selector_or_slide_id": "#days [data-day-card], #places",
+    "action": "Выбрать 8 Nov, раскрыть карточку и открыть inline-поповер чайной Heming"
+  },
+  "must_remain_unchanged": [
+    "время четырёх перелётов",
+    "7 баз и 19 ночей на Бали",
+    "18 пинов и масштаб интерактивной карты Бали и Гили",
+    "отсутствие приватных данных и горизонтального overflow"
+  ],
+  "required_viewports": [
+    "390x844",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "CUA Playwright resize; innerWidth=390; innerHeight=844",
+      "before_signature": "Карточка 8 Nov имела заголовок «Возвращение», высоту 828.7px и окно 06:10-15:30 целиком в аэропорту.",
+      "after_signature": "Карточка «Утро в Чэнду и возвращение» развёрнута, width=354px, overflowX=0; в справочнике 3 места Чэнду.",
+      "observed_visible_result": "План, метро, гейты, 12:00, 13:15-13:30, план Б и Maps-поповер читаются в одну колонку без обрезания.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "CUA Playwright resize; innerWidth=1440; innerHeight=900",
+      "before_signature": "Карточка 8 Nov имела заголовок «Возвращение», высоту 536.86px и единственный маршрут SVO -> дом.",
+      "after_signature": "Карточка «Утро в Чэнду и возвращение» имеет width=1068px, height=1025.15px, overflowX=0; видны четыре маршрута и весь тайминг.",
+      "observed_visible_result": "Карточка дня, справочник, логистика, перелёты, бюджет и решения просмотрены сверху вниз; карта сохранила 18 пинов.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ],
+  "comparison_review": {
+    "variants_shown": 0,
+    "selected_variant": "",
+    "owner_approval_reference": ""
+  }
+}
