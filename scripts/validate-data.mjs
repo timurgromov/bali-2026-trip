@@ -155,7 +155,13 @@ for (const place of data.places) {
   }
 }
 
-const requiredChengduPlaces = ["Народный парк Чэнду", "Чайная Heming", "Аллеи Kuanzhai"];
+const requiredChengduPlaces = [
+  "Станция метро Саньча (三岔站)",
+  "Вход №1 в парк Всемирной садовой выставки",
+  "Сад Чэнду (成都园)",
+  "Башня Цзиньюнь (锦云楼)",
+  "Linqi Vitality City (林栖·活力城)"
+];
 for (const placeName of requiredChengduPlaces) {
   const place = data.places.find((item) => item.name === placeName);
   if (!place || place.base !== "Chengdu / Москва" || !place.mapsUrl) {
@@ -166,16 +172,21 @@ for (const placeName of requiredChengduPlaces) {
 const chengduDay = data.days.find((day) => day.date === "8 Nov");
 const chengduDetail = data.dayDetails.find((detail) => detail.date === "8 Nov");
 const chengduText = JSON.stringify({ day: chengduDay, detail: chengduDetail });
-if (!chengduDay || !chengduDetail || !["Народн", "Heming", "Kuanzhai"].every((term) => chengduText.includes(term))) {
-  throw new Error("8 Nov must keep the compact People's Park, Heming, and Kuanzhai transit plan");
+if (!chengduDay || !chengduDetail || !["Саньча", "Сад Чэнду", "Цзиньюнь", "Linqi"].every((term) => chengduText.includes(term))) {
+  throw new Error("8 Nov must keep the compact Sancha, Chengdu Garden, Jinyun Tower, and Linqi transit plan");
 }
 
-if (!chengduText.includes("12:00") || !chengduText.includes("13:15-13:30")) {
-  throw new Error("8 Nov must keep the 12:00 hard return and 13:15-13:30 TFU target");
+if (!chengduText.includes("12:10") || !chengduText.includes("12:35-12:50") || !chengduText.includes("13:15")) {
+  throw new Error("8 Nov must keep the 12:10 hard return, 12:35-12:50 TFU target, and 13:15 ceiling");
 }
 
-if (!data.transfers.some((transfer) => transfer.from === "Аллеи Kuanzhai" && transfer.to === "TFU Terminal 1" && transfer.window.includes("12:00"))) {
+if (!data.transfers.some((transfer) => transfer.from === "Станция метро Саньча (三岔站)" && transfer.to === "TFU Terminal 1" && transfer.window.includes("12:10") && transfer.mapsUrl)) {
   throw new Error("Chengdu transit transfers must keep the hard return to TFU");
+}
+
+const chengduMapRoutes = chengduDetail.routes.filter((route) => route.mapsUrl);
+if (chengduMapRoutes.length < 5 || chengduMapRoutes.some((route) => !route.mapsUrl.startsWith("https://www.google.com/maps/dir/"))) {
+  throw new Error("8 Nov must keep direct Google Maps directions for all five Chengdu route legs");
 }
 
 if (!Array.isArray(data.dayDetails) || data.dayDetails.length < 20) {

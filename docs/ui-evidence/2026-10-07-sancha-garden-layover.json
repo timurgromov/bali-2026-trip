@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "change_id": "2026-10-07-sancha-garden-layover",
+  "change_kind": "route-data-navigation-and-day-card",
+  "status": "passed",
+  "requested_visible_change": "Заменить дальний центр Чэнду на близкий к TFU маршрут через Саньча и парк Всемирной садовой выставки, добавить все точки и Google Maps навигацию.",
+  "expected_visible_delta": "В карточке 8 Nov видны Line 18 до Саньча, вход №1, Сад Чэнду, башня Цзиньюнь, обед у метро, возврат не позже 12:10 и прямые Maps-ссылки для пяти участков и пяти мест.",
+  "attempt_number": 1,
+  "checked_after_last_edit": true,
+  "candidate_diff_sha256": "7f7f8efb608f46a61bca3e66e657497075b3f9550f20a7f5fdb503400f429dca",
+  "served_candidate": {
+    "url": "http://127.0.0.1:4321/bali-2026-trip/#day-22",
+    "source_ref": "working tree after npm run build",
+    "fresh_reload": true
+  },
+  "target": {
+    "surface": "/bali-2026-trip/#day-22",
+    "state": "публичная страница; день 8 Nov выбран и развёрнут",
+    "selector_or_slide_id": "#day-22, #places, #transfers",
+    "action": "Выбрать 8 Nov, открыть карточку и раскрыть inline-поповер Сада Чэнду"
+  },
+  "must_remain_unchanged": [
+    "время четырёх перелётов",
+    "7 баз и 19 ночей на Бали",
+    "18 пинов и масштаб интерактивной карты Бали и Гили",
+    "отсутствие приватных данных и горизонтального overflow"
+  ],
+  "required_viewports": [
+    "390x844",
+    "768x1024",
+    "1180x820",
+    "1440x900"
+  ],
+  "observations": [
+    {
+      "viewport": "390x844",
+      "viewport_source": "CUA browser viewport; innerWidth=390; innerHeight=844",
+      "before_signature": "Карточка вела примерно 70 km в центр Чэнду и не давала отдельных Maps-ссылок на участки дороги.",
+      "after_signature": "Карточка «Саньча: китайские сады и возвращение» развёрнута; 5 Maps-маршрутов, 5 мест Чэнду, overflowX=0.",
+      "observed_visible_result": "Весь маршрут, безопасные гейты, питание и ранний возврат читаются в одну колонку; полная страница просмотрена сверху вниз.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "768x1024",
+      "viewport_source": "CUA browser viewport; innerWidth=768; innerHeight=1024",
+      "before_signature": "Историческая центральная прогулка без нового набора точек.",
+      "after_signature": "Карточка дня имеет width=706.56px, раскрыта, содержит 5 Maps-маршрутов и не создаёт горизонтальный overflow.",
+      "observed_visible_result": "Заголовок, план и кликабельные названия точек читаются без обрезания на планшетной ширине.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1180x820",
+      "viewport_source": "CUA browser viewport; innerWidth=1180; innerHeight=820",
+      "before_signature": "Строки дороги не имели прямых кнопок построения маршрута.",
+      "after_signature": "Двухколоночный тайминг и дорога имеют 5 видимых Maps-ссылок; width карточки 1085.61px, overflowX=0.",
+      "observed_visible_result": "Все участки от TFU до сада и обратно помещаются в ожидаемую оконную desktop-композицию.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    },
+    {
+      "viewport": "1440x900",
+      "viewport_source": "CUA browser viewport; innerWidth=1440; innerHeight=900",
+      "before_signature": "Маршрут в центр занимал больше дороги и не показывал вход №1, сад, башню и кластер еды как отдельные точки.",
+      "after_signature": "Карточка имеет width=1068px, height=1485.41px, 5 Maps-маршрутов, 5 мест и overflowX=0.",
+      "observed_visible_result": "Карточка дня, справочник, логистика, перелёты, бюджет и решения просмотрены сверху вниз; карта сохранила 18 пинов.",
+      "delta_visible": true,
+      "target_visible": true,
+      "preserved_invariants_passed": true,
+      "console_errors": []
+    }
+  ],
+  "comparison_review": {
+    "variants_shown": 0,
+    "selected_variant": "",
+    "owner_approval_reference": "Пользователь подтвердил маршрут через Саньча и попросил внедрить его на сайт."
+  }
+}

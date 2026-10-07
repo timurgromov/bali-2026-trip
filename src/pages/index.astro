@@ -47,9 +47,11 @@ const placeAliases: Record<string, string[]> = {
   "Gili Trawangan": ["Gili T", "Trawangan"],
   "Gili Air": ["Gili Air"],
   "Gili Meno": ["Gili Meno", "Meno"],
-  "Народный парк Чэнду": ["Народного парка Чэнду", "Народному парку Чэнду", "Народного парка", "Народному парку"],
-  "Чайная Heming": ["чайной Heming", "Heming"],
-  "Аллеи Kuanzhai": ["аллей Kuanzhai", "аллеям Kuanzhai", "Kuanzhai"]
+  "Станция метро Саньча (三岔站)": ["станции метро Саньча (三岔站)", "станцию метро Саньча (三岔站)", "метро Саньча", "三岔站"],
+  "Вход №1 в парк Всемирной садовой выставки": ["входа №1 в парк Всемирной садовой выставки", "входу №1 в парк Всемирной садовой выставки", "вход №1"],
+  "Сад Чэнду (成都园)": ["Сада Чэнду (成都园)", "Саду Чэнду (成都园)", "成都园"],
+  "Башня Цзиньюнь (锦云楼)": ["башни Цзиньюнь (锦云楼)", "башню Цзиньюнь (锦云楼)", "Цзиньюнь", "锦云楼"],
+  "Linqi Vitality City (林栖·活力城)": ["Linqi Vitality City", "Linqi", "林栖·活力城"]
 };
 const normalize = (value: string) => value.toLowerCase().replaceAll("’", "'").replace(/[^a-zа-яё0-9]+/giu, " ").trim();
 const getDayTone = (day: Day) => {
@@ -245,6 +247,9 @@ const navItems = [
                                 <div>
                                   <strong class="day-route-line">{route.window} · <InlinePlace text={route.route} places={dayPlaces} id={`day-${index + 1}-route-${route.window}`} /></strong>
                                   <span>{route.distance} · {route.duration} · {route.transport}</span>
+                                  {"mapsUrl" in route && route.mapsUrl && (
+                                    <a class="day-route-maps" href={route.mapsUrl} target="_blank" rel="noreferrer">Маршрут в Google Maps</a>
+                                  )}
                                 </div>
                               ))}
                             </div>
@@ -395,6 +400,9 @@ const navItems = [
                 </div>
               </dl>
               <p>{transfer.note}</p>
+              {"mapsUrl" in transfer && transfer.mapsUrl && (
+                <a class="maps-link transfer-maps-link" href={transfer.mapsUrl} target="_blank" rel="noreferrer">Построить маршрут в Google Maps</a>
+              )}
             </article>
           ))}
         </div>

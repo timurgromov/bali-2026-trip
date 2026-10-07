@@ -923,6 +923,20 @@ dt {
   line-height: 1.4;
 }
 
+.day-route-maps {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 7px 0;
+  width: fit-content;
+  color: var(--day-accent);
+  font-size: 13px;
+  font-weight: 850;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 .day-quick-facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1075,6 +1089,10 @@ dt {
 
 .transfer-card {
   padding: 18px;
+}
+
+.transfer-maps-link {
+  margin-top: 12px;
 }
 
 .budget-card .card-topline small {

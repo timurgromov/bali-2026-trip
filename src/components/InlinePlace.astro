@@ -21,9 +21,11 @@ const aliases: Record<string, string[]> = {
   "Gili Trawangan": ["Gili T", "Trawangan"],
   "Gili Air": ["Gili Air"],
   "Gili Meno": ["Gili Meno", "Meno"],
-  "Народный парк Чэнду": ["Народного парка Чэнду", "Народному парку Чэнду", "Народного парка", "Народному парку"],
-  "Чайная Heming": ["чайной Heming", "Heming"],
-  "Аллеи Kuanzhai": ["аллей Kuanzhai", "аллеям Kuanzhai", "Kuanzhai"]
+  "Станция метро Саньча (三岔站)": ["станции метро Саньча (三岔站)", "станцию метро Саньча (三岔站)", "метро Саньча", "三岔站"],
+  "Вход №1 в парк Всемирной садовой выставки": ["входа №1 в парк Всемирной садовой выставки", "входу №1 в парк Всемирной садовой выставки", "вход №1"],
+  "Сад Чэнду (成都园)": ["Сада Чэнду (成都园)", "Саду Чэнду (成都园)", "成都园"],
+  "Башня Цзиньюнь (锦云楼)": ["башни Цзиньюнь (锦云楼)", "башню Цзиньюнь (锦云楼)", "Цзиньюнь", "锦云楼"],
+  "Linqi Vitality City (林栖·活力城)": ["Linqi Vitality City", "Linqi", "林栖·活力城"]
 };
 const getMapsUrl = (place: Place) => place.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name}, Bali, Indonesia`)}`;
 const terms = places
